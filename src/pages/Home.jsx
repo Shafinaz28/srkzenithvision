@@ -42,7 +42,7 @@ function Scene({ name }) {
     return (
       <div className="scene scene-network" aria-hidden="true">
         <svg viewBox="0 0 640 360">
-          <g stroke="#5D77FF" strokeOpacity="0.55" fill="none">
+          <g stroke="#F5D77F" strokeOpacity="0.55" fill="none">
             <path d="M80 220 L180 120 L300 180 L420 90 L540 160 L500 260 L320 280 L160 250 Z" />
             <path d="M180 120 L320 280 M300 180 L500 260 M420 90 L320 280" />
           </g>
@@ -65,8 +65,8 @@ function Scene({ name }) {
             d="M70 210h40l30-20 70-55c30-22 70-28 120-24l150 8c40 4 70 22 90 48l28 36h70c18 0 28 14 22 28H90c-16 0-30-10-20-21z"
           />
           <path fill="#D4AF37" d="M250 140h70l40 40H230z" opacity="0.35" />
-          <circle cx="190" cy="230" r="28" fill="#0B0B1D" stroke="#D4AF37" strokeWidth="3" />
-          <circle cx="520" cy="230" r="28" fill="#0B0B1D" stroke="#D4AF37" strokeWidth="3" />
+          <circle cx="190" cy="230" r="28" fill="#080B10" stroke="#D4AF37" strokeWidth="3" />
+          <circle cx="520" cy="230" r="28" fill="#080B10" stroke="#D4AF37" strokeWidth="3" />
           <path d="M600 168h28" stroke="#4FB4C4" strokeWidth="4" strokeLinecap="round" />
         </svg>
         <div className="studio-floor" />
@@ -85,7 +85,7 @@ function Scene({ name }) {
         <polyline fill="none" stroke="#D4AF37" strokeWidth="3" points="30,190 80,170 130,150 180,160 240,110 300,90 360,120 420,70 470,84" />
         <polyline fill="none" stroke="#4FB4C4" strokeWidth="2" points="30,210 90,200 150,188 220,170 300,176 380,150 470,140" />
         <rect x="500" y="40" width="110" height="70" rx="8" fill="#12121F" stroke="#D4AF37" />
-        <rect x="500" y="124" width="110" height="70" rx="8" fill="#12121F" stroke="#5D77FF" />
+        <rect x="500" y="124" width="110" height="70" rx="8" fill="#12161C" stroke="#F5D77F" />
       </svg>
     </div>
   );
@@ -452,7 +452,7 @@ export default function Home() {
                     <line key={y} x1="10" y1={y} x2="540" y2={y} />
                   ))}
                 </g>
-                <polyline fill="none" stroke="#5D77FF" strokeWidth="2" points="10,140 70,130 120,136 180,100 240,110 300,80 360,90 430,50 500,60 540,40" />
+                <polyline fill="none" stroke="#F5D77F" strokeWidth="2" points="10,140 70,130 120,136 180,100 240,110 300,80 360,90 430,50 500,60 540,40" />
                 <polyline fill="none" stroke="#D4AF37" strokeWidth="3" points="10,150 80,120 140,128 200,90 260,96 330,70 400,78 470,46 540,52" />
               </svg>
               <p className="dash-note">Auto-rebalance: EU tier-1 liquidity cluster absorbed · 6.2s ago</p>

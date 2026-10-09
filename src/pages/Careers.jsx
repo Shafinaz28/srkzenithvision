@@ -35,7 +35,7 @@ export default function Careers() {
   }
 
   return (
-    <>
+    <div className="careers-page">
       <PageHero
         crumb={
           <p className="crumb">
@@ -44,11 +44,10 @@ export default function Careers() {
         }
         kicker="Join"
         title="Careers"
-        text="We hire people who can explain their work without a slide full of arrows. Remote, serious, and close to the client number."
       />
 
-      <section className="section section-tight">
-        <div className="wrap">
+      <section className="careers-roles">
+        <div className="wrap careers-list">
           {jobs.map((job) => (
             <article className="job" key={job.title}>
               <div>
@@ -68,7 +67,7 @@ export default function Careers() {
         </div>
       </section>
 
-      <section className="section section-tight" id="apply">
+      <section className="careers-apply" id="apply">
         <div className="wrap narrow">
           <p className="kicker">Apply</p>
           <h2 className="block-title">Send a note.</h2>
@@ -109,6 +108,6 @@ export default function Careers() {
           )}
         </div>
       </section>
-    </>
+    </div>
   );
 }
