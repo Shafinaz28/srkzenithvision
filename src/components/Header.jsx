@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import gsap from "gsap";
 import { nav } from "../data/content";
+
 import Logo from "./Logo";
 import { CloseIcon, MenuIcon } from "./Icons";
 
@@ -11,7 +12,7 @@ function prefersReducedMotion() {
 
 export default function Header() {
   const [open, setOpen] = useState(false);
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   const navRef = useRef(null);
   const panelRef = useRef(null);
 
@@ -62,11 +63,23 @@ export default function Header() {
     return () => ctx.revert();
   }, [open]);
 
-  const links = nav.filter((item) => item.to !== "/contact");
+  const links = nav.filter((item) => !item.cta);
+  const cta = nav.find((item) => item.cta);
+
+  function linkClass(item) {
+    return ({ isActive }) => {
+      const active = item.hash ? hash === item.hash : isActive;
+      return active ? "nav-link active" : "nav-link";
+    };
+  }
+
+  function linkTo(item) {
+    return item.hash ? { pathname: "/", hash: item.hash } : item.to;
+  }
 
   return (
     <>
-      <header className="site-header">
+      <header className={open ? "site-header menu-open" : "site-header"}>
         <div className="header-inner">
           <Link to="/" className="logo-link" aria-label="SRK Zenithvision home">
             <Logo />
@@ -74,17 +87,12 @@ export default function Header() {
 
           <nav className="nav" aria-label="Primary" ref={navRef}>
             {links.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                end={item.to === "/"}
-                className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
-              >
+              <NavLink key={item.label} to={linkTo(item)} end={item.to === "/"} className={linkClass(item)}>
                 {item.label}
               </NavLink>
             ))}
-            <NavLink to="/contact" className={({ isActive }) => (isActive ? "btn btn-gold nav-contact active" : "btn btn-gold nav-contact")}>
-              Contact
+            <NavLink to={cta.to} className={({ isActive }) => (isActive ? "btn btn-gold nav-contact active" : "btn btn-gold nav-contact")}>
+              {cta.label}
             </NavLink>
           </nav>
 
@@ -105,18 +113,12 @@ export default function Header() {
 
       <div id="site-menu" className={open ? "nav-panel open" : "nav-panel"} aria-hidden={!open} ref={panelRef}>
         {links.map((item) => (
-          <NavLink
-            key={item.to}
-            to={item.to}
-            end={item.to === "/"}
-            className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
-            onClick={() => setOpen(false)}
-          >
+          <NavLink key={item.label} to={linkTo(item)} end={item.to === "/"} className={linkClass(item)} onClick={() => setOpen(false)}>
             {item.label}
           </NavLink>
         ))}
-        <NavLink to="/contact" className="btn btn-gold nav-contact" onClick={() => setOpen(false)}>
-          Contact
+        <NavLink to={cta.to} className="btn btn-gold nav-contact" onClick={() => setOpen(false)}>
+          {cta.label}
         </NavLink>
       </div>
     </>

@@ -24,9 +24,10 @@ export const nav = [
   { label: "About", to: "/about" },
   { label: "Services", to: "/services" },
   { label: "Projects", to: "/projects" },
-  { label: "Blogs", to: "/blogs" },
-  { label: "Careers", to: "/careers" },
-  { label: "Contact", to: "/contact" },
+  { label: "Products", to: "/saas" },
+  { label: "Process", to: "/#method", hash: "#method" },
+  { label: "Clients", to: "/#trust", hash: "#trust" },
+  { label: "Start a project", to: "/contact", cta: true },
 ];
 
 export const stats = [
@@ -590,6 +591,7 @@ export const aboutFaqs = [
 ];
 
 export const contactOptions = [
+  "Digital growth and SEO",
   ...services.map((service) => service.name),
   "The Zenith",
   "Not sure yet",

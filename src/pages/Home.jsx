@@ -18,6 +18,24 @@ import {
 import Button from "../components/Button";
 import usePageTitle from "../hooks/usePageTitle";
 
+function MethodIcon({ name }) {
+  const paths = {
+    Discover: ["M10.5 10.5m-5.5 0a5.5 5.5 0 1 0 11 0a5.5 5.5 0 1 0 -11 0", "M15 15l5 5", "M10.5 8.2v4.6", "M8.2 10.5h4.6"],
+    Strategize: ["M4 6h16v14H4z", "M4 10h16", "M8 4v4", "M16 4v4", "M8 14h3", "M13 14h3", "M8 17h3"],
+    Create: ["M16 4l4 4", "M15 5l4 4-9 9H6v-4z"],
+    Build: ["M3 5h18v14H3z", "M3 9h18", "M8 13l-2 2 2 2", "M16 13l2 2-2 2", "M13 12l-2 6"],
+    Launch: ["M12 2c2.2 3.2 3.2 6 3.2 8.2a3.2 3.2 0 01-6.4 0C8.8 8 9.8 5.2 12 2z", "M9.2 13.2L6 18l3.4-1.2", "M14.8 13.2L18 18l-3.4-1.2", "M12 15.4V21"],
+    Grow: ["M4 19V5", "M4 19h16", "M7 15l4-5 3 2 5-6"],
+  };
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      {(paths[name] || paths.Discover).map((d) => (
+        <path key={d} d={d} fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      ))}
+    </svg>
+  );
+}
+
 function PracticeIcon({ name }) {
   const paths = {
     code: "M8 8l-4 4 4 4M16 8l4 4-4 4M13 6l-2 12",
@@ -85,7 +103,11 @@ function Scene({ name }) {
         <polyline fill="none" stroke="#D4AF37" strokeWidth="3" points="30,190 80,170 130,150 180,160 240,110 300,90 360,120 420,70 470,84" />
         <polyline fill="none" stroke="#4FB4C4" strokeWidth="2" points="30,210 90,200 150,188 220,170 300,176 380,150 470,140" />
         <rect x="500" y="40" width="110" height="70" rx="8" fill="#12121F" stroke="#D4AF37" />
+        <text x="555" y="68" fill="#F5D77F" fontSize="16" textAnchor="middle">$1.8B</text>
+        <text x="555" y="90" fill="#b7b7c4" fontSize="11" textAnchor="middle">volume</text>
         <rect x="500" y="124" width="110" height="70" rx="8" fill="#12161C" stroke="#F5D77F" />
+        <text x="555" y="154" fill="#D4AF37" fontSize="16" textAnchor="middle">+310%</text>
+        <text x="555" y="176" fill="#b7b7c4" fontSize="11" textAnchor="middle">velocity</text>
       </svg>
     </div>
   );
@@ -196,7 +218,7 @@ export default function Home() {
       const groups = [
         ["#architecture", "#architecture .orbit, #architecture .arch > div:last-child"],
         ["#software", "#software .soft-card, #software .dash"],
-        ["#method", "#method .method-card"],
+        ["#method", "#method .method-step"],
         ["#trust", "#trust .trust-logos, #trust .exec-quote"],
       ];
       groups.forEach(([trigger, items]) => {
@@ -468,10 +490,15 @@ export default function Home() {
             <h2 className="display">The 6-step ascent methodology.</h2>
             <p>A disciplined, battle-hardened roadmap guaranteeing surgical execution from Day 1 to global saturation.</p>
           </div>
-          <div className="method-grid">
-            {ascent.map((step) => (
-              <article className="method-card" key={step.n}>
-                <span>{step.n}</span>
+          <div className="method-flow">
+            <svg className="method-wave" viewBox="0 0 1200 170" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M100 46 C200 46 200 124 300 124 C400 124 400 46 500 46 C600 46 600 124 700 124 C800 124 800 46 900 46 C1000 46 1000 124 1100 124" />
+            </svg>
+            {ascent.map((step, index) => (
+              <article className={index % 2 ? "method-step is-low" : "method-step"} key={step.n}>
+                <div className="method-orb">
+                  <MethodIcon name={step.title} />
+                </div>
                 <h3>{step.title}</h3>
                 <p>{step.text}</p>
                 <strong>{step.when}</strong>

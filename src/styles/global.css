@@ -291,19 +291,19 @@ svg {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 28px;
+  gap: 18px;
   margin-left: auto;
   min-width: 0;
   overflow: hidden;
 }
 
 .nav-link {
-  color: rgba(244, 242, 234, 0.78);
+  color: rgba(244, 242, 234, 0.88);
   padding: 8px 0;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-transform: none;
   white-space: nowrap;
 }
 
@@ -313,9 +313,11 @@ svg {
 }
 
 .nav-contact {
-  padding: 10px 18px;
-  font-size: 12px;
-  letter-spacing: 0.12em;
+  padding: 12px 22px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .nav-panel .nav-contact {
@@ -390,6 +392,14 @@ svg {
 
 .btn:hover {
   transform: translateY(-2px);
+}
+
+.btn.nav-contact {
+  padding: 12px 22px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .btn-gold {
@@ -1183,6 +1193,95 @@ svg {
   padding: 104px 0;
 }
 
+.enquiry-card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  gap: 48px;
+  align-items: center;
+  padding: 48px;
+  border-radius: 28px;
+  border: 1px solid rgba(244, 242, 234, 0.12);
+  background:
+    radial-gradient(circle at 92% 88%, rgba(212, 175, 55, 0.16), transparent 32%),
+    #10161c;
+}
+
+.enquiry-copy h2 {
+  max-width: 10ch;
+  font-family: "Outfit", "Segoe UI", sans-serif;
+  font-size: clamp(2.4rem, 4vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  text-transform: none;
+}
+
+.enquiry-copy > p {
+  max-width: 36ch;
+  margin-top: 18px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.enquiry-meta {
+  display: grid;
+  gap: 22px;
+  margin-top: 36px;
+}
+
+.enquiry-meta span {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--paper);
+  font-weight: 700;
+}
+
+.enquiry-meta a,
+.enquiry-meta p {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.enquiry-card .field span {
+  color: rgba(244, 242, 234, 0.82);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.enquiry-card input,
+.enquiry-card select,
+.enquiry-card textarea {
+  min-height: 48px;
+  border-radius: 12px;
+  border-color: rgba(244, 242, 234, 0.08);
+  background: #12181e;
+}
+
+.enquiry-card textarea {
+  min-height: 120px;
+}
+
+.enquiry-card textarea::placeholder {
+  color: rgba(183, 183, 196, 0.72);
+}
+
+.enquiry-card .btn {
+  width: 100%;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 16px;
+  box-shadow: 0 10px 28px rgba(212, 175, 55, 0.28);
+}
+
+.enquiry-note {
+  margin-top: 12px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 .contact-board {
   display: grid;
   grid-template-columns: 0.82fr 1.18fr;
@@ -1260,8 +1359,13 @@ svg {
 }
 
 @media (max-width: 900px) {
+  .enquiry-card,
   .contact-board {
     grid-template-columns: 1fr;
+  }
+
+  .enquiry-card {
+    padding: 28px 22px;
   }
 
   .contact-map {
@@ -1427,28 +1531,36 @@ svg {
     margin: 0;
   }
 
+  .site-header.menu-open {
+    background: #080b10;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
   .nav-panel.open {
     display: flex;
     flex-direction: column;
     position: fixed;
     z-index: 60;
     inset: var(--header) 0 0 0;
-    padding: 28px 24px 40px;
+    padding: 28px 24px 32px;
     overflow: auto;
-    background: rgba(11, 11, 29, 0.96);
-    backdrop-filter: blur(24px) saturate(1.4);
-    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+    background: #080b10;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   .nav-panel .nav-link {
     font-size: 22px;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.28);
+    background: #080b10;
   }
 
   .nav-panel .btn {
-    margin-top: 18px;
-    align-self: flex-start;
+    margin-top: auto;
+    align-self: stretch;
+    width: 100%;
   }
 }
 
@@ -1870,7 +1982,10 @@ svg {
 }
 
 .scene-network {
-  background: radial-gradient(circle at 50% 50%, rgba(93, 119, 255, 0.2), #070712 70%);
+  background:
+    radial-gradient(circle at 50% 45%, rgba(212, 175, 55, 0.22), transparent 46%),
+    radial-gradient(circle at 80% 80%, rgba(0, 59, 70, 0.55), transparent 40%),
+    #070b10;
 }
 
 .scene-car {
@@ -2041,32 +2156,100 @@ svg {
   height: 160px;
 }
 
-.method-grid {
+.method-flow {
+  position: relative;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 48px;
+  align-items: start;
 }
 
-.method-card {
-  min-height: 250px;
-  padding: 16px;
+.method-wave {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 170px;
+  pointer-events: none;
+}
+
+.method-wave path {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.55;
+}
+
+.method-step {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 8px;
+  min-width: 0;
 }
 
-.method-card span {
-  color: var(--paper);
-  font-weight: 800;
-  letter-spacing: 0.08em;
+.method-step.is-low {
+  margin-top: 78px;
 }
 
-.method-card strong {
-  margin-top: auto;
+.method-orb {
+  width: 92px;
+  height: 92px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1.5px solid rgba(245, 215, 127, 0.8);
+  background: rgba(8, 11, 16, 0.72);
+  color: var(--gold-2);
+  transition: transform 0.35s ease, background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, color 0.35s ease;
+}
+
+.method-orb svg {
+  width: 34px;
+  height: 34px;
+  transition: transform 0.35s ease;
+}
+
+.method-step:hover .method-orb {
+  transform: translateY(-10px) scale(1.08);
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--ink);
+  box-shadow: 0 16px 36px rgba(212, 175, 55, 0.32);
+}
+
+.method-step:hover .method-orb svg {
+  transform: scale(1.08);
+}
+
+.method-step:hover h3 {
+  color: var(--gold-2);
+}
+
+.method-step h3 {
+  margin-top: 14px;
+  font-family: "Outfit", "Segoe UI", sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+  text-transform: none;
+}
+
+.method-step p {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.method-step strong {
+  margin-top: 10px;
   color: var(--gold);
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -2689,8 +2872,17 @@ svg {
     grid-template-columns: 1fr 1fr;
   }
 
-  .method-grid {
+  .method-grid,
+  .method-flow {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .method-wave {
+    display: none;
+  }
+
+  .method-step.is-low {
+    margin-top: 0;
   }
 
   .arch,
@@ -2728,6 +2920,7 @@ svg {
 @media (max-width: 680px) {
   .practice-grid,
   .method-grid,
+  .method-flow,
   .exec-grid,
   .dash-metrics,
   .footer-grid,
@@ -3263,13 +3456,31 @@ svg {
 .proof .flag-card {
   width: 100%;
   height: 100%;
-  border-radius: 22px;
+  border-radius: 26px;
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  background:
+    linear-gradient(180deg, rgba(212, 175, 55, 0.1), transparent 32%),
+    rgba(8, 11, 16, 0.78);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.32);
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.proof .flag-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--gold);
+  box-shadow: 0 24px 48px rgba(212, 175, 55, 0.16);
 }
 
 .proof .scene,
 .proof .scene svg {
   height: 210px;
   min-height: 210px;
+}
+
+.proof .scene {
+  margin: 14px 14px 0;
+  border-radius: 18px;
+  border: 1px solid rgba(212, 175, 55, 0.18);
 }
 
 .proof .flag-body {
@@ -3283,9 +3494,21 @@ svg {
   min-height: 1.35em;
 }
 
+.proof .flag-body h3 {
+  font-size: 1.45rem;
+}
+
 .proof .flag-body .btn {
   margin-top: auto;
   align-self: flex-start;
+  border-color: rgba(212, 175, 55, 0.45);
+  color: var(--gold-2);
+}
+
+.proof .flag-body .btn:hover {
+  background: var(--gold);
+  color: var(--ink);
+  border-color: var(--gold);
 }
 
 .proof .metric-pills {

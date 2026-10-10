@@ -59,25 +59,27 @@ export default function Contact() {
       />
 
       <section className="section contact-section">
-        <div className="wrap contact-board">
-          <aside className="contact-panel contact-aside">
-            <p className="kicker">Information</p>
-            <a className="big-link" href={`mailto:${brand.email}`}>
-              {brand.email}
-            </a>
-            <p>Working across 18+ markets. We reply within one business day.</p>
-            <p className="contact-address">
-              Zenith Apex Tower, Financial District
-              <br />
-              One Vanguard Plaza, Level 48
-            </p>
-            <p>
-              Looking for the private seat? Read <Link to="/the-zenith">The Zenith</Link>.
-            </p>
-          </aside>
+        <div className="wrap">
+          <div className="enquiry-card">
+            <div className="enquiry-copy">
+              <h2>Let's build something bold</h2>
+              <p>Tell us what you want to grow. A senior strategist will reply with next steps, usually within one business day.</p>
+              <div className="enquiry-meta">
+                <div>
+                  <span>Email</span>
+                  <a href={`mailto:${brand.email}`}>{brand.email}</a>
+                </div>
+                <div>
+                  <span>Global HQ</span>
+                  <p>
+                    Zenith Apex Tower, Financial District
+                    <br />
+                    One Vanguard Plaza, Level 48
+                  </p>
+                </div>
+              </div>
+            </div>
 
-          <div className="contact-panel">
-            <p className="kicker">Form</p>
             {sent ? (
               <FormSuccess
                 title="Your email app should be open."
@@ -88,28 +90,35 @@ export default function Contact() {
                 }}
               />
             ) : (
-              <form className="form-grid" onSubmit={onSubmit}>
-                <Field label="Name">
+              <form className="form-grid enquiry-form" onSubmit={onSubmit}>
+                <Field label="Your name">
                   <input name="name" value={form.name} onChange={update} autoComplete="name" required />
                 </Field>
-                <Field label="Email">
+                <Field label="Work email">
                   <input name="email" type="email" value={form.email} onChange={update} autoComplete="email" required />
                 </Field>
                 <Field label="Company">
                   <input name="company" value={form.company} onChange={update} autoComplete="organization" />
                 </Field>
-                <Field label="Interest">
+                <Field label="What do you need?">
                   <select name="service" value={form.service} onChange={update}>
                     {contactOptions.map((option) => (
                       <option key={option}>{option}</option>
                     ))}
                   </select>
                 </Field>
-                <Field label="The number that has to move" full>
-                  <textarea name="message" value={form.message} onChange={update} required />
+                <Field label="Tell us about your goals" full>
+                  <textarea
+                    name="message"
+                    value={form.message}
+                    onChange={update}
+                    placeholder="What are you trying to achieve, and by when?"
+                    required
+                  />
                 </Field>
                 <div className="field-full">
-                  <Button type="submit">Send the note</Button>
+                  <Button type="submit" icon="none">Send my enquiry</Button>
+                  <p className="enquiry-note">Sending opens your email app with this message ready to send to our team.</p>
                 </div>
               </form>
             )}

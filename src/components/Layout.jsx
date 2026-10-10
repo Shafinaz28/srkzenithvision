@@ -6,13 +6,20 @@ import usePageMotion from "../hooks/usePageMotion";
 
 /** Shared frame: header, page, footer. Scrolls to the top on each new page. */
 export default function Layout() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   const mainRef = useRef(null);
   usePageMotion(mainRef, pathname);
 
   useEffect(() => {
+    if (hash) {
+      const node = document.getElementById(hash.slice(1));
+      if (node) {
+        node.scrollIntoView();
+        return;
+      }
+    }
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [pathname, hash]);
 
   return (
     <>
