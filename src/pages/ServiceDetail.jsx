@@ -21,7 +21,10 @@ export default function ServiceDetail() {
             <Link to="/">Home</Link> / <Link to="/services">Services</Link> / {service.title}
           </p>
           <p className="kicker">Pillar {service.n}</p>
-          <h1>{service.title}</h1>
+          <h1>
+            <span className="hero-line"><span>{service.title}</span></span>
+            <span className="hero-line"><span className="gradient-text">{service.line}</span></span>
+          </h1>
           <p className="deck">{service.line}</p>
         </div>
       </header>

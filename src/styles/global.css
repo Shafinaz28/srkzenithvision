@@ -8,25 +8,36 @@
 */
 
 :root {
-  --gold: #d4af37;
-  --gold-2: #f5d77f;
-  --gold-3: #8c7320;
-  --teal: #003b46;
-  --teal-2: #4fb4c4;
-  --teal-3: #02181c;
-  --blue: #f5d77f;
-  --blue-2: #f8e7b0;
-  --ink: #080b10;
-  --ink-2: #12161c;
-  --ink-3: #1c2128;
-  --paper: #f7f4ea;
-  --muted: #b7b7c4;
-  --line: rgba(212, 175, 55, 0.2);
-  --glass: rgba(8, 11, 16, 0.42);
-  --glass-strong: rgba(8, 11, 16, 0.72);
-  --grad-primary: linear-gradient(145deg, #f5d77f 0%, #e3c56a 32%, #d4af37 68%, #8c7320 100%);
-  --grad-secondary: linear-gradient(145deg, #4fb4c4 0%, #003b46 55%, #02181c 100%);
-  --header: 88px;
+  --background: oklch(0.148 0.012 260);
+  --foreground: oklch(0.963 0.018 88);
+  --primary: oklch(0.766 0.139 91);
+  --primary-foreground: oklch(0.148 0.012 260);
+  --secondary: oklch(0.322 0.056 215);
+  --accent: oklch(0.24 0.035 215);
+  --card: oklch(0.182 0.015 235);
+  --border: oklch(0.963 0.018 88 / 0.11);
+  --tertiary: oklch(0.887 0.112 91);
+  --gold-gradient: linear-gradient(105deg, var(--tertiary), var(--primary) 65%, oklch(0.64 0.109 86));
+  --section-gradient: linear-gradient(130deg, oklch(0.24 0.043 215 / 0.65), var(--background) 62%);
+  --gold: var(--primary);
+  --gold-2: var(--tertiary);
+  --gold-3: oklch(0.64 0.109 86);
+  --teal: var(--secondary);
+  --teal-2: oklch(0.72 0.08 215);
+  --teal-3: oklch(0.18 0.03 215);
+  --blue: var(--tertiary);
+  --blue-2: oklch(0.93 0.06 91);
+  --ink: var(--background);
+  --ink-2: oklch(0.12 0.012 260);
+  --ink-3: var(--card);
+  --paper: var(--foreground);
+  --muted: oklch(0.676 0.012 95);
+  --line: var(--border);
+  --glass: oklch(0.148 0.012 260 / 0.72);
+  --glass-strong: oklch(0.12 0.012 260 / 0.88);
+  --grad-primary: var(--gold-gradient);
+  --grad-secondary: var(--section-gradient);
+  --header: 96px;
 }
 
 *,
@@ -45,15 +56,12 @@ body {
   margin: 0;
   min-height: 100vh;
   overflow-x: clip;
-  font-family: "Outfit", "Segoe UI", sans-serif;
-  color: var(--paper);
-  font-size: 16px;
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  color: var(--foreground);
+  font-size: 14px;
   line-height: 1.5;
-  background:
-    radial-gradient(ellipse at 50% -8%, rgba(212, 175, 55, 0.22) 0%, transparent 42%),
-    radial-gradient(ellipse at 100% 10%, rgba(0, 59, 70, 0.62) 0%, transparent 36%),
-    radial-gradient(ellipse at 0% 88%, rgba(0, 59, 70, 0.38) 0%, transparent 40%),
-    #080b10;
+  letter-spacing: 0;
+  background: var(--background);
   background-attachment: fixed;
 }
 
@@ -63,11 +71,12 @@ body {
 
 h1,
 h2,
-h3 {
+h3,
+h4 {
   margin: 0;
-  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
-  font-weight: 700;
-  letter-spacing: 0.01em;
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0;
   text-wrap: balance;
   color: var(--paper);
 }
@@ -221,25 +230,49 @@ svg {
 /* Header */
 
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 50;
   display: flex;
   align-items: center;
   height: var(--header);
-  background: rgba(11, 11, 29, 0.38);
-  border-bottom: 1px solid rgba(244, 242, 234, 0.14);
-  box-shadow: inset 0 1px 0 rgba(244, 242, 234, 0.1);
-  backdrop-filter: blur(22px) saturate(1.4);
-  -webkit-backdrop-filter: blur(22px) saturate(1.4);
+  background: transparent;
+  border-bottom: 0;
+  box-shadow: none;
+  transform: translateY(0);
+  transition: transform 0.35s ease, background 0.35s ease;
+}
+
+.site-header.is-hidden {
+  transform: translateY(-110%);
+}
+
+.site-header.is-solid {
+  background: oklch(0.12 0.012 260 / 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.site-header.on-home:not(.is-solid) {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+#content:not(.is-home) {
+  padding-top: var(--header);
 }
 
 .header-inner {
+  position: relative;
   width: min(1440px, calc(100% - 80px));
   height: 100%;
   margin: 0 auto;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 40px;
 }
 
@@ -288,21 +321,23 @@ svg {
 }
 
 .nav {
+  position: absolute;
+  left: 50%;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 18px;
-  margin-left: auto;
+  justify-content: center;
+  gap: 22px;
+  margin: 0;
+  transform: translateX(-50%);
   min-width: 0;
-  overflow: hidden;
 }
 
 .nav-link {
   color: rgba(244, 242, 234, 0.88);
   padding: 8px 0;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
   text-transform: none;
   white-space: nowrap;
 }
@@ -381,12 +416,12 @@ svg {
   justify-content: center;
   gap: 10px;
   border: 1px solid transparent;
-  border-radius: 999px;
+  border-radius: 4px;
   padding: 14px 22px;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
   transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
@@ -403,13 +438,15 @@ svg {
 }
 
 .btn-gold {
-  background: var(--gold);
-  color: var(--ink);
+  background: var(--gold-gradient);
+  color: var(--primary-foreground);
+  border-color: var(--primary);
 }
 
 .btn-gold:hover {
-  background: var(--teal);
-  color: var(--gold-2);
+  filter: brightness(1.12);
+  background: var(--gold-gradient);
+  color: var(--primary-foreground);
 }
 
 .btn-ghost {
@@ -1511,6 +1548,7 @@ svg {
 
 @media (max-width: 1180px) {
   .nav,
+  .header-cta,
   .refer-desktop {
     display: none;
   }
@@ -1988,6 +2026,13 @@ svg {
     #070b10;
 }
 
+.scene-route {
+  background:
+    radial-gradient(circle at 30% 40%, rgba(212, 175, 55, 0.16), transparent 42%),
+    radial-gradient(circle at 80% 70%, rgba(0, 59, 70, 0.5), transparent 46%),
+    #070b10;
+}
+
 .scene-car {
   background:
     radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.28), transparent 42%),
@@ -2177,10 +2222,10 @@ svg {
 .method-wave path {
   fill: none;
   stroke: var(--gold);
-  stroke-width: 1.5;
+  stroke-width: 1.25;
   stroke-linecap: round;
   vector-effect: non-scaling-stroke;
-  opacity: 0.55;
+  opacity: 0.85;
 }
 
 .method-step {
@@ -2204,7 +2249,7 @@ svg {
   place-items: center;
   border-radius: 50%;
   border: 1.5px solid rgba(245, 215, 127, 0.8);
-  background: rgba(8, 11, 16, 0.72);
+  background: var(--background);
   color: var(--gold-2);
   transition: transform 0.35s ease, background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, color 0.35s ease;
 }
@@ -2232,10 +2277,11 @@ svg {
 }
 
 .method-step h3 {
-  margin-top: 14px;
-  font-family: "Outfit", "Segoe UI", sans-serif;
-  font-size: 1.05rem;
-  letter-spacing: -0.02em;
+  margin-top: 16px;
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0;
   text-transform: none;
 }
 
@@ -2247,10 +2293,11 @@ svg {
 }
 
 .method-step strong {
-  margin-top: 10px;
+  margin-top: 12px;
   color: var(--gold);
   font-size: 11px;
-  letter-spacing: 0.08em;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -3709,6 +3756,297 @@ svg {
 
   .careers-page .job .meta {
     text-align: left;
+  }
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 36px 0 0;
+  background:
+    radial-gradient(ellipse at 78% 38%, rgba(0, 59, 70, 0.9) 0%, transparent 48%),
+    radial-gradient(ellipse at 88% 72%, rgba(212, 175, 55, 0.2) 0%, transparent 34%),
+    linear-gradient(160deg, #070b10 0%, #0b161c 52%, #080b10 100%);
+}
+
+.hero-stage {
+  width: min(1240px, calc(100% - 80px));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: 28px;
+  flex: 1;
+}
+
+.hero-copy {
+  text-align: left;
+}
+
+.hero h1 {
+  text-align: left;
+  text-transform: none;
+  font-family: "Outfit", "Segoe UI", sans-serif;
+  letter-spacing: -0.045em;
+  line-height: 1.02;
+  font-size: clamp(3rem, 5.4vw, 4.8rem);
+}
+
+.hero-actions {
+  justify-content: flex-start;
+}
+
+.hero .btn,
+.horizon-band .btn {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 15px;
+}
+
+.hero-sculpture svg {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 30px 40px rgba(212, 175, 55, 0.18));
+}
+
+.hero-foot {
+  width: min(1240px, calc(100% - 80px));
+  margin: 28px auto 0;
+  padding: 18px 0 22px;
+  display: grid;
+  grid-template-columns: 180px 1fr auto;
+  align-items: center;
+  gap: 18px;
+  border-top: 1px solid rgba(244, 242, 234, 0.1);
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero-logos {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--paper);
+  font-weight: 700;
+}
+
+.scroll-cue {
+  color: var(--gold-2);
+}
+
+.pillar-intro {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 32px;
+  align-items: end;
+  margin-bottom: 28px;
+}
+
+.pillar-intro p {
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.practice-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.practice-n {
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.orbit-diamond .orbit-core {
+  width: 148px;
+  height: 148px;
+  border-radius: 16px;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.orbit-diamond .orbit-core strong,
+.orbit-diamond .orbit-core span {
+  transform: rotate(-45deg);
+}
+
+.horizon-band {
+  padding: 88px 0;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(79, 180, 196, 0.18), transparent 36%),
+    linear-gradient(90deg, #02181c 0%, #003b46 48%, #071014 100%);
+}
+
+.horizon-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.horizon-inner .display {
+  max-width: 16ch;
+  margin-top: 10px;
+}
+
+.horizon-inner p:last-child {
+  margin-top: 12px;
+  color: rgba(247, 244, 234, 0.78);
+}
+
+#trust .display .accent,
+.horizon-inner .display .accent {
+  display: inline;
+}
+
+#trust .display,
+.horizon-inner .display {
+  max-width: 18ch;
+}
+
+@media (max-width: 980px) {
+  .hero h1 {
+    font-size: clamp(2.2rem, 10vw, 3.4rem);
+  }
+
+  .hero-stage,
+  .pillar-intro,
+  .horizon-inner,
+  .hero-foot {
+    grid-template-columns: 1fr;
+    display: grid;
+  }
+
+  .hero-foot {
+    width: min(100% - 28px, 1120px);
+  }
+
+  .hero-stage {
+    width: min(100% - 28px, 1120px);
+  }
+
+  .hero-logos {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .horizon-inner {
+    display: grid;
+  }
+}
+
+/* Type on every page, matching the company style */
+
+body h1,
+body h2,
+body h3,
+body h4,
+body .display,
+body .about-title,
+body .svc-title {
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+body .page-hero h1,
+body .about-title,
+body .svc-title,
+body .not-found h1,
+body .hero h1 {
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1.16;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+body .display,
+body .section-head h2,
+body .cta-band h2,
+body .close-band h2 {
+  font-size: clamp(28px, 3.2vw, 36px);
+  line-height: 1.35;
+  max-width: 22ch;
+}
+
+body .page-hero h1,
+body .about-title,
+body .svc-title,
+body .not-found h1 {
+  max-width: 750px;
+}
+
+body h3 {
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+body .kicker,
+body .dot-kicker,
+body .crumb,
+body .meta,
+body .metric-label,
+body .flag-tag,
+body .text-link {
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+body .deck,
+body .lead,
+body .about-deck,
+body .section-head p,
+body .home-aside,
+body .prose p {
+  font-size: 14px;
+  line-height: 1.9;
+  letter-spacing: 0;
+  color: var(--muted);
+  font-weight: 400;
+  text-transform: none;
+}
+
+body .founder-quote {
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.45;
+  color: var(--foreground);
+}
+
+body .accent,
+body .gradient-text {
+  background: var(--gold-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+@media (max-width: 800px) {
+  body .page-hero h1,
+  body .about-title,
+  body .svc-title,
+  body .not-found h1 {
+    font-size: 36px;
+  }
+
+  body .display,
+  body .section-head h2,
+  body .cta-band h2,
+  body .close-band h2 {
+    font-size: 28px;
   }
 }
 

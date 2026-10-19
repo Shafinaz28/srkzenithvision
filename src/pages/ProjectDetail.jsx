@@ -24,7 +24,10 @@ export default function ProjectDetail() {
           <p className="meta">
             {project.category} · {project.year}
           </p>
-          <h1>{project.client}</h1>
+          <h1>
+            <span className="hero-line"><span>{project.client}</span></span>
+            <span className="hero-line"><span className="gradient-text">{project.metric}</span></span>
+          </h1>
           <p className="deck">{project.summary}</p>
         </div>
       </header>

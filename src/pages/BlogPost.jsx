@@ -11,6 +11,10 @@ export default function BlogPost() {
   if (!post) return <NotFound />;
 
   const more = posts.filter((item) => item.slug !== post.slug).slice(0, 2);
+  const words = post.title.split(" ");
+  const cut = Math.ceil(words.length / 2);
+  const title = words.slice(0, cut).join(" ");
+  const accent = words.slice(cut).join(" ");
 
   return (
     <>
@@ -20,7 +24,10 @@ export default function BlogPost() {
             <Link to="/">Home</Link> / <Link to="/blogs">Blogs</Link>
           </p>
           <p className="meta">{post.category}</p>
-          <h1>{post.title}</h1>
+          <h1>
+            <span className="hero-line"><span>{title}</span></span>
+            <span className="hero-line"><span className="gradient-text">{accent}</span></span>
+          </h1>
           <p className="deck">
             {post.date} · {post.read} · Zenith Studio
           </p>

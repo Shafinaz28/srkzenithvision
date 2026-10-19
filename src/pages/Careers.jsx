@@ -43,7 +43,8 @@ export default function Careers() {
           </p>
         }
         kicker="Join"
-        title="Careers"
+        title="Come build"
+        accent="what comes next."
       />
 
       <section className="careers-roles">

@@ -27,7 +27,7 @@ export default function Layout() {
         Skip to content
       </a>
       <Header />
-      <main id="content" ref={mainRef}>
+      <main id="content" className={pathname === "/" ? "is-home" : ""} ref={mainRef}>
         <Outlet />
       </main>
       <Footer />

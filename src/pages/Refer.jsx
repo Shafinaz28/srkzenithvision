@@ -38,7 +38,8 @@ export default function Refer() {
           </p>
         }
         kicker="Introductions"
-        title="Refer & earn"
+        title="Refer a company."
+        accent="Earn the introduction."
         text="Introduce a company that should be working with us. If that introduction becomes a signed engagement, you receive 10% of the first-year fee."
       />
 

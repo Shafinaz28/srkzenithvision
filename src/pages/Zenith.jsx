@@ -16,7 +16,8 @@ export default function Zenith() {
           </p>
         }
         kicker="The private partnership"
-        title="The Zenith"
+        title="A private seat"
+        accent="for the long work."
         text="An annual seat for companies that want a category, not a campaign calendar. Few of these are open at once. That is the point."
       />
 

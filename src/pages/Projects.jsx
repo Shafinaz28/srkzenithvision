@@ -99,7 +99,8 @@ export default function Projects() {
           </p>
         }
         kicker="Proof"
-        title="Selected work"
+        title="Selected work."
+        accent="Proof, not promises."
       />
 
       <section className="projects-work">

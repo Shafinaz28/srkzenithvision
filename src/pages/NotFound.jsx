@@ -10,7 +10,10 @@ export default function NotFound() {
         <p className="kicker">404</p>
         <h1>
           <span className="hero-line">
-            <span>This page is not on the map.</span>
+            <span>This page</span>
+          </span>
+          <span className="hero-line">
+            <span className="gradient-text">is not on the map.</span>
           </span>
         </h1>
         <p className="deck">The link may be old. The work is still here.</p>

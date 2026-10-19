@@ -15,7 +15,8 @@ export default function Blogs() {
           </p>
         }
         kicker="Journal"
-        title="Notes from the work"
+        title="Notes from"
+        accent="the work."
         text="Short writing on systems, measurement, and creative. No trend list. No recycled advice."
       />
 

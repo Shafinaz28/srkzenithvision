@@ -55,7 +55,8 @@ export default function Contact() {
           </p>
         }
         kicker="Start"
-        title="Contact"
+        title="Let's build"
+        accent="something bold."
       />
 
       <section className="section contact-section">

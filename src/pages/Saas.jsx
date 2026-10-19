@@ -17,7 +17,8 @@ export default function Saas() {
           </p>
         }
         kicker="Software"
-        title="SaaS products"
+        title="Software built"
+        accent="to stay."
         text="Four products we run beside the marketing work. They keep signal, creative, lifecycle, and reporting in one place after the workshop is over."
       />
 

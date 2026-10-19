@@ -71,6 +71,27 @@ function Scene({ name }) {
       </div>
     );
   }
+  if (name === "route") {
+    return (
+      <div className="scene scene-route" aria-hidden="true">
+        <svg viewBox="0 0 640 360">
+          <path
+            d="M48 250 C 150 250, 170 100, 290 108 S 430 250, 600 132"
+            fill="none"
+            stroke="#D4AF37"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          />
+          {[[48, 250], [290, 108], [430, 196], [600, 132]].map(([x, y]) => (
+            <circle key={`${x}-${y}`} cx={x} cy={y} r="7" fill="#080B10" stroke="#F5D77F" strokeWidth="2" />
+          ))}
+          <rect x="248" y="168" width="150" height="72" rx="8" fill="#12161C" stroke="#D4AF37" />
+          <text x="323" y="198" fill="#F5D77F" fontSize="16" textAnchor="middle">38%</text>
+          <text x="323" y="218" fill="#b7b7c4" fontSize="11" textAnchor="middle">activation</text>
+        </svg>
+      </div>
+    );
+  }
   if (name === "car") {
     return (
       <div className="scene scene-car" aria-hidden="true">
@@ -126,8 +147,6 @@ export default function Home() {
     const root = practiceGrid.current;
     if (!root || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
     gsap.registerPlugin(ScrollTrigger);
-    const cards = root.querySelectorAll(".practice");
-    const cleanups = [];
     const ctx = gsap.context(() => {
       gsap.from(".practice", {
         y: 56,
@@ -138,54 +157,6 @@ export default function Home() {
         scrollTrigger: { trigger: root, start: "top 82%" },
       });
     }, root);
-
-    cards.forEach((card) => {
-      const icon = card.querySelector(".practice-icon");
-      const enter = () => {
-        gsap.to(card, {
-          y: -12,
-          scale: 1.03,
-          boxShadow: "0 22px 48px rgba(11, 11, 29, 0.14)",
-          duration: 0.35,
-          ease: "power2.out",
-          overwrite: "auto",
-        });
-        if (icon) {
-          gsap.to(icon, {
-            scale: 1.12,
-            rotation: -8,
-            duration: 0.35,
-            ease: "back.out(2)",
-            overwrite: "auto",
-          });
-        }
-      };
-      const leave = () => {
-        gsap.to(card, {
-          y: 0,
-          scale: 1,
-          boxShadow: "0 12px 32px rgba(11, 11, 29, 0.06)",
-          duration: 0.45,
-          ease: "power2.out",
-          overwrite: "auto",
-        });
-        if (icon) {
-          gsap.to(icon, {
-            scale: 1,
-            rotation: 0,
-            duration: 0.4,
-            ease: "power2.out",
-            overwrite: "auto",
-          });
-        }
-      };
-      card.addEventListener("mouseenter", enter);
-      card.addEventListener("mouseleave", leave);
-      cleanups.push(() => {
-        card.removeEventListener("mouseenter", enter);
-        card.removeEventListener("mouseleave", leave);
-      });
-    });
 
     const titleTween = gsap.context(() => {
       gsap.from(".slide-line > span", {
@@ -238,7 +209,6 @@ export default function Home() {
       titleTween.revert();
       heroTween.revert();
       restTween.revert();
-      cleanups.forEach((remove) => remove());
     };
   }, []);
 
@@ -269,196 +239,188 @@ export default function Home() {
   }, [filter]);
 
   return (
-    <>
+    <div className="home-co">
       <section className="hero" ref={heroRef}>
-        <div className="hero-inner">
-          <p className="eyebrow">{brand.eyebrow}</p>
+        <div className="container-site hero-content">
+          <p className="eyebrow"><span className="status-dot" />{brand.eyebrow}</p>
           <h1>
             <span className="hero-line">
-              <span>
-                {brand.headlineBefore} <span className="accent">{brand.headlineAccent}</span>
-              </span>
+              <span>{brand.headlineBefore} {brand.headlineAccent}</span>
             </span>
             <span className="hero-line">
-              <span>{brand.headlineAfter}</span>
+              <span className="gradient-text">{brand.headlineAfter}</span>
             </span>
           </h1>
-          <p className="hero-lead hero-piece">{brand.heroText}</p>
+          <p className="hero-description hero-piece">{brand.heroText}</p>
           <div className="hero-actions hero-piece">
             <Button to="/contact">Let&apos;s build something bold</Button>
-            <Button to="/projects" variant="ghost" icon="eye">
-              Explore our work
-            </Button>
+            <Button to="/projects" variant="ghost" icon="eye">Explore our work</Button>
           </div>
+        </div>
+        <div className="hero-sculpture hero-piece" aria-hidden="true">
+            <svg viewBox="0 0 640 560">
+              <defs>
+                <linearGradient id="ribbon" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#f8e7b0" />
+                  <stop offset="42%" stopColor="#d4af37" />
+                  <stop offset="100%" stopColor="#8c7320" />
+                </linearGradient>
+              </defs>
+              <path fill="url(#ribbon)" d="M150 430 L310 70 L360 70 L230 430 Z" />
+              <path fill="url(#ribbon)" opacity="0.85" d="M300 90 L560 390 L490 450 L270 150 Z" />
+              <path fill="none" stroke="url(#ribbon)" strokeWidth="34" strokeLinecap="round" d="M120 300 C 230 210, 390 230, 560 340" />
+              <ellipse cx="320" cy="490" rx="230" ry="16" fill="rgba(212,175,55,0.22)" />
+            </svg>
         </div>
       </section>
 
-      <section className="home-block band-light" id="practices">
-        <div className="wrap">
-          <div className="center-head">
-            <h2 className="display slide-title" ref={titleRef}>
-              <span className="slide-line">
-                <span>We don&apos;t just build digital experiences.</span>
-              </span>
-              <span className="slide-line">
-                <span className="accent">We build what comes next.</span>
-              </span>
+      <section className="trust-strip">
+        <div className="container-site trust-inner">
+          {trusted.map((name) => (
+            <span className="client-logo" key={name}>{name}</span>
+          ))}
+        </div>
+      </section>
+
+      <section className="section pillar-band" id="practices">
+        <div className="container-site">
+          <div className="band-head">
+            <p className="eyebrow">Our six pillars</p>
+            <h2 className="slide-title" ref={titleRef}>
+              <span className="slide-line"><span>We don&apos;t just build digital experiences.</span></span>
+              <span className="slide-line"><span className="gradient-text">We build what comes next.</span></span>
             </h2>
-            <p>
-              Six synchronized specialized practices delivering end-to-end sovereignty from core algorithmic architecture to hyper-scale market adoption.
+            <p className="section-intro">
+              Six specialised practices. One connected vision. From core architecture to market acceleration, every capability works in perfect synchrony.
             </p>
           </div>
-          <div className="practice-grid" ref={practiceGrid}>
+          <div className="services-grid" ref={practiceGrid}>
             {practices.map((item) => (
-              <article className="practice" key={item.n}>
-                <span className="practice-icon">
-                  <PracticeIcon name={item.icon} />
-                </span>
+              <article className="service-card practice" key={item.n}>
+                <div className="service-top">
+                  <span className="practice-icon"><PracticeIcon name={item.icon} /></span>
+                  <span className="service-index">{item.n}</span>
+                </div>
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
-                <ul className="points">
+                <ul>
                   {item.points.map((point) => (
                     <li key={point}>{point}</li>
                   ))}
                 </ul>
-                <Link to={item.to}>View this service →</Link>
+                <Link className="service-link" to={item.to}>Explore this service →</Link>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="home-block home-block-tight" id="architecture">
-        <div className="wrap arch">
-          <div className="orbit" aria-hidden="true">
-            <svg viewBox="0 0 100 100" className="orbit-lines">
-              <circle cx="50" cy="50" r="34" fill="none" stroke="#D4AF37" strokeOpacity="0.35" />
-              <line x1="50" y1="50" x2="50" y2="14" stroke="#D4AF37" strokeOpacity="0.7" />
-              <line x1="50" y1="50" x2="82" y2="30" stroke="#D4AF37" strokeOpacity="0.7" />
-              <line x1="50" y1="50" x2="82" y2="70" stroke="#D4AF37" strokeOpacity="0.7" />
-              <line x1="50" y1="50" x2="50" y2="86" stroke="#D4AF37" strokeOpacity="0.7" />
-              <line x1="50" y1="50" x2="18" y2="70" stroke="#D4AF37" strokeOpacity="0.7" />
-              <line x1="50" y1="50" x2="18" y2="30" stroke="#D4AF37" strokeOpacity="0.7" />
-            </svg>
-            <div className="orbit-core">
-              <strong>SRK Core</strong>
-              <span>Nexus V5</span>
-            </div>
-            {orbit.map((node) => (
-              <span key={node.n} className="orbit-node" style={{ left: node.x, top: node.y }}>
-                {node.n} {node.label}
-              </span>
-            ))}
+      <section className="section architecture" id="architecture">
+        <div className="container-site">
+          <div className="band-head">
+            <p className="eyebrow">The Zenith architecture</p>
+            <h2>One ecosystem. <span className="gradient-text">Boundless possibilities.</span></h2>
+            <p className="section-intro">From raw genesis to market dominance. A closed-loop framework that connects strategy, engineering, and cultural impact, so every asset moves your business forward.</p>
           </div>
-          <div>
-            <p className="dot-kicker">The Zenith architecture</p>
-            <h2 className="display">From raw genesis to sovereign market dominance.</h2>
-            <p className="home-aside">
-              A closed-loop systemic framework designed to eliminate friction between capital, engineering, and cultural impact. Every asset created amplifies the overarching enterprise valuation.
-            </p>
-            <div className="arch-list">
-              {architecture.map((item) => (
-                <article key={item.title}>
-                  <span className="practice-icon">
-                    <PracticeIcon name={item.icon} />
-                  </span>
+          <div className="architecture-inner">
+            <div className="architecture-copy">
+              {architecture.map((item, index) => (
+                <article className="principle" key={item.title}>
+                  <span className="step-index">{String(index + 1).padStart(2, "0")}</span>
+                  <span className="practice-icon"><PracticeIcon name={item.icon} /></span>
                   <div>
-                    <h3>{item.title}</h3>
+                    <h4>{item.title}</h4>
                     <p>{item.text}</p>
                   </div>
                 </article>
               ))}
             </div>
+            <div className="architecture-art" aria-hidden="true">
+              <div className="orbit" />
+              <div className="core">
+                <div className="core-inner">
+                  <strong>SRK Core</strong>
+                  <small>NEXUS V5</small>
+                </div>
+              </div>
+              {orbit.map((node) => (
+                <div key={node.n} className="orbit-label" style={{ left: node.x, top: node.y }}>
+                  <span>{node.n}</span>{node.label}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="home-block home-block-tight band-light proof" id="flagships">
-        <div className="wrap">
-          <div className="center-head">
-            <p className="dot-kicker">Flagship engagements</p>
-            <h2 className="display">Proof of sovereign execution.</h2>
-          </div>
-          <div className="filter-row proof-filters" role="group" aria-label="Filter flagship work">
-              {flagshipFilters.map((item) => (
-                <button
-                  key={item}
-                  type="button"
-                  className={filter === item ? "chip active" : "chip"}
-                  aria-pressed={filter === item}
-                  onClick={() => setFilter(item)}
-                >
-                  {item}
-                </button>
-              ))}
+      <section className="section" id="flagships">
+        <div className="container-site">
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">Flagship engagements</p>
+              <h2>Proof of <span className="gradient-text">sovereign execution.</span></h2>
             </div>
-
-          <div className="proof-scroller" ref={flagRef}>
+          </div>
+          <div className="filters" role="group" aria-label="Filter flagship work">
+            {flagshipFilters.map((item) => (
+              <button
+                key={item}
+                type="button"
+                className="button-filter"
+                aria-pressed={filter === item}
+                onClick={() => setFilter(item)}
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+          <div className="projects-grid" ref={flagRef}>
             {shown.map((item) => (
-              <article className="flag-card proof-slide" key={item.id}>
-                <Scene name={item.scene} />
-                <div className="flag-body">
-                  <p className="flag-tag">{item.tag || item.award}</p>
+              <article className="project-card" key={item.id}>
+                <div className="project-visual"><Scene name={item.scene} /></div>
+                <div className="project-copy">
+                  <p className="eyebrow">{item.tag || item.award}</p>
                   <p className="metric">{item.metric || "\u00a0"}</p>
                   <h3>{item.title}</h3>
                   <p>{item.text}</p>
-                  {item.stats ? (
-                    <div className="metric-pills">
-                      {item.stats.map((stat) => (
-                        <div key={stat.label}>
-                          <strong>{stat.value}</strong>
-                          <span>{stat.label}</span>
-                        </div>
-                      ))}
-                    </div>
-                  ) : null}
-                  <Button to={item.to} variant="ghost" className="btn-small">
-                    {item.cta}
-                  </Button>
+                  <Button to={item.to} variant="ghost" icon="arrow">{item.cta}</Button>
                 </div>
               </article>
             ))}
           </div>
-
-          {shown.length === 0 ? <p className="home-aside">Nothing in this group yet.</p> : null}
-
-          <p className="view-all">
-            <Link to="/projects">View all 140+ sovereign flagships →</Link>
-          </p>
+          {shown.length === 0 ? <p className="section-intro">Nothing in this group yet.</p> : null}
+          <p className="all-work"><Link to="/projects">View all 140+ sovereign flagships →</Link></p>
         </div>
       </section>
 
-      <section className="home-block home-block-tight" id="software">
-        <div className="wrap">
-          <p className="dot-kicker">Proprietary software systems</p>
-          <h2 className="display">Built for businesses that think ahead.</h2>
-          <p className="home-aside">
-            Modular, turnkey cloud platforms crafted by ZenithVision engineering and licensed globally to high-velocity enterprises.
-          </p>
-          <div className="soft-grid">
-            <div>
-              {softwareProducts.map((product) => (
-                <article className="soft-card" key={product.title}>
-                  <p className="flag-tag">{product.status}</p>
-                  <h3>{product.title}</h3>
-                  <p>{product.text}</p>
-                  <ul className="marks">
-                    {product.marks.map((mark) => (
-                      <li key={mark}>{mark}</li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
-              <Button to="/contact?service=The%20Zenith" variant="ghost">
-                Request tier-1 enterprise access
-              </Button>
-            </div>
-            <div className="dash">
-              <div className="dash-top">
+      <section className="section products" id="software">
+        <div className="container-site">
+          <div className="section-heading">
+            <p className="eyebrow">Proprietary software systems</p>
+            <h2>Built for businesses <span className="gradient-text">that think ahead.</span></h2>
+          </div>
+          <div className="products-layout">
+          <div>
+            {softwareProducts.map((product) => (
+              <article className="product-item" key={product.title}>
+                <p className="eyebrow">{product.status}</p>
+                <h3>{product.title}</h3>
+                <p>{product.text}</p>
+                <ul className="product-badges">
+                  {product.marks.map((mark) => (
+                    <li key={mark}>{mark}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+            <Button to="/contact?service=The%20Zenith" variant="ghost">Request enterprise access</Button>
+          </div>
+          <div className="dashboard">
+              <div className="dashboard-head">
                 <span>Node: US-East-Central-01 // Production</span>
-                <span>Encrypted</span>
+                <span className="encrypted">Encrypted</span>
               </div>
-              <div className="dash-metrics">
+              <div className="dashboard-stats">
                 {softwareMetrics.map((item) => (
                   <div key={item.label}>
                     <span>{item.label}</span>
@@ -467,7 +429,7 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-              <p className="dash-label">Real-time throughput index</p>
+              <p className="chart-title">Real-time throughput index</p>
               <svg viewBox="0 0 560 180" className="dash-chart" aria-hidden="true">
                 <g stroke="rgba(244,242,234,0.08)">
                   {[30, 70, 110, 150].map((y) => (
@@ -477,18 +439,20 @@ export default function Home() {
                 <polyline fill="none" stroke="#F5D77F" strokeWidth="2" points="10,140 70,130 120,136 180,100 240,110 300,80 360,90 430,50 500,60 540,40" />
                 <polyline fill="none" stroke="#D4AF37" strokeWidth="3" points="10,150 80,120 140,128 200,90 260,96 330,70 400,78 470,46 540,52" />
               </svg>
-              <p className="dash-note">Auto-rebalance: EU tier-1 liquidity cluster absorbed · 6.2s ago</p>
-            </div>
+              <p className="dashboard-foot">Auto-rebalance: EU tier-1 liquidity cluster absorbed · 6.2s ago</p>
+          </div>
           </div>
         </div>
       </section>
 
-      <section className="home-block home-block-tight band-light" id="method">
-        <div className="wrap">
-          <div className="center-head">
-            <p className="dot-kicker">Predictable excellence</p>
-            <h2 className="display">The 6-step ascent methodology.</h2>
-            <p>A disciplined, battle-hardened roadmap guaranteeing surgical execution from Day 1 to global saturation.</p>
+      <section className="section" id="method">
+        <div className="container-site">
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">Predictable excellence</p>
+              <h2>The 6-step <span className="gradient-text">ascent methodology.</span></h2>
+            </div>
+            <p className="section-intro">A disciplined roadmap from the first conversation to global scale.</p>
           </div>
           <div className="method-flow">
             <svg className="method-wave" viewBox="0 0 1200 170" preserveAspectRatio="none" aria-hidden="true">
@@ -508,31 +472,42 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="home-block home-block-tight" id="trust">
-        <div className="wrap">
-          <p className="trust-kicker">Trusted by visionary executives · Global enterprises</p>
-          <div className="trust-logos">
-            {trusted.map((name) => (
-              <span key={name}>{name}</span>
-            ))}
-          </div>
-          <div className="exec-grid">
-            {executiveQuotes.map((item) => (
-              <blockquote className="exec-quote" key={item.initials}>
-                <p className="stars" aria-label="5 stars">★★★★★</p>
-                <p>{item.quote}</p>
-                <footer>
-                  <span className="avatar">{item.initials}</span>
-                  <span>
-                    <strong>{item.name}</strong>
-                    {item.role}
-                  </span>
-                </footer>
-              </blockquote>
-            ))}
+      <section className="section testimonials" id="trust">
+        <div className="container-site">
+          <p className="eyebrow">Partners in ambition</p>
+          <h2>Great work. <span className="gradient-text">Greater relationships.</span></h2>
+          <div className="quote-slider">
+            <div className="quote-track">
+              {[0, 1].map((copy) =>
+                executiveQuotes.map((item) => (
+                  <article className="testimonial" key={`${copy}-${item.initials}`} aria-hidden={copy === 1 ? true : undefined}>
+                    <p className="stars" aria-label="5 stars">★★★★★</p>
+                    <blockquote>{item.quote}</blockquote>
+                    <div className="person">
+                      <span className="avatar">{item.initials}</span>
+                      <div>
+                        <strong>{item.name}</strong>
+                        <small>{item.role}</small>
+                      </div>
+                    </div>
+                  </article>
+                )),
+              )}
+            </div>
           </div>
         </div>
       </section>
-    </>
+
+      <section className="contact-band">
+        <div className="container-site contact-inner">
+          <div>
+            <p className="eyebrow">Your next horizon starts here</p>
+            <h2>Have a bold idea? <span className="gradient-text">Let&apos;s make it real.</span></h2>
+            <p>Bring your ambition. We&apos;ll bring the expertise.</p>
+          </div>
+          <Button to="/contact">Start a conversation</Button>
+        </div>
+      </section>
+    </div>
   );
 }

@@ -17,7 +17,8 @@ export default function Industries() {
           </p>
         }
         kicker="Markets"
-        title="Industries"
+        title="The markets"
+        accent="we know."
         text="The craft is the same. The constraint changes. We learn the buyer, the rulebook, and the number that leadership already manages."
       />
 

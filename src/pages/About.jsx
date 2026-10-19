@@ -125,7 +125,7 @@ export default function About() {
               <span>The architects of</span>
             </span>
             <span className="about-line">
-              <span className="accent">digital sovereignty</span>
+              <span className="gradient-text">digital sovereignty</span>
             </span>
           </h1>
           <p className="about-deck about-piece">

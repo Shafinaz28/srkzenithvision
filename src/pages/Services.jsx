@@ -140,7 +140,7 @@ export default function Services() {
                 <span>One vision.</span>
               </span>
               <span className="hero-line">
-                <span className="accent">Multiple digital possibilities.</span>
+                <span className="gradient-text">Multiple digital possibilities.</span>
               </span>
             </h1>
             <p className="about-deck svc-piece">

@@ -14,7 +14,7 @@ export const brand = {
   headlineAccent: "bold ideas",
   headlineAfter: "into digital reality.",
   heroText:
-    "Technology, creativity, and sovereign digital acceleration — architected with institutional precision to scale tier-1 enterprises to market dominance.",
+    "Technology. Creativity. Limitless possibility. We architect exceptional digital experiences that move ambitious businesses toward their next horizon.",
 };
 
 export const year = 2026;
@@ -717,6 +717,18 @@ export const flagships = [
     ],
     cta: "Launch interactive experience",
     to: "/projects/vanta",
+  },
+  {
+    id: "lumen",
+    layout: "card",
+    scene: "route",
+    categories: ["SaaS Engines"],
+    tag: "Logistics SaaS · Product",
+    metric: "Activation up 38%",
+    title: "Lumen Freight Activation Rail",
+    text: "A trial-to-shipment system that carries new accounts through the first live load, with lifecycle timing tied to the one action that predicts retention.",
+    cta: "View case study",
+    to: "/projects/lumen",
   },
 ];
 
