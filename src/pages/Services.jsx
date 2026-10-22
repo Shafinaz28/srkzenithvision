@@ -1,7 +1,5 @@
-import { useLayoutEffect, useRef } from "react";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   arsenal,
   crossCases,
@@ -50,84 +48,6 @@ function Radar() {
 export default function Services() {
   const pageRef = useRef(null);
   usePageTitle("Services | SRK Zenithvision");
-
-  useLayoutEffect(() => {
-    const root = pageRef.current;
-    if (!root || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
-    gsap.registerPlugin(ScrollTrigger);
-
-    const ctx = gsap.context(() => {
-      gsap.from(".hero-line > span", {
-        yPercent: 120,
-        duration: 0.95,
-        stagger: 0.16,
-        ease: "power3.out",
-      });
-      gsap.from(".svc-piece", {
-        y: 32,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.12,
-        delay: 0.28,
-        ease: "power3.out",
-      });
-
-      const groups = [
-        ["#pillars", ".sov-card"],
-        ["#arsenal", ".arsenal-grid article"],
-        [".protocol-grid", ".protocol-grid article"],
-        [".reason-grid", ".reason-copy, .reason-cards article"],
-        [".steward", ".steward"],
-        [".case-grid", ".case-grid article"],
-        [".tier-price-grid", ".price-card"],
-      ];
-      groups.forEach(([trigger, items]) => {
-        gsap.from(items, {
-          y: 56,
-          opacity: 0,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: "power3.out",
-          scrollTrigger: { trigger, start: "top 82%" },
-        });
-      });
-    }, root);
-
-    const cleanups = [];
-    root.querySelectorAll(".sov-card, .arsenal-grid article, .protocol-grid article, .reason-cards article, .case-grid article, .price-card").forEach((card) => {
-      const enter = () => {
-        gsap.to(card, {
-          y: -10,
-          scale: 1.02,
-          boxShadow: "0 22px 48px rgba(0, 0, 0, 0.28)",
-          duration: 0.35,
-          ease: "power2.out",
-          overwrite: "auto",
-        });
-      };
-      const leave = () => {
-        gsap.to(card, {
-          y: 0,
-          scale: 1,
-          boxShadow: "0 0 0 rgba(0, 0, 0, 0)",
-          duration: 0.45,
-          ease: "power2.out",
-          overwrite: "auto",
-        });
-      };
-      card.addEventListener("mouseenter", enter);
-      card.addEventListener("mouseleave", leave);
-      cleanups.push(() => {
-        card.removeEventListener("mouseenter", enter);
-        card.removeEventListener("mouseleave", leave);
-      });
-    });
-
-    return () => {
-      ctx.revert();
-      cleanups.forEach((remove) => remove());
-    };
-  }, []);
 
   return (
     <div className="services-page" ref={pageRef}>

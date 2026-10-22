@@ -1,7 +1,5 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   architecture,
   ascent,
@@ -137,80 +135,10 @@ function Scene({ name }) {
 export default function Home() {
   usePageTitle("SRK Zenithvision | Digital Marketing Company");
   const practiceGrid = useRef(null);
-  const titleRef = useRef(null);
   const heroRef = useRef(null);
   const flagRef = useRef(null);
   const [filter, setFilter] = useState("All Work");
   const shown = filter === "All Work" ? flagships : flagships.filter((item) => item.categories.includes(filter));
-
-  useLayoutEffect(() => {
-    const root = practiceGrid.current;
-    if (!root || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
-    gsap.registerPlugin(ScrollTrigger);
-    const ctx = gsap.context(() => {
-      gsap.from(".practice", {
-        y: 56,
-        opacity: 0,
-        duration: 0.75,
-        stagger: 0.12,
-        ease: "power3.out",
-        scrollTrigger: { trigger: root, start: "top 82%" },
-      });
-    }, root);
-
-    const titleTween = gsap.context(() => {
-      gsap.from(".slide-line > span", {
-        yPercent: 120,
-        duration: 0.9,
-        stagger: 0.15,
-        ease: "power3.out",
-        scrollTrigger: { trigger: titleRef.current, start: "top 88%" },
-      });
-    }, titleRef);
-
-    const heroTween = gsap.context(() => {
-      gsap.from(".hero-line > span", {
-        yPercent: 120,
-        duration: 0.95,
-        stagger: 0.16,
-        ease: "power3.out",
-      });
-      gsap.from(".hero-piece", {
-        y: 32,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.14,
-        delay: 0.28,
-        ease: "power3.out",
-      });
-    }, heroRef);
-
-    const restTween = gsap.context(() => {
-      const groups = [
-        ["#architecture", "#architecture .orbit, #architecture .arch > div:last-child"],
-        ["#software", "#software .soft-card, #software .dash"],
-        ["#method", "#method .method-step"],
-        ["#trust", "#trust .trust-logos, #trust .exec-quote"],
-      ];
-      groups.forEach(([trigger, items]) => {
-        gsap.from(items, {
-          y: 52,
-          opacity: 0,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: "power3.out",
-          scrollTrigger: { trigger, start: "top 82%" },
-        });
-      });
-    });
-
-    return () => {
-      ctx.revert();
-      titleTween.revert();
-      heroTween.revert();
-      restTween.revert();
-    };
-  }, []);
 
   useLayoutEffect(() => {
     const root = flagRef.current;
@@ -245,16 +173,17 @@ export default function Home() {
           <p className="eyebrow"><span className="status-dot" />{brand.eyebrow}</p>
           <h1>
             <span className="hero-line">
-              <span>{brand.headlineBefore} {brand.headlineAccent}</span>
+              <span>{brand.headlineBefore} </span>
+              <span className="hero-accent">{brand.headlineAccent}</span>
             </span>
             <span className="hero-line">
-              <span className="gradient-text">{brand.headlineAfter}</span>
+              <span>{brand.headlineAfter}</span>
             </span>
           </h1>
           <p className="hero-description hero-piece">{brand.heroText}</p>
           <div className="hero-actions hero-piece">
-            <Button to="/contact">Let&apos;s build something bold</Button>
-            <Button to="/projects" variant="ghost" icon="eye">Explore our work</Button>
+            <Button to="/contact" variant="ghost">Let&apos;s build something bold</Button>
+            <Button to="/projects" variant="ghost" className="btn-plain">Explore our work</Button>
           </div>
         </div>
         <div className="hero-sculpture hero-piece" aria-hidden="true">
@@ -275,41 +204,34 @@ export default function Home() {
       </section>
 
       <section className="trust-strip">
-        <div className="container-site trust-inner">
-          {trusted.map((name) => (
-            <span className="client-logo" key={name}>{name}</span>
-          ))}
+        <div className="trust-slider">
+          <div className="trust-track">
+            {[0, 1].map((copy) =>
+              trusted.map((name) => (
+                <span className={copy ? "client-logo trust-copy" : "client-logo"} key={`${copy}-${name}`}>{name}</span>
+              ))
+            )}
+          </div>
         </div>
       </section>
 
       <section className="section pillar-band" id="practices">
         <div className="container-site">
           <div className="band-head">
-            <p className="eyebrow">Our six pillars</p>
-            <h2 className="slide-title" ref={titleRef}>
-              <span className="slide-line"><span>We don&apos;t just build digital experiences.</span></span>
-              <span className="slide-line"><span className="gradient-text">We build what comes next.</span></span>
-            </h2>
-            <p className="section-intro">
-              Six specialised practices. One connected vision. From core architecture to market acceleration, every capability works in perfect synchrony.
-            </p>
+            <h2>Everything You Need to Lead Digital</h2>
           </div>
           <div className="services-grid" ref={practiceGrid}>
-            {practices.map((item) => (
-              <article className="service-card practice" key={item.n}>
-                <div className="service-top">
-                  <span className="practice-icon"><PracticeIcon name={item.icon} /></span>
-                  <span className="service-index">{item.n}</span>
-                </div>
+            {practices.map((item, index) => (
+              <Link className={`service-card practice tone-${index % 3}`} to={item.to} key={item.n}>
+                <span className="practice-icon"><PracticeIcon name={item.icon} /></span>
                 <h3>{item.title}</h3>
-                <p>{item.text}</p>
+                <span className="card-rule" aria-hidden="true" />
                 <ul>
                   {item.points.map((point) => (
                     <li key={point}>{point}</li>
                   ))}
                 </ul>
-                <Link className="service-link" to={item.to}>Explore this service →</Link>
-              </article>
+              </Link>
             ))}
           </div>
         </div>

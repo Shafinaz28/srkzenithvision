@@ -1,118 +1,92 @@
 import { useLayoutEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { TextPlugin } from "gsap/TextPlugin";
 
-const BLOCKS = [
-  ".sov-card",
-  ".arsenal-grid article",
-  ".protocol-grid article",
-  ".reason-cards article",
-  ".case-grid article",
-  ".price-card",
+const CARDS = [
+  ".service-card",
   ".project-card",
   ".post-card",
   ".industry-card",
   ".product-card",
+  ".dossier-card",
+  ".time-card",
+  ".nda-card",
+  ".enquiry-card",
+  ".sov-card",
+  ".price-card",
   ".job",
   ".tier",
-  ".step",
-  ".svc-stats > div",
-  ".radar",
-  ".contact-aside",
-  ".form-grid",
-  ".check-list",
-  ".steward",
-  ".faq details",
-  ".detail-copy",
-  ".prose",
+  ".principle",
+  ".method-step",
+  ".product-item",
+  ".arsenal-grid article",
+  ".protocol-grid article",
+  ".reason-cards article",
+  ".case-grid article",
 ].join(",");
 
-const HOVER = ".sov-card, .project-card, .post-card, .industry-card, .product-card, .job, .tier, .price-card, .case-grid article, .arsenal-grid article, .protocol-grid article, .reason-cards article, .step";
+const TYPE_LINE = ".page-hero .deck, .about-hero .about-deck, .svc-hero .about-deck, .not-found .deck";
 
-/** Scroll and entrance motion for every page except Home and About, which have their own scenes. */
+/** Text rises in from below, and the intro line types itself, on every page. */
 export default function usePageMotion(rootRef, pathname) {
   useLayoutEffect(() => {
     const root = rootRef.current;
-    if (!root || pathname === "/" || pathname === "/about" || pathname === "/services" || pathname === "/projects") return undefined;
+    if (!root) return undefined;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
 
-    window.scrollTo(0, 0);
-    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
     const ctx = gsap.context(() => {
-      gsap.from(".page-hero .hero-line > span, .svc-hero .hero-line > span, .not-found .hero-line > span", {
-        yPercent: 120,
-        duration: 0.9,
-        stagger: 0.14,
-        ease: "power3.out",
-      });
-      gsap.from(
-        ".page-hero .kicker, .page-hero .crumb, .page-hero .deck, .svc-hero .dot-kicker, .svc-hero .about-deck, .svc-hero .hero-actions, .not-found .kicker, .not-found .deck, .not-found .btn",
-        {
-          y: 28,
-          opacity: 0,
-          duration: 0.7,
-          stagger: 0.1,
-          delay: 0.18,
-          ease: "power3.out",
-        },
-      );
-
-      root.querySelectorAll("section").forEach((section) => {
-        const head = section.querySelector(".center-head, .home-intro, .section-head");
-        if (head) {
-          gsap.from(head, {
-            y: 36,
-            opacity: 0,
-            duration: 0.75,
-            ease: "power3.out",
-            scrollTrigger: { trigger: head, start: "top 88%" },
+      const typeLine = root.querySelector(TYPE_LINE);
+      if (typeLine) {
+        const value = typeLine.textContent.trim();
+        if (value) {
+          typeLine.textContent = "";
+          gsap.to(typeLine, {
+            duration: Math.min(2.8, Math.max(1.2, value.length * 0.02)),
+            text: value,
+            ease: "none",
+            delay: 0.35,
           });
         }
-        const blocks = section.querySelectorAll(BLOCKS);
-        if (!blocks.length) return;
-        gsap.from(blocks, {
-          y: 52,
+      }
+
+      const headings = [...root.querySelectorAll("h1, h2, h3")].filter((el) => !el.closest(CARDS));
+      headings.forEach((heading) => {
+        const inHero = heading.closest(".hero, .page-hero, .about-hero, .svc-hero, .not-found");
+        gsap.from(heading, {
+          y: 56,
+          opacity: 0,
+          duration: 0.85,
+          ease: "power3.out",
+          scrollTrigger: inHero ? undefined : { trigger: heading, start: "top 92%" },
+        });
+      });
+
+      root.querySelectorAll(".hero-description").forEach((line) => {
+        gsap.from(line, {
+          y: 28,
           opacity: 0,
           duration: 0.75,
-          stagger: 0.08,
+          delay: 0.2,
           ease: "power3.out",
-          scrollTrigger: { trigger: blocks[0].parentElement || section, start: "top 84%" },
         });
       });
 
-      const cta = root.querySelector(".cta-band .wrap");
-      if (cta) {
-        gsap.from(cta.children, {
-          y: 32,
+      root.querySelectorAll(".section-intro").forEach((line) => {
+        gsap.from(line, {
+          y: 36,
           opacity: 0,
           duration: 0.7,
-          stagger: 0.1,
           ease: "power3.out",
-          scrollTrigger: { trigger: cta, start: "top 86%" },
+          scrollTrigger: { trigger: line, start: "top 92%" },
         });
-      }
+      });
     }, root);
 
-    const cleanups = [];
-    root.querySelectorAll(HOVER).forEach((card) => {
-      const enter = () => {
-        gsap.to(card, { y: -10, scale: 1.02, duration: 0.35, ease: "power2.out", overwrite: "auto" });
-      };
-      const leave = () => {
-        gsap.to(card, { y: 0, scale: 1, duration: 0.4, ease: "power2.out", overwrite: "auto" });
-      };
-      card.addEventListener("mouseenter", enter);
-      card.addEventListener("mouseleave", leave);
-      cleanups.push(() => {
-        card.removeEventListener("mouseenter", enter);
-        card.removeEventListener("mouseleave", leave);
-      });
-    });
+    ScrollTrigger.refresh();
 
-    return () => {
-      ctx.revert();
-      cleanups.forEach((remove) => remove());
-    };
+    return () => ctx.revert();
   }, [pathname, rootRef]);
 }

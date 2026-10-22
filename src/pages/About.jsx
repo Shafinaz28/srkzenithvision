@@ -1,7 +1,5 @@
-import { useLayoutEffect, useRef } from "react";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { aboutDossier, aboutFaqs, aboutPillars, ascentTimeline, brand, founderTraits } from "../data/content";
 import Button from "../components/Button";
 import usePageTitle from "../hooks/usePageTitle";
@@ -9,106 +7,6 @@ import usePageTitle from "../hooks/usePageTitle";
 export default function About() {
   const pageRef = useRef(null);
   usePageTitle("About | SRK Zenithvision");
-
-  useLayoutEffect(() => {
-    const root = pageRef.current;
-    if (!root || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
-    gsap.registerPlugin(ScrollTrigger);
-
-    const ctx = gsap.context(() => {
-      gsap.from(".about-line > span", {
-        yPercent: 120,
-        duration: 0.95,
-        stagger: 0.16,
-        ease: "power3.out",
-      });
-      gsap.from(".about-piece", {
-        y: 32,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.12,
-        delay: 0.28,
-        ease: "power3.out",
-      });
-      gsap.from(".dossier-card", {
-        y: 48,
-        opacity: 0,
-        duration: 0.75,
-        stagger: 0.1,
-        delay: 0.4,
-        ease: "power3.out",
-      });
-
-      const groups = [
-        [".founder-grid", ".founder-grid > *"],
-        [".pillar-duo", ".pillar-duo article"],
-        [".timeline-grid", ".time-card"],
-        [".diligence", ".diligence > *"],
-      ];
-      groups.forEach(([trigger, items]) => {
-        gsap.from(items, {
-          y: 56,
-          opacity: 0,
-          duration: 0.8,
-          stagger: 0.12,
-          ease: "power3.out",
-          scrollTrigger: { trigger, start: "top 82%" },
-        });
-      });
-
-      gsap.from(".close-band .slide-line > span", {
-        yPercent: 120,
-        duration: 0.9,
-        stagger: 0.15,
-        ease: "power3.out",
-        scrollTrigger: { trigger: ".close-band", start: "top 84%" },
-      });
-      gsap.from(".close-piece", {
-        y: 28,
-        opacity: 0,
-        duration: 0.75,
-        stagger: 0.12,
-        ease: "power3.out",
-        scrollTrigger: { trigger: ".close-band", start: "top 84%" },
-      });
-    }, root);
-
-    const cards = root.querySelectorAll(".dossier-card, .pillar-duo article, .time-card");
-    const cleanups = [];
-    cards.forEach((card) => {
-      const enter = () => {
-        gsap.to(card, {
-          y: -10,
-          scale: 1.02,
-          boxShadow: "0 22px 48px rgba(0, 0, 0, 0.28)",
-          duration: 0.35,
-          ease: "power2.out",
-          overwrite: "auto",
-        });
-      };
-      const leave = () => {
-        gsap.to(card, {
-          y: 0,
-          scale: 1,
-          boxShadow: "0 0 0 rgba(0, 0, 0, 0)",
-          duration: 0.45,
-          ease: "power2.out",
-          overwrite: "auto",
-        });
-      };
-      card.addEventListener("mouseenter", enter);
-      card.addEventListener("mouseleave", leave);
-      cleanups.push(() => {
-        card.removeEventListener("mouseenter", enter);
-        card.removeEventListener("mouseleave", leave);
-      });
-    });
-
-    return () => {
-      ctx.revert();
-      cleanups.forEach((remove) => remove());
-    };
-  }, []);
 
   return (
     <div className="about-page" ref={pageRef}>
@@ -225,29 +123,21 @@ export default function About() {
         </div>
       </section>
 
-      <section className="home-block home-block-tight">
-        <div className="wrap diligence">
-          <article className="nda-card">
-            <p className="dot-kicker">Direct founder office inquiry</p>
-            <h2>Sovereign protocol & mutual non-disclosure</h2>
-            <p>All enterprise advisory begins with an enforceable mutual bilateral NDA. We operate under rigorous confidential compute standards, zero cross-project code contamination, and strict fiduciary non-disclosure.</p>
-            <div className="nda-note">
-              <strong>Pre-signed executive NDA</strong>
-              <p>Available instantly for C-suite and General Counsel review prior to technical disclosure.</p>
-            </div>
-            <Button to="/contact?service=The%20Zenith&message=Request%20the%20mutual%20NDA%20form.">Request mutual NDA form</Button>
-          </article>
-          <div>
-            <p className="dot-kicker">Due diligence</p>
-            <h2 className="display">Frequently addressed inquiries</h2>
-            <div className="inquiry-list">
-              {aboutFaqs.map((item) => (
-                <details key={item.q}>
-                  <summary>{item.q}</summary>
-                  <p>{item.a}</p>
-                </details>
-              ))}
-            </div>
+      <section className="home-block home-block-tight about-faq">
+        <div className="wrap">
+          <p className="faq-pill">FAQ</p>
+          <h2>Frequently Asked Questions</h2>
+          <p className="faq-lead">Answers to the questions clients ask before we start.</p>
+          <div className="inquiry-list">
+            {aboutFaqs.map((item, index) => (
+              <details key={item.q} open={index === 0}>
+                <summary>
+                  <span>{item.q}</span>
+                  <span className="faq-icon" aria-hidden="true" />
+                </summary>
+                <p>{item.a}</p>
+              </details>
+            ))}
           </div>
         </div>
       </section>

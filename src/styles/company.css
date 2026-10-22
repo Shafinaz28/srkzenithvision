@@ -14,9 +14,11 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-  padding: calc(var(--header) + 24px) 0 72px;
+  padding: calc(var(--header) + 24px) 0 40px;
   justify-content: center;
-  background: linear-gradient(180deg, oklch(0.07 0.015 260) 0%, oklch(0.09 0.025 230) 100%);
+  background:
+    radial-gradient(ellipse 95% 62% at 50% -8%, oklch(0.58 0.11 195) 0%, oklch(0.38 0.09 198) 34%, oklch(0.16 0.045 215) 62%, transparent 78%),
+    linear-gradient(180deg, oklch(0.2 0.05 200) 0%, oklch(0.09 0.025 230) 46%, oklch(0.06 0.015 260) 100%);
 }
 
 .home-co .hero::before {
@@ -49,13 +51,16 @@
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background:
-    linear-gradient(90deg, transparent 6%, oklch(0.22 0.04 255 / 0.45) 14%, transparent 24%),
-    linear-gradient(90deg, transparent 28%, oklch(0.24 0.045 255 / 0.38) 40%, transparent 52%),
-    linear-gradient(90deg, transparent 56%, oklch(0.22 0.04 255 / 0.42) 68%, transparent 80%),
-    linear-gradient(90deg, transparent 82%, oklch(0.2 0.04 255 / 0.32) 91%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 88%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 88%);
+  background-image:
+    radial-gradient(1.2px 1.2px at 18% 28%, oklch(0.95 0.02 195 / 0.75) 50%, transparent 52%),
+    radial-gradient(1px 1px at 32% 18%, oklch(0.95 0.02 195 / 0.55) 50%, transparent 52%),
+    radial-gradient(1.4px 1.4px at 46% 36%, oklch(0.96 0.02 190 / 0.7) 50%, transparent 52%),
+    radial-gradient(1px 1px at 61% 22%, oklch(0.95 0.02 195 / 0.5) 50%, transparent 52%),
+    radial-gradient(1.2px 1.2px at 74% 32%, oklch(0.95 0.02 195 / 0.65) 50%, transparent 52%),
+    radial-gradient(1px 1px at 84% 16%, oklch(0.95 0.02 195 / 0.45) 50%, transparent 52%),
+    radial-gradient(1px 1px at 24% 52%, oklch(0.9 0.02 200 / 0.4) 50%, transparent 52%),
+    radial-gradient(1.2px 1.2px at 55% 58%, oklch(0.9 0.02 200 / 0.35) 50%, transparent 52%),
+    radial-gradient(1px 1px at 78% 48%, oklch(0.9 0.02 200 / 0.4) 50%, transparent 52%);
 }
 
 @keyframes arc-sway {
@@ -114,14 +119,37 @@
 
 .home-co .hero h1 {
   font-family: "Sora", sans-serif;
-  font-size: clamp(38px, 4.2vw, 56px);
-  font-weight: 600;
-  line-height: 1.08;
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 500;
+  line-height: 1.2;
   letter-spacing: 0;
-  text-transform: none;
+  text-transform: capitalize;
   text-align: center;
-  margin: 0 auto 24px;
-  max-width: 750px;
+  margin: 0 auto 22px;
+  max-width: 920px;
+  background: var(--gold-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.home-co .hero .hero-line {
+  white-space: nowrap;
+  overflow: visible;
+}
+
+.home-co .hero .hero-line > span {
+  display: inline;
+}
+
+.home-co .hero .hero-line > span,
+.home-co .hero .hero-accent {
+  background: var(--gold-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 .home-co .gradient-text {
@@ -133,25 +161,71 @@
 }
 
 .home-co .hero-description {
-  max-width: 460px;
-  font-size: 15px;
-  line-height: 1.7;
-  color: var(--muted);
-  margin: 0 auto 32px;
+  max-width: 640px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: oklch(0.78 0.012 250);
+  margin: 0 auto 28px;
   text-align: center;
 }
 
 .home-co .hero-actions {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 6px;
 }
 
 .home-co .hero-actions a {
-  height: 44px;
+  width: auto;
+  height: 36px;
   font-size: 13px;
-  padding-inline: 22px;
+  font-weight: 500;
+  padding: 0 14px;
   border-radius: 999px;
+  gap: 6px;
+  letter-spacing: 0;
+}
+
+.home-co .hero-actions a:hover {
+  transform: none;
+}
+
+.home-co .hero-actions .btn-ghost {
+  color: #fff;
+  background: linear-gradient(180deg, oklch(1 0 0 / 0.12), oklch(1 0 0 / 0.04));
+  border: 1px solid oklch(1 0 0 / 0.22);
+  backdrop-filter: blur(16px) saturate(1.35);
+  -webkit-backdrop-filter: blur(16px) saturate(1.35);
+  box-shadow:
+    inset 0 1px 0 oklch(1 0 0 / 0.32),
+    inset 0 -8px 16px oklch(1 0 0 / 0.04),
+    0 8px 20px oklch(0 0 0 / 0.22);
+}
+
+.home-co .hero-actions .btn-ghost:hover {
+  color: #fff;
+  background: linear-gradient(180deg, oklch(1 0 0 / 0.18), oklch(1 0 0 / 0.07));
+  border-color: oklch(1 0 0 / 0.4);
+}
+
+.home-co .hero-actions .btn-plain {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  color: #fff;
+  padding-inline: 10px;
+}
+
+.home-co .hero-actions .btn-plain:hover {
+  background: transparent;
+  border-color: transparent;
+  color: oklch(0.92 0.02 90);
 }
 
 
@@ -161,11 +235,25 @@
   background: transparent;
 }
 
-.home-co .trust-inner {
+.home-co .trust-slider {
+  overflow: hidden;
+}
+
+.home-co .trust-track {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 30px;
+  gap: 56px;
+  width: max-content;
+  animation: trust-slide 22s linear infinite;
+}
+
+.home-co .trust-slider:hover .trust-track {
+  animation-play-state: paused;
+}
+
+@keyframes trust-slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 .home-co .trust-title {
@@ -187,7 +275,7 @@
 }
 
 .home-co .section {
-  padding: 100px 0;
+  padding: 52px 0;
 }
 
 .home-co .section-heading {
@@ -196,19 +284,25 @@
   align-items: center;
   text-align: center;
   gap: 14px;
-  margin-bottom: 45px;
+  margin-bottom: 28px;
 }
 
-.home-co .section h2 {
+.home-co .section h2,
+.home-co .band-head h2 {
   font-family: "Sora", sans-serif;
-  font-size: 36px;
+  font-size: clamp(32px, 4vw, 44px);
   font-weight: 500;
-  line-height: 1.4;
+  line-height: 1.2;
   letter-spacing: 0;
-  text-transform: none;
+  text-transform: capitalize;
   max-width: none;
   margin: 0;
   text-align: center;
+  background: var(--gold-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 .home-co .section-intro {
@@ -226,7 +320,7 @@
 
 .home-co .band-head {
   max-width: 760px;
-  margin: 0 auto 48px;
+  margin: 0 auto 28px;
   text-align: center;
 }
 
@@ -255,66 +349,96 @@
 .home-co .service-card {
   position: relative;
   overflow: hidden;
-  border: 1px solid oklch(0.45 0.06 190 / 0.28);
-  border-radius: 18px;
-  padding: 28px 24px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: left;
+  text-decoration: none;
+  color: inherit;
+  min-height: 100%;
+  gap: 0;
+  border: 1px solid oklch(1 0 0 / 0.14);
+  border-radius: 22px;
+  padding: 28px 26px 30px;
   background:
-    radial-gradient(ellipse 130% 95% at 100% -8%, oklch(0.46 0.1 185), oklch(0.3 0.075 195) 46%, transparent 72%),
-    linear-gradient(168deg, oklch(0.2 0.05 200) 0%, oklch(0.13 0.03 220) 52%, oklch(0.09 0.02 245) 100%);
-  box-shadow: none;
-  backdrop-filter: none;
+    radial-gradient(ellipse 90% 55% at 0% 110%, oklch(0.72 0.13 75 / 0.38), transparent 62%),
+    linear-gradient(180deg, oklch(0.16 0.02 260 / 0.92), oklch(0.09 0.02 260 / 0.96));
+  box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.08);
+  backdrop-filter: blur(8px);
   transition: border-color 0.35s, box-shadow 0.35s;
 }
 
+.home-co .service-card.tone-1 {
+  background:
+    radial-gradient(ellipse 80% 50% at 100% -10%, oklch(0.62 0.12 195 / 0.42), transparent 64%),
+    linear-gradient(180deg, oklch(0.15 0.025 230 / 0.92), oklch(0.09 0.02 250 / 0.96));
+}
+
+.home-co .service-card.tone-2 {
+  background:
+    radial-gradient(ellipse 90% 55% at 100% 110%, oklch(0.78 0.12 91 / 0.34), transparent 62%),
+    linear-gradient(180deg, oklch(0.16 0.02 280 / 0.92), oklch(0.09 0.02 260 / 0.96));
+}
+
 .home-co .service-card:hover {
-  border-color: oklch(0.766 0.139 91 / 0.5);
-}
-
-.home-co .service-top {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 24px;
-  color: var(--primary);
-}
-
-.home-co .service-index {
-  font-size: 10px;
-  color: var(--muted);
-  font-family: monospace;
+  border-color: oklch(0.963 0.018 88 / 0.32);
 }
 
 .home-co .service-card h3 {
-  font-size: 16px;
-  margin: 0 0 13px;
+  width: 100%;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+  color: #fff;
+  margin: 0 0 16px;
+  text-wrap: balance;
 }
 
-.home-co .service-card p {
-  font-size: 11px;
-  line-height: 1.9;
-  color: var(--muted);
-  margin: 0 0 18px;
+.home-co .card-rule {
+  display: block;
+  height: 2px;
+  width: 100%;
+  margin: 0 0 22px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #c9842a, #f5d77f);
+}
+
+.home-co .service-card.tone-1 .card-rule {
+  background: linear-gradient(90deg, #d946ef, #67e8f9);
+}
+
+.home-co .service-card.tone-2 .card-rule {
+  background: linear-gradient(90deg, #22d3ee, #93c5fd);
 }
 
 .home-co .service-card ul {
   list-style: none;
   padding: 0;
-  margin: 0 0 23px;
+  margin: 0;
 }
 
 .home-co .service-card li {
-  font-size: 10px;
-  color: var(--muted);
-  margin: 10px 0;
+  font-size: 14px;
+  line-height: 1.45;
+  color: oklch(0.84 0.012 250);
+  margin: 0 0 14px;
   display: flex;
-  gap: 8px;
-  align-items: center;
+  gap: 10px;
+  align-items: flex-start;
 }
 
 .home-co .service-card li::before {
-  content: "";
-  width: 3px;
-  height: 3px;
-  background: var(--primary);
+  content: "+";
+  width: auto;
+  height: auto;
+  margin-top: 1px;
+  background: none;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  flex: none;
 }
 
 .home-co .service-link {
@@ -359,6 +483,11 @@
   box-shadow: 0 0 14px oklch(0.766 0.139 91 / 0.45), 0 0 28px oklch(0.766 0.139 91 / 0.18);
 }
 
+.home-co .service-card .practice-icon {
+  align-self: center;
+  margin-bottom: 16px;
+}
+
 .home-co .principle {
   display: grid;
   grid-template-columns: auto auto 1fr;
@@ -370,7 +499,7 @@
 
 .home-co .step-index {
   color: var(--primary);
-  font-family: monospace;
+  font-family: "Sora", "Segoe UI", sans-serif;
   font-size: 12px;
   padding-top: 14px;
 }
@@ -459,7 +588,7 @@
 .home-co .orbit-label span {
   color: var(--primary);
   margin-right: 9px;
-  font-family: monospace;
+  font-family: "Sora", "Segoe UI", sans-serif;
 }
 
 .home-co .orbit-label {
@@ -710,7 +839,7 @@
 .home-co .step-number,
 .home-co .step small {
   font-size: 10px;
-  font-family: monospace;
+  font-family: "Sora", "Segoe UI", sans-serif;
   color: var(--primary);
 }
 
@@ -811,7 +940,7 @@
 }
 
 .home-co .contact-band {
-  padding: 70px 0;
+  padding: 48px 0;
   border: 0;
   background: transparent;
 }
@@ -921,7 +1050,7 @@
   }
 
   .home-co .hero h1 {
-    font-size: 44px;
+    font-size: clamp(32px, 4vw, 44px);
   }
 
   .home-co .architecture-inner,
@@ -941,12 +1070,71 @@
     padding-bottom: 64px;
   }
 
-  .home-co .hero h1 {
-    font-size: 34px;
+  .home-co .hero::before {
+    top: calc(var(--header) + 8px);
+    width: 148%;
+    clip-path: inset(0 0 70% 0);
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 22%, transparent 30%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 22%, transparent 30%);
   }
 
   .home-co .hero-content {
-    padding-top: 20px;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+    padding-top: 28px;
+  }
+
+  .home-co .eyebrow {
+    align-self: center;
+    margin: 16px auto 36px;
+  }
+
+  .home-co .hero h1 {
+    align-self: stretch;
+    font-size: clamp(28px, 7vw, 36px);
+    line-height: 1.2;
+    text-align: center;
+    max-width: 100%;
+    margin: 0 0 16px;
+  }
+
+  .home-co .hero .hero-line {
+    white-space: normal;
+  }
+
+  .home-co .hero .hero-line:first-child > span {
+    display: block;
+  }
+
+  .home-co .hero-description {
+    align-self: stretch;
+    max-width: 100%;
+    margin: 0 0 26px;
+    font-size: 15px;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  .home-co .hero-actions {
+    align-self: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    max-width: 100%;
+  }
+
+  .home-co .hero-actions,
+  .home-co .hero-actions .btn {
+    width: auto;
+    flex-direction: row;
+  }
+
+  .home-co .hero-actions a {
+    height: 36px;
+    font-size: 13px;
+    padding: 0 14px;
   }
 
   .home-co .hero-sculpture {
@@ -961,14 +1149,18 @@
   .home-co .services-grid,
   .home-co .projects-grid,
   .home-co .testimonials-grid,
-  .home-co .contact-inner,
-  .home-co .trust-inner {
+  .home-co .contact-inner {
     display: grid;
     grid-template-columns: 1fr;
   }
 
   .home-co .services-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .home-co .service-card {
+    width: min(100%, 420px);
   }
 
   .home-co .steps {
@@ -993,6 +1185,18 @@
   }
 
   .home-co .quote-track .testimonial:nth-child(n + 4) {
+    display: none;
+  }
+
+  .home-co .trust-track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: auto;
+    gap: 28px 40px;
+  }
+
+  .home-co .trust-copy {
     display: none;
   }
 }
