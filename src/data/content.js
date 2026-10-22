@@ -556,7 +556,7 @@ export const closing = {
 };
 
 export const aboutDossier = [
-  { kicker: "Value generation", value: "$48M+", text: "Enterprise value created across client portfolios", note: "Audited portfolio impact" },
+  { kicker: "Value generation", value: "48M+", text: "Enterprise value created across client portfolios", note: "Audited portfolio impact" },
   { kicker: "Systems deployed", value: "140+", text: "Production engines and sovereign platforms shipped", note: "Zero-defect SLA delivery" },
   { kicker: "Infrastructure", value: "18+", text: "Sovereign global cloud mesh nodes operating", note: "Multi-region high resilience" },
   { kicker: "High assurance", value: "99.998%", text: "Uptime protocol across fault-tolerant meshes", note: "Deterministic realtime mesh" },

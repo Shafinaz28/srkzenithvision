@@ -12,12 +12,6 @@ export default function About() {
     <div className="about-page" ref={pageRef}>
       <section className="about-hero">
         <div className="wrap">
-          <div className="about-top">
-            <p className="dot-kicker">Enterprise strategic dossier // Apex grade 2026</p>
-            <p className="crumb">
-              <Link to="/">Zenith</Link> / Governance / About us
-            </p>
-          </div>
           <h1 className="display about-title">
             <span className="about-line">
               <span>The architects of</span>
@@ -29,13 +23,18 @@ export default function About() {
           <p className="about-deck about-piece">
             Founded in 2023 on the unshakeable conviction that generational visions demand uncompromising engineering. We synthesize surgical enterprise architecture, sovereign cloud protocols, and hyper-aesthetic intelligence engines to propel category leaders to boundless market dominance.
           </p>
+        </div>
+      </section>
+
+      <section className="dossier-band">
+        <div className="wrap">
           <div className="dossier-grid">
             {aboutDossier.map((item) => (
               <article className="dossier-card" key={item.kicker}>
                 <p className="flag-tag">{item.kicker}</p>
                 <strong>{item.value}</strong>
                 <p>{item.text}</p>
-                <span>{item.note}</span>
+                <span className="dossier-note">{item.note}</span>
               </article>
             ))}
           </div>
@@ -80,7 +79,7 @@ export default function About() {
       <section className="home-block home-block-tight">
         <div className="wrap">
           <div className="center-head">
-            <p className="dot-kicker">Core operational values</p>
+            
             <h2 className="display">The four architectural pillars</h2>
             <p>Our structural doctrines define every system specification, deployment blueprint, and client covenant.</p>
           </div>
@@ -99,9 +98,8 @@ export default function About() {
 
       <section className="home-block home-block-tight band-light">
         <div className="wrap">
-          <div className="home-intro">
+          <div className="home-intro is-center">
             <div>
-              <p className="dot-kicker">Trajectory roadmap</p>
               <h2 className="display">The ascent timeline</h2>
             </div>
             <p className="home-aside">A chronological testament of rapid institutional scaling, infrastructural maturation, and value acceleration.</p>
@@ -125,7 +123,7 @@ export default function About() {
 
       <section className="home-block home-block-tight about-faq">
         <div className="wrap">
-          <p className="faq-pill">FAQ</p>
+          
           <h2>Frequently Asked Questions</h2>
           <p className="faq-lead">Answers to the questions clients ask before we start.</p>
           <div className="inquiry-list">
@@ -144,7 +142,7 @@ export default function About() {
 
       <section className="close-band band-light">
         <div className="wrap">
-          <p className="dot-kicker">Private client advisory 2026</p>
+          
           <h2 className="display">
             <span className="slide-line">
               <span>Ready to architect</span>
@@ -159,11 +157,7 @@ export default function About() {
             <Button to="/services" variant="dark">Explore services</Button>
             <a className="btn btn-dark" href={`mailto:${brand.email}`}>Founder office</a>
           </div>
-          <ul className="assure close-piece">
-            <li>ISO 27001 prepared</li>
-            <li>Strict bilateral NDA</li>
-            <li>Zero vendor-lock</li>
-          </ul>
+          
         </div>
       </section>
     </div>

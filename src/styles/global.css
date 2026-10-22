@@ -1827,6 +1827,23 @@ svg {
   margin: 0;
 }
 
+.home-intro.is-center {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.home-intro.is-center .display,
+.home-intro.is-center .home-aside {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.home-intro.is-center .home-aside {
+  max-width: 46ch;
+}
+
 .dot-kicker {
   display: flex;
   align-items: center;
@@ -2431,6 +2448,38 @@ svg {
   margin-top: 26px;
 }
 
+.close-actions .btn {
+  border-radius: 10px;
+  border: 1px solid oklch(1 0 0 / 0.22);
+  backdrop-filter: blur(18px) saturate(1.45);
+  -webkit-backdrop-filter: blur(18px) saturate(1.45);
+  box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.32), 0 10px 28px oklch(0 0 0 / 0.28);
+}
+
+.close-actions .btn-gold {
+  background: linear-gradient(180deg, oklch(0.86 0.13 92 / 0.9), oklch(0.7 0.13 84 / 0.62));
+  color: var(--primary-foreground);
+  border-color: oklch(0.94 0.06 92 / 0.55);
+}
+
+.close-actions .btn-gold:hover {
+  filter: brightness(1.08);
+  background: linear-gradient(180deg, oklch(0.9 0.12 92 / 0.95), oklch(0.74 0.13 84 / 0.72));
+  color: var(--primary-foreground);
+}
+
+.close-actions .btn-dark {
+  background: linear-gradient(180deg, oklch(1 0 0 / 0.16), oklch(0.16 0.02 260 / 0.38));
+  color: var(--paper);
+  border-color: oklch(1 0 0 / 0.2);
+}
+
+.close-actions .btn-dark:hover {
+  background: linear-gradient(180deg, oklch(1 0 0 / 0.24), oklch(0.2 0.02 260 / 0.48));
+  color: var(--paper);
+  border-color: oklch(1 0 0 / 0.34);
+}
+
 .assure {
   display: flex;
   justify-content: center;
@@ -2515,7 +2564,11 @@ svg {
 }
 
 .about-hero {
-  padding: 88px 0 72px;
+  padding: 88px 0 36px;
+}
+
+.dossier-band {
+  padding: 8px 0 88px;
 }
 
 .about-page .home-block,
@@ -2531,8 +2584,8 @@ svg {
   margin-top: 28px;
 }
 
-.about-page .dossier-grid {
-  margin-top: 48px;
+.about-page .dossier-band .dossier-grid {
+  margin-top: 0;
 }
 
 .about-hero .wrap {
@@ -2619,16 +2672,27 @@ svg {
   flex-direction: column;
   gap: 8px;
   min-height: 180px;
+  text-align: left;
 }
 
 .dossier-card strong {
   font-family: "Sora", "Segoe UI", sans-serif;
   font-size: clamp(1.8rem, 3vw, 2.4rem);
   letter-spacing: -0.04em;
+  color: var(--paper);
+  background: none;
+  -webkit-text-fill-color: currentColor;
 }
 
 .dossier-card p,
-.dossier-card span,
+.dossier-card .flag-tag,
+.dossier-card .dossier-note {
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+.dossier-card p,
+.dossier-card .dossier-note,
 .pillar-duo p,
 .time-card p,
 .trait-grid p,
@@ -2637,7 +2701,7 @@ svg {
   line-height: 1.55;
 }
 
-.dossier-card span {
+.dossier-card .dossier-note {
   margin-top: auto;
   color: var(--gold);
   font-size: 12px;
