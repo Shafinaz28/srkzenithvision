@@ -685,6 +685,12 @@ export const flagships = [
     categories: ["SaaS Engines", "Fintech"],
     tag: "Fintech SaaS · Institutional",
     metric: "+310% velocity acceleration",
+    facts: [
+      { label: "Result", value: "+310% velocity" },
+      { label: "Sector", value: "Fintech" },
+      { label: "Volume", value: "$1.8B+ / mo" },
+      { label: "Reach", value: "24 markets" },
+    ],
     title: "AuraPay Global Sovereign Rail",
     text: "Next-generation distributed liquidity network with ultra-low latency settlement, processing $1.8B+ monthly volume across 24 tier-1 jurisdictions.",
     cta: "View case study",
@@ -697,6 +703,12 @@ export const flagships = [
     categories: ["AI Systems"],
     tag: "AI Platform · $48M acquisition",
     metric: "Autonomous intelligence",
+    facts: [
+      { label: "Result", value: "$48M acquisition" },
+      { label: "Sector", value: "AI systems" },
+      { label: "Mark", value: "Autonomous" },
+      { label: "Speed", value: "Milliseconds" },
+    ],
     title: "Novus Deep Intelligence Cloud",
     text: "Self-calibrating neural model orchestrator, scaling enterprise decision engines from weeks to milliseconds.",
     cta: "Examine architecture",
@@ -708,6 +720,12 @@ export const flagships = [
     scene: "car",
     categories: ["Creative 3D"],
     award: "Automotive Design Award 2024",
+    facts: [
+      { label: "Award", value: "Design 2024" },
+      { label: "Sector", value: "Creative 3D" },
+      { label: "Frame", value: "60 FPS" },
+      { label: "Sold", value: "100% batch" },
+    ],
     title: "Vanguard 3D WebGL Configurator",
     text: "A real-time raytraced browser configurator delivering zero-latency paint customization, telemetry simulator, and direct multi-signature smart contract deposit integrations.",
     stats: [
@@ -725,6 +743,12 @@ export const flagships = [
     categories: ["SaaS Engines"],
     tag: "Logistics SaaS · Product",
     metric: "Activation up 38%",
+    facts: [
+      { label: "Result", value: "+38% activation" },
+      { label: "Sector", value: "Logistics" },
+      { label: "Product", value: "SaaS rail" },
+      { label: "Focus", value: "First load" },
+    ],
     title: "Lumen Freight Activation Rail",
     text: "A trial-to-shipment system that carries new accounts through the first live load, with lifecycle timing tied to the one action that predicts retention.",
     cta: "View case study",
@@ -787,33 +811,34 @@ export const executiveQuotes = [
 
 export const footerColumns = [
   {
+    title: "Services",
+    links: [
+      { label: "Technology", to: "/services/technology" },
+      { label: "SaaS applications", to: "/services/saas" },
+      { label: "Digital marketing", to: "/services/digital-marketing" },
+      { label: "Design", to: "/services/design" },
+      { label: "Motion", to: "/services/motion" },
+      { label: "Search engine optimization", to: "/services/seo", accent: true },
+    ],
+  },
+  {
+    title: "Support",
+    links: [
+      { label: "Contact", to: "/contact" },
+      { label: "Careers", to: "/careers" },
+      { label: "Journal", to: "/blogs" },
+      { label: "Partner program", to: "/refer" },
+      { label: "The Zenith", to: "/the-zenith" },
+    ],
+  },
+  {
     title: "Company",
     links: [
-      { label: "About ZenithVision", to: "/about" },
-      { label: "Leadership & Vision", to: "/about" },
-      { label: "Careers & Culture", to: "/careers" },
-      { label: "Flagship Ventures", to: "/projects" },
-      { label: "Partner Program", to: "/refer" },
-    ],
-  },
-  {
-    title: "Pillars & Ecosystem",
-    links: [
-      { label: "Enterprise Consulting", to: "/services/technology" },
-      { label: "SaaS Applications", to: "/services/saas" },
-      { label: "Industrial AI & Cloud", to: "/services/technology" },
-      { label: "Creative Studio", to: "/services/design" },
-      { label: "Zenith Innovation Lab", to: "/the-zenith" },
-    ],
-  },
-  {
-    title: "Resources",
-    links: [
-      { label: "Thought Leadership", to: "/blogs" },
-      { label: "Engineering Whitepapers", to: "/blogs" },
-      { label: "Ecosystem Case Studies", to: "/projects" },
-      { label: "Product Documentation", to: "/saas" },
-      { label: "Developer Portal", to: "/saas" },
+      { label: "About", to: "/about" },
+      { label: "Projects", to: "/projects" },
+      { label: "Industries", to: "/industries" },
+      { label: "Products", to: "/saas" },
+      { label: "Insights", to: "/blogs" },
     ],
   },
 ];

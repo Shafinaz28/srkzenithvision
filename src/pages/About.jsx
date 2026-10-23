@@ -4,6 +4,20 @@ import { aboutDossier, aboutFaqs, aboutPillars, ascentTimeline, brand, founderTr
 import Button from "../components/Button";
 import usePageTitle from "../hooks/usePageTitle";
 
+function ImpactIcon({ index }) {
+  const paths = [
+    "M8 14a3 3 0 100-6 3 3 0 000 6zM16 15a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 14v1.5A3.5 3.5 0 0011.5 19h1M16 15v.5a3 3 0 01-3 3",
+    "M5 16l4-8 3 5 2-3 5 6",
+    "M12 4a8 8 0 100 16 8 8 0 000-16zM4 12h16M12 4c2.2 2.4 3.2 5.2 3.2 8s-1 5.6-3.2 8c-2.2-2.4-3.2-5.2-3.2-8s1-5.6 3.2-8z",
+    "M12 4l6 2.5v5c0 3.6-2.4 6.2-6 7.5-3.6-1.3-6-3.9-6-7.5v-5L12 4z",
+  ];
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d={paths[index] || paths[0]} fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 export default function About() {
   const pageRef = useRef(null);
   usePageTitle("About | SRK Zenithvision");
@@ -28,13 +42,21 @@ export default function About() {
 
       <section className="dossier-band">
         <div className="wrap">
-          <div className="dossier-grid">
-            {aboutDossier.map((item) => (
-              <article className="dossier-card" key={item.kicker}>
-                <p className="flag-tag">{item.kicker}</p>
-                <strong>{item.value}</strong>
-                <p>{item.text}</p>
-                <span className="dossier-note">{item.note}</span>
+          <div className="dossier-grid impact-grid">
+            {aboutDossier.map((item, index) => (
+              <article className={`impact-ring tone-${index}`} key={item.kicker}>
+                <svg className="impact-arc" viewBox="0 0 200 200" aria-hidden="true">
+                  <circle cx="100" cy="100" r="84" />
+                  <circle className="impact-progress" cx="100" cy="100" r="84" />
+                </svg>
+                <span className="impact-badge" aria-hidden="true">
+                  <ImpactIcon index={index} />
+                </span>
+                <div className="impact-copy">
+                  <p>{item.kicker}</p>
+                  <strong>{item.value}</strong>
+                  <span>{item.text}</span>
+                </div>
               </article>
             ))}
           </div>

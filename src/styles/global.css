@@ -298,7 +298,7 @@ svg {
 }
 
 .site-footer .logo img {
-  height: 108px;
+  height: 64px;
 }
 
 .logo-text {
@@ -1520,13 +1520,10 @@ svg {
 .site-footer {
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  padding: 56px 0 24px;
-  border-top: 1px solid rgba(244, 242, 234, 0.12);
-  background: var(--glass-strong);
-  box-shadow: inset 0 1px 0 rgba(244, 242, 234, 0.08);
-  backdrop-filter: blur(22px) saturate(1.35);
-  -webkit-backdrop-filter: blur(22px) saturate(1.35);
+  gap: 0;
+  padding: 0 0 22px;
+  border-top: 1px solid oklch(1 0 0 / 0.14);
+  background: #080b10;
 }
 
 .site-footer .logo {
@@ -1534,23 +1531,38 @@ svg {
 }
 
 .footer-grid {
-  grid-template-columns: minmax(260px, 1.4fr) repeat(4, minmax(0, 1fr));
-  gap: 28px 32px;
+  grid-template-columns: minmax(240px, 1.35fr) repeat(3, minmax(140px, 0.7fr));
+  gap: 36px 28px;
   align-items: start;
+  padding: 42px 0 36px;
 }
 
 .footer-note {
-  margin: 16px 0 0;
-  max-width: 36ch;
+  margin: 18px 0 0;
+  max-width: 34ch;
   line-height: 1.7;
+  font-size: 14px;
+}
+
+.footer-title {
+  margin: 0 0 18px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .footer-links {
   display: grid;
-  gap: 8px;
+  gap: 12px;
 }
 
-.footer-links a:hover {
+.footer-links a {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.footer-links a:hover,
+.footer-links a.is-accent {
   color: var(--gold);
 }
 
@@ -2538,19 +2550,23 @@ svg {
 
 .socials {
   display: flex;
-  gap: 8px;
+  gap: 10px;
+  margin-top: 22px;
 }
 
 .socials span {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   display: grid;
   place-items: center;
   border-radius: 50%;
-  border: 1px solid var(--line);
-  color: var(--paper);
-  font-size: 11px;
-  font-weight: 700;
+  border: 1px solid oklch(1 0 0 / 0.72);
+  color: #fff;
+}
+
+.socials svg {
+  width: 16px;
+  height: 16px;
 }
 
 .footer-legal {
@@ -2564,11 +2580,111 @@ svg {
 }
 
 .about-hero {
-  padding: 88px 0 36px;
+  padding: 88px 0 72px;
 }
 
 .dossier-band {
-  padding: 8px 0 88px;
+  padding: 72px 0 88px;
+  border-top: 1px solid oklch(1 0 0 / 0.12);
+}
+
+.impact-grid {
+  align-items: start;
+}
+
+.impact-ring {
+  position: relative;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  color: var(--primary);
+}
+
+.impact-arc {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-80deg);
+}
+
+.impact-arc circle {
+  fill: none;
+  stroke: oklch(1 0 0 / 0.08);
+  stroke-width: 16;
+}
+
+.impact-progress {
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-dasharray: 400 528;
+}
+
+.impact-ring.tone-0 { --ring: oklch(0.78 0.14 91); color: var(--ring); }
+.impact-ring.tone-1 { --ring: oklch(0.72 0.12 195); color: var(--ring); }
+.impact-ring.tone-1 .impact-arc { transform: rotate(-20deg); }
+.impact-ring.tone-2 { --ring: oklch(0.82 0.12 85); color: var(--ring); }
+.impact-ring.tone-2 .impact-arc { transform: rotate(30deg); }
+.impact-ring.tone-3 { --ring: oklch(0.74 0.1 175); color: var(--ring); }
+.impact-ring.tone-3 .impact-arc { transform: rotate(110deg); }
+
+.impact-badge {
+  position: absolute;
+  top: 8%;
+  left: 16%;
+  z-index: 2;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--ring);
+  color: oklch(0.14 0.02 250);
+  box-shadow: 0 8px 18px oklch(0 0 0 / 0.28);
+}
+
+.impact-badge svg {
+  width: 20px;
+  height: 20px;
+}
+
+.impact-copy {
+  position: relative;
+  z-index: 1;
+  width: min(68%, 180px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.impact-copy p {
+  margin: 0;
+  color: currentColor;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+.impact-copy strong {
+  color: currentColor;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+.impact-copy span {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+  -webkit-text-fill-color: currentColor;
 }
 
 .about-page .home-block,
@@ -3136,6 +3252,10 @@ svg {
   .footer-grid {
     grid-template-columns: 1fr 1fr;
   }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 680px) {
@@ -3616,7 +3736,11 @@ svg {
   }
 
   .site-footer .logo img {
-    height: 84px;
+    height: 56px;
+  }
+
+  .footer-brand {
+    grid-column: auto;
   }
 }
 

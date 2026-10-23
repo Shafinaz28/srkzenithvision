@@ -1,16 +1,11 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import {
-  architecture,
   ascent,
   brand,
   executiveQuotes,
-  flagshipFilters,
-  flagships,
   orbit,
   practices,
-  softwareMetrics,
-  softwareProducts,
   trusted,
 } from "../data/content";
 import Button from "../components/Button";
@@ -29,6 +24,24 @@ function MethodIcon({ name }) {
     <svg viewBox="0 0 24 24" aria-hidden="true">
       {(paths[name] || paths.Discover).map((d) => (
         <path key={d} d={d} fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      ))}
+    </svg>
+  );
+}
+
+function CycleGlyph({ name }) {
+  const paths = {
+    Idea: ["M12 3a5 5 0 00-3 9c.5.5 1 1.3 1 2h4c0-.7.5-1.5 1-2a5 5 0 00-3-9z", "M10 18h4", "M11 21h2"],
+    Design: ["M4 20l3.2-.8L19 7.4 16.6 5 4.8 16.8 4 20z", "M14.2 6.4l3.4 3.4"],
+    Tech: ["M9 9h6v6H9z", "M12 5v2", "M12 17v2", "M5 12h2", "M17 12h2", "M7 5v2", "M17 5v2", "M7 17v2", "M17 17v2"],
+    Product: ["M5 7h2l1.6 9h8.2L19 9H8", "M10 20.2a1.1 1.1 0 100-2.2 1.1 1.1 0 000 2.2z", "M16.5 20.2a1.1 1.1 0 100-2.2 1.1 1.1 0 000 2.2z"],
+    Marketing: ["M4 19V5", "M4 19h16", "M8 15l3-4 3 2 5-7"],
+    Growth: ["M7 17L17 7", "M10 7h7v7"],
+  };
+  return (
+    <svg className="cycle-glyph" viewBox="0 0 24 24" aria-hidden="true">
+      {(paths[name] || paths.Idea).map((d) => (
+        <path key={d} d={d} fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
       ))}
     </svg>
   );
@@ -53,118 +66,10 @@ function PracticeIcon({ name }) {
   );
 }
 
-function Scene({ name }) {
-  if (name === "network") {
-    return (
-      <div className="scene scene-network" aria-hidden="true">
-        <svg viewBox="0 0 640 360">
-          <g stroke="#F5D77F" strokeOpacity="0.55" fill="none">
-            <path d="M80 220 L180 120 L300 180 L420 90 L540 160 L500 260 L320 280 L160 250 Z" />
-            <path d="M180 120 L320 280 M300 180 L500 260 M420 90 L320 280" />
-          </g>
-          {[[80, 220], [180, 120], [300, 180], [420, 90], [540, 160], [500, 260], [320, 280], [160, 250]].map(([x, y]) => (
-            <circle key={`${x}-${y}`} cx={x} cy={y} r="7" fill="#D4AF37" />
-          ))}
-        </svg>
-      </div>
-    );
-  }
-  if (name === "route") {
-    return (
-      <div className="scene scene-route" aria-hidden="true">
-        <svg viewBox="0 0 640 360">
-          <path
-            d="M48 250 C 150 250, 170 100, 290 108 S 430 250, 600 132"
-            fill="none"
-            stroke="#D4AF37"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-          />
-          {[[48, 250], [290, 108], [430, 196], [600, 132]].map(([x, y]) => (
-            <circle key={`${x}-${y}`} cx={x} cy={y} r="7" fill="#080B10" stroke="#F5D77F" strokeWidth="2" />
-          ))}
-          <rect x="248" y="168" width="150" height="72" rx="8" fill="#12161C" stroke="#D4AF37" />
-          <text x="323" y="198" fill="#F5D77F" fontSize="16" textAnchor="middle">38%</text>
-          <text x="323" y="218" fill="#b7b7c4" fontSize="11" textAnchor="middle">activation</text>
-        </svg>
-      </div>
-    );
-  }
-  if (name === "car") {
-    return (
-      <div className="scene scene-car" aria-hidden="true">
-        <div className="studio-lights" />
-        <svg viewBox="0 0 720 320" className="car-svg">
-          <path
-            fill="#1a1a22"
-            stroke="#D4AF37"
-            strokeWidth="2"
-            d="M70 210h40l30-20 70-55c30-22 70-28 120-24l150 8c40 4 70 22 90 48l28 36h70c18 0 28 14 22 28H90c-16 0-30-10-20-21z"
-          />
-          <path fill="#D4AF37" d="M250 140h70l40 40H230z" opacity="0.35" />
-          <circle cx="190" cy="230" r="28" fill="#080B10" stroke="#D4AF37" strokeWidth="3" />
-          <circle cx="520" cy="230" r="28" fill="#080B10" stroke="#D4AF37" strokeWidth="3" />
-          <path d="M600 168h28" stroke="#4FB4C4" strokeWidth="4" strokeLinecap="round" />
-        </svg>
-        <div className="studio-floor" />
-      </div>
-    );
-  }
-  return (
-    <div className="scene scene-terminal" aria-hidden="true">
-      <div className="skyline" />
-      <svg viewBox="0 0 640 280" className="terminal-chart">
-        <g stroke="rgba(212,175,55,0.25)">
-          {[40, 80, 120, 160, 200].map((y) => (
-            <line key={y} x1="30" y1={y} x2="470" y2={y} />
-          ))}
-        </g>
-        <polyline fill="none" stroke="#D4AF37" strokeWidth="3" points="30,190 80,170 130,150 180,160 240,110 300,90 360,120 420,70 470,84" />
-        <polyline fill="none" stroke="#4FB4C4" strokeWidth="2" points="30,210 90,200 150,188 220,170 300,176 380,150 470,140" />
-        <rect x="500" y="40" width="110" height="70" rx="8" fill="#12121F" stroke="#D4AF37" />
-        <text x="555" y="68" fill="#F5D77F" fontSize="16" textAnchor="middle">$1.8B</text>
-        <text x="555" y="90" fill="#b7b7c4" fontSize="11" textAnchor="middle">volume</text>
-        <rect x="500" y="124" width="110" height="70" rx="8" fill="#12161C" stroke="#F5D77F" />
-        <text x="555" y="154" fill="#D4AF37" fontSize="16" textAnchor="middle">+310%</text>
-        <text x="555" y="176" fill="#b7b7c4" fontSize="11" textAnchor="middle">velocity</text>
-      </svg>
-    </div>
-  );
-}
-
 export default function Home() {
   usePageTitle("SRK Zenithvision | Digital Marketing Company");
   const practiceGrid = useRef(null);
   const heroRef = useRef(null);
-  const flagRef = useRef(null);
-  const [filter, setFilter] = useState("All Work");
-  const shown = filter === "All Work" ? flagships : flagships.filter((item) => item.categories.includes(filter));
-
-  useLayoutEffect(() => {
-    const root = flagRef.current;
-    if (!root) return undefined;
-    root.scrollLeft = 0;
-    let locked = false;
-    const onWheel = (event) => {
-      const slides = root.querySelectorAll(".proof-slide");
-      if (slides.length < 2) return;
-      const gap = parseFloat(getComputedStyle(root).columnGap) || 0;
-      const step = slides[0].getBoundingClientRect().width + gap;
-      const max = root.scrollWidth - root.clientWidth;
-      const goingNext = event.deltaY > 0;
-      if ((goingNext && root.scrollLeft >= max - 4) || (!goingNext && root.scrollLeft <= 4)) return;
-      event.preventDefault();
-      if (locked) return;
-      locked = true;
-      const index = Math.round(root.scrollLeft / step) + (goingNext ? 1 : -1);
-      root.scrollTo({ left: Math.max(0, Math.min(max, index * step)), behavior: "smooth" });
-      window.setTimeout(() => {
-        locked = false;
-      }, 520);
-    };
-    root.addEventListener("wheel", onWheel, { passive: false });
-    return () => root.removeEventListener("wheel", onWheel);
-  }, [filter]);
 
   return (
     <div className="home-co">
@@ -215,6 +120,32 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section who-band">
+        <div className="container-site who-layout">
+          <figure className="who-photo">
+            <img src="/who-team.png" alt="Two colleagues reviewing work together on a tablet" />
+            <div className="who-badge" aria-hidden="true">
+              <svg viewBox="0 0 120 120">
+                <defs>
+                  <path id="who-ring" d="M60 60m-44 0a44 44 0 1 1 88 0a44 44 0 1 1-88 0" />
+                </defs>
+                <circle cx="60" cy="60" r="58" fill="#d4af37" />
+                <circle cx="60" cy="60" r="46" fill="#080b10" />
+                <text fill="#f5d77f" fontSize="7.4" fontWeight="700" letterSpacing="1.4">
+                  <textPath href="#who-ring">PREMIUM SERVICES AND SUPPORT • PREMIUM SERVICES AND SUPPORT •</textPath>
+                </text>
+              </svg>
+            </div>
+          </figure>
+          <div className="who-copy">
+            <p className="eyebrow">Who we are</p>
+            <h2>Your digital future, held to one standard of excellence.</h2>
+            <p>From the first idea to a system the business owns. Strategy, engineering, and creative work stay on one brief, so the work that ships is the work that was promised.</p>
+            <Link className="card-more" to="/about">Discover more</Link>
+          </div>
+        </div>
+      </section>
+
       <section className="section pillar-band" id="practices">
         <div className="container-site">
           <div className="band-head">
@@ -231,6 +162,7 @@ export default function Home() {
                     <li key={point}>{point}</li>
                   ))}
                 </ul>
+                <span className="card-more">Learn more</span>
               </Link>
             ))}
           </div>
@@ -239,130 +171,57 @@ export default function Home() {
 
       <section className="section architecture" id="architecture">
         <div className="container-site">
-          <div className="band-head">
-            <p className="eyebrow">The Zenith architecture</p>
-            <h2>One ecosystem. <span className="gradient-text">Boundless possibilities.</span></h2>
-            <p className="section-intro">From raw genesis to market dominance. A closed-loop framework that connects strategy, engineering, and cultural impact, so every asset moves your business forward.</p>
+          <div className="cycle-intro">
+              <h2>
+                <span>One ecosystem.</span>
+                <span className="gradient-text">Boundless possibilities.</span>
+              </h2>
           </div>
-          <div className="architecture-inner">
-            <div className="architecture-copy">
-              {architecture.map((item, index) => (
-                <article className="principle" key={item.title}>
-                  <span className="step-index">{String(index + 1).padStart(2, "0")}</span>
-                  <span className="practice-icon"><PracticeIcon name={item.icon} /></span>
-                  <div>
-                    <h4>{item.title}</h4>
-                    <p>{item.text}</p>
-                  </div>
-                </article>
-              ))}
+          <div className="eco-layout">
+            <div className="cycle">
+            <svg className="cycle-core" viewBox="0 0 100 100" aria-hidden="true">
+              <path className="flow" d="M50 28 C62 36 40 42 50 50 C62 58 40 66 50 74" />
+              <path className="flow flow-gold" d="M28 38 C36 42 42 46 48 50" />
+              <path className="flow" d="M72 38 C64 42 58 46 52 50" />
+              <path className="flow flow-gold" d="M28 62 C36 58 42 54 48 50" />
+              <path className="flow" d="M72 62 C64 58 58 54 52 50" />
+              <circle className="joint" cx="50" cy="28" r="1.1" />
+              <circle className="joint" cx="50" cy="50" r="1.2" />
+              <circle className="joint" cx="50" cy="74" r="1.1" />
+              <g className="gear" transform="translate(43 46)">
+                <circle r="6.2" />
+                <circle r="2.2" />
+              </g>
+              <g className="gear" transform="translate(58 56)">
+                <circle r="4.4" />
+                <circle r="1.6" />
+              </g>
+            </svg>
+            <ol className="cycle-nodes">
+              {orbit.map((node, index) => {
+                const angle = ((-90 + index * 60) * Math.PI) / 180;
+                return (
+                  <li
+                    className={`cycle-node tone-${index}`}
+                    key={node.n}
+                    style={{
+                      left: `${50 + Math.cos(angle) * 36}%`,
+                      top: `${50 + Math.sin(angle) * 36}%`,
+                    }}
+                  >
+                    <CycleGlyph name={node.label} />
+                    <span>{node.label}</span>
+                  </li>
+                );
+              })}
+            </ol>
             </div>
-            <div className="architecture-art" aria-hidden="true">
-              <div className="orbit" />
-              <div className="core">
-                <div className="core-inner">
-                  <strong>SRK Core</strong>
-                  <small>NEXUS V5</small>
-                </div>
-              </div>
-              {orbit.map((node) => (
-                <div key={node.n} className="orbit-label" style={{ left: node.x, top: node.y }}>
-                  <span>{node.n}</span>{node.label}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section" id="flagships">
-        <div className="container-site">
-          <div className="section-heading">
-            <div>
-              <p className="eyebrow">Flagship engagements</p>
-              <h2>Proof of <span className="gradient-text">sovereign execution.</span></h2>
-            </div>
-          </div>
-          <div className="filters" role="group" aria-label="Filter flagship work">
-            {flagshipFilters.map((item) => (
-              <button
-                key={item}
-                type="button"
-                className="button-filter"
-                aria-pressed={filter === item}
-                onClick={() => setFilter(item)}
-              >
-                {item}
-              </button>
-            ))}
-          </div>
-          <div className="projects-grid" ref={flagRef}>
-            {shown.map((item) => (
-              <article className="project-card" key={item.id}>
-                <div className="project-visual"><Scene name={item.scene} /></div>
-                <div className="project-copy">
-                  <p className="eyebrow">{item.tag || item.award}</p>
-                  <p className="metric">{item.metric || "\u00a0"}</p>
-                  <h3>{item.title}</h3>
-                  <p>{item.text}</p>
-                  <Button to={item.to} variant="ghost" icon="arrow">{item.cta}</Button>
-                </div>
-              </article>
-            ))}
-          </div>
-          {shown.length === 0 ? <p className="section-intro">Nothing in this group yet.</p> : null}
-          <p className="all-work"><Link to="/projects">View all 140+ sovereign flagships →</Link></p>
-        </div>
-      </section>
-
-      <section className="section products" id="software">
-        <div className="container-site">
-          <div className="section-heading">
-            <p className="eyebrow">Proprietary software systems</p>
-            <h2>Built for businesses <span className="gradient-text">that think ahead.</span></h2>
-          </div>
-          <div className="products-layout">
-          <div>
-            {softwareProducts.map((product) => (
-              <article className="product-item" key={product.title}>
-                <p className="eyebrow">{product.status}</p>
-                <h3>{product.title}</h3>
-                <p>{product.text}</p>
-                <ul className="product-badges">
-                  {product.marks.map((mark) => (
-                    <li key={mark}>{mark}</li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-            <Button to="/contact?service=The%20Zenith" variant="ghost">Request enterprise access</Button>
-          </div>
-          <div className="dashboard">
-              <div className="dashboard-head">
-                <span>Node: US-East-Central-01 // Production</span>
-                <span className="encrypted">Encrypted</span>
-              </div>
-              <div className="dashboard-stats">
-                {softwareMetrics.map((item) => (
-                  <div key={item.label}>
-                    <span>{item.label}</span>
-                    <strong>{item.value}</strong>
-                    <em>{item.note}</em>
-                  </div>
-                ))}
-              </div>
-              <p className="chart-title">Real-time throughput index</p>
-              <svg viewBox="0 0 560 180" className="dash-chart" aria-hidden="true">
-                <g stroke="rgba(244,242,234,0.08)">
-                  {[30, 70, 110, 150].map((y) => (
-                    <line key={y} x1="10" y1={y} x2="540" y2={y} />
-                  ))}
-                </g>
-                <polyline fill="none" stroke="#F5D77F" strokeWidth="2" points="10,140 70,130 120,136 180,100 240,110 300,80 360,90 430,50 500,60 540,40" />
-                <polyline fill="none" stroke="#D4AF37" strokeWidth="3" points="10,150 80,120 140,128 200,90 260,96 330,70 400,78 470,46 540,52" />
+            <div className="cycle-card">
+              <p>From raw genesis to market dominance. A closed-loop framework that connects strategy, engineering, and cultural impact, so every asset moves your business forward.</p>
+              <svg className="cycle-spark" viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M8 0l1.2 5.2L16 8l-6.8 1.2L8 16l-1.2-6.8L0 8l6.8-1.2L8 0z" />
               </svg>
-              <p className="dashboard-foot">Auto-rebalance: EU tier-1 liquidity cluster absorbed · 6.2s ago</p>
-          </div>
+            </div>
           </div>
         </div>
       </section>
