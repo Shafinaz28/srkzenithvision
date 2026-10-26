@@ -55,9 +55,6 @@ function PracticeIcon({ name }) {
     aperture: "M12 16a4 4 0 100-8 4 4 0 000 8zM12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6L17 7M7 17l-1.4 1.4",
     device: "M7 4h10a1 1 0 011 1v12H6V5a1 1 0 011-1zM9 20h6",
     film: "M5 6h14v12H5zM9 6v12M15 6v12M5 10h4M15 10h4M5 14h4M15 14h4",
-    stack: "M12 4l8 4-8 4-8-4 8-4zM4 12l8 4 8-4M4 16l8 4 8-4",
-    bolt: "M13 3L5 13h6l-1 8 8-10h-6l1-8z",
-    shield: "M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z",
   };
   return (
     <svg viewBox="0 0 24 24" className="practice-svg" aria-hidden="true">
@@ -153,18 +150,22 @@ export default function Home() {
           </div>
           <div className="services-grid" ref={practiceGrid}>
             {practices.map((item, index) => (
-              <Link className={`service-card practice tone-${index % 3}`} to={item.to} key={item.n}>
+              <article className={`service-card practice tone-${index % 3}`} key={item.n}>
                 <span className="practice-icon"><PracticeIcon name={item.icon} /></span>
+                <p className="practice-label">{item.n} - {item.label}</p>
                 <h3>{item.title}</h3>
                 <span className="card-rule" aria-hidden="true" />
-                <ul>
-                  {item.points.map((point) => (
-                    <li key={point}>{point}</li>
+                <p className="practice-description">{item.text}</p>
+                <div className="practice-tags">
+                  {item.tags.map((tag) => (
+                    <span key={tag}>{tag}</span>
                   ))}
-                </ul>
-                <span className="card-more">Learn more</span>
-              </Link>
+                </div>
+              </article>
             ))}
+          </div>
+          <div className="home-services-action">
+            <Button to="/services">Explore all services</Button>
           </div>
         </div>
       </section>

@@ -1,8 +1,9 @@
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { aboutDossier, aboutFaqs, aboutPillars, ascentTimeline, brand, founderTraits } from "../data/content";
+import { aboutDossier, aboutFaqs, aboutPillars, ascentTimeline, brand, founderTraits, team } from "../data/content";
 import Button from "../components/Button";
 import usePageTitle from "../hooks/usePageTitle";
+import useCardHover from "../hooks/useCardHover";
 
 function ImpactIcon({ index }) {
   const paths = [
@@ -21,6 +22,10 @@ function ImpactIcon({ index }) {
 export default function About() {
   const pageRef = useRef(null);
   usePageTitle("About | SRK Zenithvision");
+  useCardHover(
+    pageRef,
+    ".mission-card, .team-card, .pillar-duo article, .time-card, .trait-grid article"
+  );
 
   return (
     <div className="about-page" ref={pageRef}>
@@ -64,36 +69,84 @@ export default function About() {
       </section>
 
       <section className="home-block home-block-tight band-light">
-        <div className="wrap founder-grid">
-          <figure className="founder-photo">
-            <img src="/suhas-rk.png" alt="Suhas RK, Founder and Chief Executive Officer" />
-          </figure>
-          <div>
-            <p className="dot-kicker">Foundational directive</p>
-            <blockquote className="founder-quote">
-              “We do not build software to follow existing paradigms. We engineer sovereign technological architecture that grants enterprises decisive velocity and boundless market dominance.”
-            </blockquote>
-            <p className="quote-by">— Suhas RK · Founder keynote</p>
-            <div className="prose">
-              <p>
-                As an enterprise systems architect and venture strategist, Suhas RK established SRK ZenithVision in 2023 with a singular directive: to liberate high-tier institutions from sluggish legacy frameworks and cookie-cutter SaaS limitations.
-              </p>
-              <p>
-                With deep roots spanning distributed systems, high-throughput algorithmic backbones, and bespoke visual command interfaces, his engineering ethos unites extreme mathematical rigor with sculptural digital luxury. Under his stewardship, ZenithVision operates not as a conventional agency, but as an elite sovereign skunkworks.
-              </p>
+  <div className="wrap founder-grid">
+    <figure className="founder-photo">
+      <img src="/suhas-rk.png" alt="Suhas RK" />
+    </figure>
+    <div>
+      <p className="dot-kicker">Foundational directive</p>
+      <blockquote className="founder-quote">
+        “We engineer sovereign technological architecture that grants enterprises decisive velocity and market dominance.”
+      </blockquote>
+      <p className="quote-by">— Suhas RK · Founder & CEO</p>
+      <p className="prose-lead">
+        Suhas RK founded SRK ZenithVision in 2023 as an elite sovereign skunkworks—uniting mathematical rigor with sculptural digital luxury to liberate enterprises from legacy constraints.
+      </p>
+      <div className="trait-grid">
+        {founderTraits.map((item) => (
+          <article key={item.title}>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
+      <div className="protocol-row">
+        <Link to="/the-zenith">Explore protocol →</Link>
+        <span>SHA-256: 4CBE…89A1</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+      
+      <section className="home-block home-block-tight mission-vision-section">
+        <div className="wrap mission-vision-wrap">
+          <div className="mission-intro">
+            <p className="dot-kicker">Mission & vision</p>
+            <h2 className="display">The original story of our mission and vision.</h2>
+            <p>
+              SRK ZenithVision began with one conviction: ambitious enterprises should never have to trade speed for sovereignty. We exist to build elegant systems that convert strategic intent into operational advantage.
+            </p>
+            <p>
+              Our mission is to give leaders the architecture, creative clarity, and executional depth required to move decisively in complex markets. Our vision is to become the trusted sovereign growth partner for brands, institutions, and technology leaders building what comes next.
+            </p>
+            <div className="story-badges">
+              <span>Mission</span>
+              <span>Vision</span>
+              <span>Sovereign by design</span>
             </div>
-            <div className="trait-grid">
-              {founderTraits.map((item) => (
-                <article key={item.title}>
-                  <h3>{item.title}</h3>
-                  <p>{item.text}</p>
-                </article>
-              ))}
+          </div>
+          <div className="mission-cards">
+            <article className="mission-card">
+              <span>01 / Our mission</span>
+              <h3>Make growth a system, not a gamble.</h3>
+              <p>Unite strategic thinking, engineering discipline, and creative execution so growth becomes a system instead of a gamble.</p>
+            </article>
+            <article className="mission-card">
+              <span>02 / Our vision</span>
+              <h3>Build what comes next.</h3>
+              <p>Build the next generation of category-defining institutions through disciplined innovation and uncompromising craft.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section className="home-block home-block-tight band-light">
+        <div className="wrap">
+          <div className="home-intro is-center">
+            <div>
+              <h2 className="display">The team & leadership</h2>
             </div>
-            <div className="protocol-row">
-              <Link to="/the-zenith">Explore protocol →</Link>
-              <span>Authority hash: SHA-256:4CBE…89A1</span>
-            </div>
+            <p className="home-aside">A compact leadership group that combines strategic clarity, craft, and operating discipline.</p>
+          </div>
+          <div className="leadership-grid">
+            {team.map((person, index) => (
+              <article className="team-card" key={person.role}>
+                <span className="team-index">0{index + 1}</span>
+                <h3>{person.role}</h3>
+                <p>{person.text}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -101,7 +154,6 @@ export default function About() {
       <section className="home-block home-block-tight">
         <div className="wrap">
           <div className="center-head">
-            
             <h2 className="display">The four architectural pillars</h2>
             <p>Our structural doctrines define every system specification, deployment blueprint, and client covenant.</p>
           </div>

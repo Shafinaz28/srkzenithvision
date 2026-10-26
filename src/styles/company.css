@@ -17,7 +17,7 @@
   padding: calc(var(--header) + 24px) 0 40px;
   justify-content: center;
   background:
-    radial-gradient(ellipse 100% 78% at 50% -4%, oklch(0.58 0.11 195) 0%, oklch(0.4 0.09 198) 28%, oklch(0.2 0.055 210) 52%, transparent 78%),
+    radial-gradient(ellipse 100% 78% at 50% -4%, oklch(28.453% 0.04652 194.896) 0%, oklch(26.745% 0.04316 199.882) 28%, oklch(0.2 0.055 210) 52%, transparent 78%),
     radial-gradient(ellipse 88% 62% at 50% 78%, oklch(0.32 0.08 195 / 0.9) 0%, oklch(0.18 0.05 205 / 0.55) 46%, transparent 74%),
     linear-gradient(180deg, oklch(0.2 0.05 200) 0%, oklch(0.14 0.045 210) 42%, oklch(0.1 0.035 220) 72%, oklch(0.06 0.015 260) 100%);
 }
@@ -459,6 +459,44 @@
   color: #fff;
   margin: 0 0 16px;
   text-wrap: balance;
+}
+
+.home-co .practice-label {
+  margin: 0 0 10px;
+  color: var(--primary);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.home-co .service-card .practice-description {
+  margin: 0 0 16px;
+  color: oklch(0.78 0.012 250);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.home-co .practice-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: auto;
+}
+
+.home-co .practice-tags span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 27px;
+  padding: 5px 9px;
+  border: 1px solid oklch(1 0 0 / 0.14);
+  border-radius: 999px;
+  background: oklch(1 0 0 / 0.035);
+  color: oklch(0.86 0.012 250);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.2;
 }
 
 .home-co .card-rule {
@@ -1445,6 +1483,10 @@
 .about-page {
   margin-top: calc(var(--header) * -1);
   padding-top: var(--header);
+  background: transparent;
+}
+
+.about-page .about-hero {
   background:
     radial-gradient(ellipse 78% 16% at 78% 18%, oklch(0.36 0.09 188 / 0.55), transparent 68%),
     radial-gradient(ellipse 70% 14% at 12% 36%, oklch(0.32 0.08 198 / 0.48), transparent 66%),
@@ -1462,6 +1504,7 @@
 .about-hero {
   position: relative;
   overflow: hidden;
+  isolation: isolate;
 }
 
 .about-hero::before {
@@ -1477,7 +1520,7 @@
   pointer-events: auto;
   cursor: pointer;
   background:
-    radial-gradient(ellipse 42% 9% at 50% 0%, oklch(0.24 0.01 0 / 0.95), oklch(0.14 0 0 / 0.15) 36%, transparent 68%),
+    radial-gradient(ellipse 42% 9% at 0% 0%, #000, oklch(0.14 0 0 / 0.15) 36%, transparent 68%),
     radial-gradient(circle at 50% 50%, transparent 45.2%, oklch(0.55 0.11 190 / 0.2) 47.4%, oklch(0.74 0.14 188 / 0.75) 48.8%, oklch(0.97 0.03 195) 49.7%, oklch(0.8 0.13 188) 50.4%, oklch(0.55 0.11 186 / 0.4) 52%, transparent 55%);
   filter: drop-shadow(0 -10px 18px oklch(0.85 0.1 190 / 0.85)) drop-shadow(0 -28px 50px oklch(0.62 0.13 188 / 0.45));
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 3%, rgba(0, 0, 0, 0.72) 9%, rgba(0, 0, 0, 0.28) 16%, transparent 24%);
@@ -1645,12 +1688,28 @@
   }
 
   .home-co .services-grid {
-    grid-template-columns: 1fr;
-    justify-items: center;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
   }
 
   .home-co .service-card {
-    width: min(100%, 420px);
+    width: 100%;
+    min-height: 100%;
+    padding: 24px 20px;
+    border-radius: 22px;
+  }
+
+  .home-co .practice-label {
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+
+  .home-co .service-card .practice-description {
+    text-align: center;
+  }
+
+  .home-co .practice-tags {
+    justify-content: center;
   }
 
   .home-co .steps {
@@ -1659,6 +1718,68 @@
 
   .home-co .trust-title {
     max-width: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .home-co .services-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .home-co .band-head {
+    margin-bottom: 22px;
+  }
+
+  .home-co .band-head h2 {
+    max-width: 14ch;
+    margin-inline: auto;
+    font-size: clamp(26px, 8vw, 34px);
+    line-height: 1.15;
+    text-align: center;
+  }
+
+  .home-co .service-card {
+    width: 100%;
+    min-height: 0;
+    padding: 24px 20px 22px;
+  }
+
+  .home-co .service-card .practice-icon {
+    margin-bottom: 14px;
+  }
+
+  .home-co .practice-label {
+    max-width: 100%;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+  }
+
+  .home-co .service-card h3 {
+    font-size: 20px;
+    line-height: 1.25;
+  }
+
+  .home-co .service-card .practice-description {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .home-co .practice-tags {
+    gap: 6px;
+  }
+
+  .home-co .practice-tags span {
+    font-size: 9px;
+  }
+
+  .home-services-action {
+    margin-top: 22px;
+  }
+
+  .home-services-action .btn {
+    width: 100%;
+    max-width: 320px;
   }
 }
 

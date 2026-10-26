@@ -19,6 +19,8 @@ export default function Header() {
   const panelRef = useRef(null);
   const lastY = useRef(0);
   const onHome = pathname === "/";
+  const onServices = pathname === "/services";
+  const onAbout = pathname === "/about";
 
   useEffect(() => {
     setOpen(false);
@@ -108,7 +110,7 @@ export default function Header() {
           open && "menu-open",
           onHome && "on-home",
           hidden && !open && "is-hidden",
-          (!onHome || solid) && "is-solid",
+          ((!onHome && !onServices && !onAbout) || solid) && "is-solid",
         ].filter(Boolean).join(" ")}
       >
         <div className="header-inner">

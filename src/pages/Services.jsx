@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import { Link } from "react-router-dom";
 import {
   arsenal,
   crossCases,
@@ -11,6 +10,7 @@ import {
 } from "../data/content";
 import Button from "../components/Button";
 import usePageTitle from "../hooks/usePageTitle";
+import useCardHover from "../hooks/useCardHover";
 
 function Radar() {
   return (
@@ -45,215 +45,188 @@ function Radar() {
   );
 }
 
+const engineeringCatalog = [
+  "All Services (12)",
+  "Web & SaaS (4)",
+  "Mobile & Streaming (3)",
+  "Custom Software & ERP (4)",
+  "AI & Automation (2)",
+  "Cloud & DevOps (3)",
+  "UI/UX Design (2)",
+  "Security & Data (3)",
+];
+
+const focusAreas = [
+  {
+    id: "01",
+    label: "Web application development",
+    title: "Web Application Development",
+    text: "Launch a polished web product with the speed, accessibility, and flexible architecture to serve customers today and grow with your business.",
+    tags: ["Next.js", "React 19", "TypeScript", "Tailwind CSS"],
+    cta: "Explore Service",
+  },
+  {
+    id: "02",
+    label: "Mobile app development",
+    title: "Mobile App Development",
+    text: "Turn your product into a thoughtful iOS and Android experience, with intuitive navigation, reliable performance, and the features your users need.",
+    tags: ["Flutter", "React Native", "Swift (iOS)", "Kotlin (Android)"],
+    cta: "Explore Service",
+  },
+  {
+    id: "03",
+    label: "Custom software & ERP",
+    title: "Custom Software & ERP Systems",
+    text: "Bring your teams and operations together with software shaped around your processes, from internal tools and approval flows to full ERP platforms.",
+    tags: ["Python", "Node.js", "PostgreSQL", "Enterprise Cloud"],
+    cta: "Explore Service",
+  },
+  {
+    id: "04",
+    label: "UI/UX & product design",
+    title: "UI/UX & Product Design",
+    text: "Give your product a clear visual direction and an easy-to-use experience through research, interface design, and interactive prototypes.",
+    tags: ["Figma", "Framer", "Prototyping", "UX Research"],
+    cta: "Explore Service",
+  },
+  {
+    id: "05",
+    label: "Cloud & DevOps infrastructure",
+    title: "Cloud Hosting & DevOps",
+    text: "Build a dependable cloud foundation with deployment automation, observability, and infrastructure practices tailored to your team and workload.",
+    tags: ["AWS", "Google Cloud", "Docker", "CI/CD Pipelines"],
+    cta: "Explore Service",
+  },
+  {
+    id: "06",
+    label: "AI & automation solutions",
+    title: "AI & Smart Automation",
+    text: "Put AI and automation to work on practical tasks—from knowledge assistants and support workflows to integrations that reduce repetitive effort.",
+    tags: ["OpenAI GPT-4", "Google Gemini", "LangChain", "n8n Automation"],
+    cta: "Explore Service",
+  },
+  {
+    id: "07",
+    label: "Real-time live streaming",
+    title: "Live Video & Audio Streaming",
+    text: "Create live video and audio experiences with interactive rooms, real-time communication, and streaming infrastructure designed for your audience.",
+    tags: ["WebRTC", "Zego Cloud", "Agora", "Flutter Streaming"],
+    cta: "Explore Service",
+  },
+  {
+    id: "08",
+    label: "Growth & technical SEO",
+    title: "Digital Growth & Technical SEO",
+    text: "Make your site easier to discover and navigate with technical SEO, structured content, performance improvements, and focused landing pages.",
+    tags: ["Technical SEO", "Google Console", "Schema.org", "Conversion CRO"],
+    cta: "Explore Service",
+  },
+  {
+    id: "09",
+    label: "Cybersecurity & compliance",
+    title: "Cybersecurity & Compliance",
+    text: "Strengthen your security posture through architecture reviews, data-protection practices, risk assessments, and support for compliance readiness.",
+    tags: ["HIPAA Ready", "SOC-2 Type II", "Data Encryption", "Penetration Audit"],
+    cta: "Explore Service",
+  },
+  {
+    id: "10",
+    label: "Dedicated engineering squads",
+    title: "Dedicated Developer Teams",
+    text: "Extend your delivery capacity with a focused engineering team that works alongside your people, shares progress, and supports your roadmap.",
+    tags: ["Dedicated Devs", "Full-Stack Squad", "Mobile Teams", "Agile Sprints"],
+    cta: "Explore Service",
+  },
+  {
+    id: "11",
+    label: "High-speed APIs & integrations",
+    title: "API Development & Integrations",
+    text: "Connect your product to the services you rely on with well-documented APIs and integrations for payments, CRM, logistics, and internal systems.",
+    tags: ["RESTful APIs", "GraphQL", "Node.js", "Payment Gateways"],
+    cta: "Explore Service",
+  },
+  {
+    id: "12",
+    label: "Database & data analytics",
+    title: "Database & Real-Time Analytics",
+    text: "Organize and understand your data with resilient database design, dependable backup strategies, and dashboards that make key metrics easier to act on.",
+    tags: ["PostgreSQL", "MongoDB", "Live Dashboards", "Data Pipelines"],
+    cta: "Explore Service",
+  },
+];
+
 export default function Services() {
   const pageRef = useRef(null);
   usePageTitle("Services | SRK Zenithvision");
+  useCardHover(pageRef, ".focus-card");
 
   return (
     <div className="services-page" ref={pageRef}>
       <section className="svc-hero">
-        <div className="wrap svc-hero-grid">
-          <div>
-            <p className="dot-kicker">SRK Zenithvision // Ecosystem architecture</p>
+        <div className="wrap svc-hero-centered">
+          <div className="engineering-catalog svc-piece">
+            <p className="catalog-kicker">ENGINEERING CATALOG</p>
             <h1 className="display svc-title">
               <span className="hero-line">
-                <span>One vision.</span>
-              </span>
-              <span className="hero-line">
-                <span className="gradient-text">Multiple digital possibilities.</span>
+                From First Idea to Full-Scale Product
               </span>
             </h1>
-            <p className="about-deck svc-piece">
-              From custom technology and scalable SaaS engines to high-velocity digital growth, cognitive UI/UX, and immersive 3D media, we architect complete sovereign digital ecosystems that propel global enterprises to category dominance.
+            <p className="catalog-description">
+              Strategy, design, software, and infrastructure—one experienced team to help you shape, launch, and grow your digital product.
             </p>
-            <div className="hero-actions svc-actions svc-piece">
-              <a className="btn btn-gold" href="#pillars">Explore our 8 pillars</a>
-              <Button to="/contact" variant="dark">Discuss your vision</Button>
+            <div className="catalog-tags" aria-label="Engineering categories">
+              {engineeringCatalog.map((item) => (
+                <span key={item}>{item}</span>
+              ))}
             </div>
-          </div>
-          <Radar />
-        </div>
-        <div className="wrap svc-stats svc-piece">
-          {serviceStats.map((item) => (
-            <div key={item.label}>
-              <strong>{item.value}</strong>
-              <span>{item.label}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="home-block band-light" id="pillars">
-        <div className="wrap">
-          <div className="center-head">
-            <p className="dot-kicker">Core multi-disciplinary framework</p>
-            <h2 className="display">The 8 sovereign pillars</h2>
-            <p>A fully integrated infrastructure engineered to replace fragmented vendors with a singular, high-precision powerhouse.</p>
-          </div>
-          <div className="sov-grid">
-            {sovereignPillars.map((item) => (
-              <article className="sov-card" key={item.n}>
-                <p className="flag-tag">Pillar {item.n}</p>
-                <h3>{item.title}</h3>
-                <p className="sov-line">“{item.line}”</p>
-                <p>{item.text}</p>
-                {item.chips ? (
-                  <ul className="marks">
-                    {item.chips.map((chip) => (
-                      <li key={chip}>{chip}</li>
-                    ))}
-                  </ul>
-                ) : null}
-                {item.metric ? (
-                  <div className="sov-metric">
-                    <span>{item.metric}</span>
-                    <strong>{item.metricValue}</strong>
-                  </div>
-                ) : null}
-                <Link to={item.to}>{item.cta} →</Link>
-              </article>
-            ))}
           </div>
         </div>
       </section>
 
-      <section className="home-block home-block-tight" id="arsenal">
+      <section className="home-block home-block-tight focus-section" id="focus">
         <div className="wrap">
-          <div className="home-intro">
-            <div>
-              <p className="dot-kicker">Architectural infrastructure</p>
-              <h2 className="display">Unified technical spine & arsenal</h2>
-            </div>
-            <p className="home-aside">Standardized enterprise tooling vetted across mission-critical fintech, global marketplaces, and tier-1 media deployments.</p>
-          </div>
-          <div className="arsenal-grid">
-            {arsenal.map((item) => (
-              <article key={item.n}>
-                <span>{item.n}</span>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-                <ul className="points">
-                  {item.points.map((point) => (
-                    <li key={point}>{point}</li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="home-block home-block-tight band-light">
-        <div className="wrap">
-          <div className="center-head">
-            <p className="dot-kicker">Synchronized execution</p>
-            <h2 className="display">The 5-step delivery protocol</h2>
-            <p>Every project adheres to our zero-drift architectural deployment lifecycle.</p>
-          </div>
-          <div className="protocol-grid">
-            {delivery.map((step) => (
-              <article key={step.n}>
-                <span>{step.n}</span>
-                <h3>{step.title}</h3>
-                <p>{step.text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="home-block home-block-tight">
-        <div className="wrap reason-grid">
-          <div className="reason-copy">
-            <p className="dot-kicker">Foundational competencies</p>
-            <h2 className="display">Why visionaries choose SRK Zenithvision.</h2>
-            <p className="about-deck">We operate at the convergence of high-order technical engineering, sovereign aesthetic design, and ruthless customer acquisition mechanics.</p>
-            <Link className="protocol-link" to="/about">About the firm →</Link>
-            <Link className="protocol-link" to="/#method">Learn more about our methodology →</Link>
-          </div>
-          <div className="reason-cards">
-            {reasons.map((item) => (
-              <article key={item.n}>
-                <p className="flag-tag">{item.n} / {item.kicker}</p>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-        <div className="wrap">
-          <blockquote className="steward">
-            <img src="/suhas-rk.png" alt="Suhas RK" />
-            <div>
-              <p className="flag-tag">Architectural stewardship</p>
-              <p className="steward-quote">“Engineering excellence is not an accident. It is deliberate, uncompromising architecture.”</p>
-              <p>At SRK ZenithVision, every line of code, design token, and media asset is crafted under sovereign oversight. We reject the commodity agency model to serve as your dedicated technological vanguard.</p>
-              <footer><strong>RK</strong> Founder & Principal Systems Architect</footer>
-            </div>
-          </blockquote>
-        </div>
-      </section>
-
-      <section className="home-block home-block-tight band-light">
-        <div className="wrap">
-          <div className="home-intro">
-            <div>
-              <p className="dot-kicker">Verified deployments</p>
-              <h2 className="display">Cross-pillar case studies</h2>
-            </div>
-            <p className="home-aside">Proven multi-node deployments combining technology, brand equity, and algorithmic acquisition.</p>
-          </div>
-          <div className="case-grid">
-            {crossCases.map((item) => (
-              <article key={item.title}>
-                <div className="case-tags">
-                  <span>{item.tag}</span>
-                  <em>{item.badge}</em>
+          <div className="focus-grid">
+            {focusAreas.map((item) => (
+              <article className="focus-card" key={item.id}>
+                <div className="focus-topline">
+                  <span className="focus-dot" aria-hidden="true" />
+                  <span>{item.id} - {item.label.toUpperCase()}</span>
                 </div>
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
-                <div className="case-metrics">
-                  {item.metrics.map((metric) => (
-                    <div key={metric.label}>
-                      <strong>{metric.value}</strong>
-                      <span>{metric.label}</span>
-                    </div>
+                <div className="focus-tags">
+                  {item.tags.map((tag) => (
+                    <span key={tag}>{tag}</span>
                   ))}
                 </div>
+                <button className="focus-cta" type="button">
+                  {item.cta} <span aria-hidden="true">→</span>
+                </button>
+                <span className="focus-number">{item.id}</span>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="home-block home-block-tight">
+      <section className="idea-cta-band">
         <div className="wrap">
-          <div className="center-head">
-            <p className="dot-kicker">Transparent architectural engagements</p>
-            <h2 className="display">Institutional engagement tiers</h2>
-            <p>Flexible sovereign delivery arrangements designed for scale, velocity, and complete IP security.</p>
-          </div>
-          <div className="tier-price-grid">
-            {engagementTiers.map((tier) => (
-              <article className={tier.featured ? "price-card featured" : "price-card"} key={tier.title}>
-                {tier.badge ? <p className="price-badge">{tier.badge}</p> : null}
-                <p className="flag-tag">{tier.kicker}</p>
-                <h3>{tier.title}</h3>
-                <p>{tier.text}</p>
-                <p className="price-line"><strong>{tier.price}</strong> <span>{tier.cadence}</span></p>
-                <ul className="points">
-                  {tier.points.map((point) => (
-                    <li key={point}>{point}</li>
-                  ))}
-                </ul>
-                <Button
-                  to={`/contact?service=${encodeURIComponent(tier.featured ? "The Zenith" : "Not sure yet")}&message=${encodeURIComponent("We want the " + tier.title + ".")}`}
-                  variant={tier.featured ? "gold" : "ghost"}
-                >
-                  {tier.cta}
-                </Button>
-              </article>
-            ))}
+          <div className="idea-cta-shell">
+            <div className="idea-cta-copy">
+              <p className="eyebrow">Have An Idea?</p>
+              <h2>Let&apos;s Build It Together.</h2>
+              <p>
+                Partner with senior engineers to design, build, and scale your digital product from concept to store release.
+              </p>
+            </div>
+            <div className="idea-cta-actions">
+              <Button to="/contact" className="idea-cta-btn" icon="arrow">
+                ⚡ Estimate Your Project
+              </Button>
+              <Button to="/contact" variant="ghost" className="idea-cta-btn idea-cta-btn-secondary" icon="none">
+                📞 Book A Call
+              </Button>
+            </div>
           </div>
         </div>
       </section>

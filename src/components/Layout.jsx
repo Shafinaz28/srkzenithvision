@@ -27,7 +27,15 @@ export default function Layout() {
         Skip to content
       </a>
       <Header />
-      <main id="content" className={pathname === "/" ? "is-home" : ""} ref={mainRef}>
+      <main
+        id="content"
+        className={[
+          pathname === "/" && "is-home",
+          pathname === "/services" && "is-services",
+          pathname === "/about" && "is-about",
+        ].filter(Boolean).join(" ")}
+        ref={mainRef}
+      >
         <Outlet />
       </main>
       <Footer />
