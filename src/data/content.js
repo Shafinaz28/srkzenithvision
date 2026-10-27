@@ -8,7 +8,10 @@ export const brand = {
   name: "SRK Zenithvision",
   wordmark: "SRK ZENITHVISION",
   tagline: "Ambitions, Boundless Heights",
-  email: "hello@srkzenithvision.com",
+  email: "srkzenithvision@gmail.com",
+  phone: "+91 733 780 1771",
+  whatsapp: "917337801771",
+  address: "1st floor, No. 14/36, Basavanagudi, Bengaluru, Karnataka - 560004",
   eyebrow: "IT  •  Digital  •  SaaS  •  Creative",
   headlineBefore: "We turn",
   headlineAccent: "bold ideas",
@@ -24,9 +27,9 @@ export const nav = [
   { label: "About", to: "/about" },
   { label: "Services", to: "/services" },
   { label: "Projects", to: "/projects" },
-  { label: "Products", to: "/saas" },
-  { label: "Process", to: "/#method", hash: "#method" },
-  { label: "Clients", to: "/#trust", hash: "#trust" },
+  { label: "Blog", to: "/blogs" },
+  { label: "Careers", to: "/careers" },
+  { label: "Contact", to: "/contact" },
   { label: "Start a project", to: "/contact", cta: true },
 ];
 
@@ -57,9 +60,9 @@ export const pillars = [
   },
   {
     kicker: "SaaS",
-    title: "Products we run",
-    text: "Software for signal, creative testing, lifecycle, and the reporting room.",
-    to: "/saas",
+    title: "SaaS applications",
+    text: "Product strategy, SaaS UI/UX, MVP development, subscription billing, and scalable dashboards.",
+    to: "/services/saas",
   },
   {
     kicker: "Creative",
@@ -295,6 +298,71 @@ export const projects = [
   },
 ];
 
+export const projectIndustries = [
+  {
+    name: "Healthcare & MedTech",
+    
+    image: "https://codecurious.in/assets/project-healthcare.webp",
+    summary: "Engineer secure telemedicine platforms, HL7/FHIR health record sync, patient scheduling portals, and AI clinical diagnostic tools built for global medical standards.",
+    capability: "HIPAA Enclave • Sub-400ms WebRTC • 99.99% Cloud Uptime",
+    tags: ["HIPAA Compliant", "HL7 / FHIR APIs", "Indian DPDP Act", "EHR Integration"],
+  },
+  {
+    name: "EdTech & E-Learning",
+    image: "https://codecurious.in/assets/project-education.webp",
+    summary: "Empower learners and educators with custom Learning Management Systems (LMS), DRM-protected video streaming, proctored exam portals, and AI study copilots.",
+    capability: "High Concurrency • Enterprise Security • 99.99% SLA",
+    tags: ["Widevine & FairPlay DRM", "COPPA Compliant", "SCORM 2004 / xAPI"],
+  },
+  {
+    name: "FinTech & Banking",
+    image: "https://codecurious.in/assets/blog-cloud-scaling.webp",
+    summary: "Architect high-concurrency payment gateways, RBI-compliant digital lending engines, Aadhaar eKYC onboarding flows, and sub-40ms AI fraud scoring pipelines.",
+    capability: "RBI CKYC Ready • <40ms Fraud Scoring • PCI-DSS L1",
+    tags: ["PCI-DSS Level 1", "RBI Data Localization", "Aadhaar eKYC / CKYC"],
+  },
+  {
+    name: "E-Commerce & Quick-Commerce",
+    image: "https://codecurious.in/assets/hero_digital_growth.webp",
+    summary: "Power lightning-fast 10-minute dark store dispatches, multi-vendor marketplaces, real-time inventory locking, and headless Next.js 15 shopping storefronts.",
+    capability: "10ms Inventory Sync • Algolia Instant Search • Razorpay Turbo",
+    tags: ["Headless Next.js", "WMS & Dark Stores", "Real-time Surge Routing"],
+  },
+ 
+  {
+    name: "Real Estate & PropTech",
+    image: "https://codecurious.in/assets/hero_digital_ecosystem.webp",
+    summary: "Interactive 3D virtual tour engines, automated tenant background scoring, digital lease signing with smart escrows, and high-volume MLS/IDX property feed integrations.",
+    capability: "WebXR 3D Tours • Automated KYC • Smart Lease Contracts",
+    tags: ["Three.js / WebGL", "RETS & RESO Web APIs", "Smart Escrow"],
+  },
+  
+  {
+    name: "Automotive & EV Mobility",
+    image: "https://codecurious.in/assets/blog-mobile-perf.webp",
+    summary: "Connected vehicle telematics (CAN-bus), smart EV charging station management systems (OCPP 2.0.1 / OCPI), and real-time battery health predictive analytics.",
+    capability: "OCPP 2.0.1 Protocol • Dynamic Load Balancing • Bluetooth BLE Sync",
+    tags: ["OCPP 1.6 / 2.0.1", "CAN-bus Telematics", "Automated Tariffs"],
+  },
+  
+  
+  {
+    name: "Hospitality & Travel Tech", 
+    image: "https://codecurious.in/assets/hero_digital_growth.webp",
+    summary: "Global GDS (Amadeus, Sabre) flight inventory feeds, real-time hotel PMS synchronization, dynamic yield pricing engines, and contactless mobile check-in room keys.",
+    capability: "Amadeus NDC Ready • Dynamic Yield Engine • BLE Mobile Key",
+    tags: ["GDS / NDC Protocol", "Hotel PMS Sync", "Dynamic Currency"],
+  },
+  {
+    name: "Gaming & Esports Platforms",
+    image: "https://codecurious.in/assets/hero_ai_automation.webp",
+    summary: "Low-latency multiplayer matchmaking servers, real-time anti-cheat behavioral telemetry, automated tournament bracket generators, and live Twitch/OBS stream integrations.",
+    capability: "Sub-20ms WebSocket Tick • Anti-Cheat Gating • Instant Cashouts",
+    tags: ["WebSockets / Go", "Anti-Cheat ML", "Live Leaderboards"],
+  },
+
+];
+
 export const industries = [
   {
     name: "Financial services",
@@ -359,6 +427,8 @@ export const posts = [
     category: "Measurement",
     date: "August 3, 2026",
     read: "5 min",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+    imageAlt: "Analytics dashboard with business performance charts",
     excerpt: "Return on ad spend is a useful servant and a poor master. Finance already knows this.",
     paragraphs: [
       "ROAS tells you what the ad account believes. It does not tell you whether the company made money, kept the customer, or filled the right pipeline.",
@@ -373,6 +443,8 @@ export const posts = [
     category: "Creative",
     date: "June 18, 2026",
     read: "4 min",
+    image: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=1200&q=80",
+    imageAlt: "Colorful abstract artwork representing creative experimentation",
     excerpt: "Beautiful work that cannot hold attention in a feed is a private pleasure. Build work that can do both.",
     paragraphs: [
       "A film can be gorgeous and still fail the placement it was bought for. The first second has a job. The offer has to be legible. The brand has to be recognizable without the logo doing all the work.",
@@ -387,6 +459,8 @@ export const posts = [
     category: "Growth",
     date: "April 9, 2026",
     read: "4 min",
+    image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&q=80",
+    imageAlt: "Marketing team collaborating around a table",
     excerpt: "Paid media is a tool. It becomes a risk when it is the only door into the company.",
     paragraphs: [
       "Renting attention is rational. Owning none of it is not. Search, content, lifecycle, and product loops are how a company stops paying full price for every conversation.",
@@ -453,27 +527,39 @@ export const testimonials = [
 export const jobs = [
   {
     title: "Growth Lead",
-    where: "Remote · Global",
+    where: "Bengaluru, India",
     type: "Full time",
     summary: "Own a client engine: the number, the weekly plan, and the quality of the work that ships.",
   },
   {
     title: "Brand Designer",
-    where: "Remote · Global",
+    where: "Bengaluru, India",
     type: "Full time",
     summary: "Campaign systems, identity, and the assets media can actually run. Taste with a commercial brief.",
   },
   {
     title: "Media Buyer",
-    where: "Remote · Global",
+    where: "Bengaluru, India",
     type: "Full time",
     summary: "Search and paid social for complex offers. You should be able to explain a budget shift in one paragraph.",
   },
   {
     title: "Analytics Partner",
-    where: "Remote · Global",
+    where: "Bengaluru, India",
     type: "Full time",
     summary: "Definitions, tracking, and the weekly page leadership reads. You will sit with finance as often as with media.",
+  },
+  {
+    title: "Web Developer",
+    where: "Bengaluru, India",
+    type: "Full time",
+    summary: "Build and maintain fast, accessible websites and landing pages that turn strong creative into useful digital experiences.",
+  },
+  {
+    title: "SEO Specialist",
+    where: "Bengaluru, India",
+    type: "Full time",
+    summary: "Grow organic visibility through technical SEO, thoughtful content planning, and measurement tied to qualified demand.",
   },
 ];
 
@@ -837,7 +923,6 @@ export const footerColumns = [
       { label: "About", to: "/about" },
       { label: "Projects", to: "/projects" },
       { label: "Industries", to: "/industries" },
-      { label: "Products", to: "/saas" },
       { label: "Insights", to: "/blogs" },
     ],
   },

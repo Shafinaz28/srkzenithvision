@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { aboutDossier, aboutFaqs, aboutPillars, ascentTimeline, brand, founderTraits, team } from "../data/content";
+import { aboutDossier, aboutFaqs, aboutPillars, brand, founderTraits, team } from "../data/content";
 import Button from "../components/Button";
 import usePageTitle from "../hooks/usePageTitle";
 import useCardHover from "../hooks/useCardHover";
@@ -24,7 +24,7 @@ export default function About() {
   usePageTitle("About | SRK Zenithvision");
   useCardHover(
     pageRef,
-    ".mission-card, .team-card, .pillar-duo article, .time-card, .trait-grid article"
+    ".mission-card, .team-card, .pillar-duo article, .trait-grid article"
   );
 
   return (
@@ -132,21 +132,32 @@ export default function About() {
       </section>
 
       <section className="home-block home-block-tight band-light">
-        <div className="wrap">
-          <div className="home-intro is-center">
-            <div>
-              <h2 className="display">The team & leadership</h2>
-            </div>
-            <p className="home-aside">A compact leadership group that combines strategic clarity, craft, and operating discipline.</p>
+        <div className="wrap leadership-wrap">
+          <div className="leadership-heading">
+            <h2 className="display">The team & leadership</h2>
+            <p>A compact leadership group that combines strategic clarity, craft, and operating discipline.</p>
           </div>
-          <div className="leadership-grid">
-            {team.map((person, index) => (
-              <article className="team-card" key={person.role}>
-                <span className="team-index">0{index + 1}</span>
-                <h3>{person.role}</h3>
-                <p>{person.text}</p>
-              </article>
-            ))}
+          <div className="leadership-layout">
+            <div className="leadership-intro">
+              <p className="dot-kicker">Leadership, built to deliver</p>
+              <h3>One team.<br />Four disciplines.</h3>
+              <p className="leadership-description">
+                Senior owners bring commercial clarity, creative conviction, and measurement together at every stage of the work.
+              </p>
+              <div className="leadership-summary">
+                <strong>04</strong>
+                <span>senior disciplines<br />one accountable team</span>
+              </div>
+            </div>
+            <div className="leadership-grid">
+              {team.map((person, index) => (
+                <article className="team-card" key={person.role}>
+                  <span className="team-index">0{index + 1}<i aria-hidden="true" /></span>
+                  <h3>{person.role}</h3>
+                  <p>{person.text}</p>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -164,31 +175,6 @@ export default function About() {
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
                 <strong>{item.note}</strong>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="home-block home-block-tight band-light">
-        <div className="wrap">
-          <div className="home-intro is-center">
-            <div>
-              <h2 className="display">The ascent timeline</h2>
-            </div>
-            <p className="home-aside">A chronological testament of rapid institutional scaling, infrastructural maturation, and value acceleration.</p>
-          </div>
-          <div className="timeline-grid">
-            {ascentTimeline.map((item) => (
-              <article className={item.current ? "time-card current" : "time-card"} key={item.title}>
-                <p><span>{item.year}</span> {item.phase}</p>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-                <div>
-                  {item.marks.map((mark) => (
-                    <strong key={mark}>{mark}</strong>
-                  ))}
-                </div>
               </article>
             ))}
           </div>

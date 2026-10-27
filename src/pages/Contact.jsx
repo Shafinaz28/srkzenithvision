@@ -71,13 +71,21 @@ export default function Contact() {
                   <a href={`mailto:${brand.email}`}>{brand.email}</a>
                 </div>
                 <div>
-                  <span>Global HQ</span>
-                  <p>
-                    Zenith Apex Tower, Financial District
-                    <br />
-                    One Vanguard Plaza, Level 48
-                  </p>
+                  <span>Phone</span>
+                  <a href={`tel:${brand.phone.replace(/\s/g, "")}`}>{brand.phone}</a>
                 </div>
+                <div>
+                  <span>Address</span>
+                  <p>{brand.address}</p>
+                </div>
+                <a
+                  className="btn btn-whatsapp"
+                  href={`https://wa.me/${brand.whatsapp}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Chat with us on WhatsApp
+                </a>
               </div>
             </div>
 
@@ -131,7 +139,7 @@ export default function Contact() {
           <div className="contact-map">
             <iframe
               title="SRK Zenithvision office on Google Maps"
-              src="https://maps.google.com/maps?q=One%20Vanguard%20Plaza%20Financial%20District&z=15&output=embed"
+              src={`https://maps.google.com/maps?q=${encodeURIComponent(brand.address)}&z=15&output=embed`}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />

@@ -169,6 +169,32 @@ export default function usePageMotion(rootRef, pathname) {
         });
       });
 
+      root.querySelectorAll(".industry-project-card").forEach((card) => {
+        const targets = [
+          card.querySelector(".industry-project-image"),
+          card.querySelector(".industry-project-content"),
+        ].filter(Boolean);
+        if (!targets.length || targets.some(covered)) return;
+        targets.forEach((target) => animated.add(target));
+        const isEvenRow = card.matches(":nth-child(even)");
+        const startOffsets = targets.map((target) => {
+          const isImage = target.classList.contains("industry-project-image");
+          return isEvenRow ? (isImage ? 48 : -48) : (isImage ? -48 : 48);
+        });
+        const below = card.getBoundingClientRect().top > window.innerHeight * 0.92;
+        gsap.from(targets, {
+          x: (index) => startOffsets[index],
+          opacity: 0,
+          duration: 0.85,
+          stagger: 0.14,
+          ease: "power3.out",
+          clearProps: "opacity,transform",
+          scrollTrigger: below
+            ? { trigger: card, start: "top 92%", toggleActions: "play none none none" }
+            : undefined,
+        });
+      });
+
       root.querySelectorAll("h1, h2, h3").forEach((heading) => {
         const lines = [...heading.children].filter((child) =>
           child.matches?.(".hero-line, .about-line, .slide-line")

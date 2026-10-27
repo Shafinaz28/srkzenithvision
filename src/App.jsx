@@ -4,7 +4,6 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Services from "./pages/Services";
 import ServiceDetail from "./pages/ServiceDetail";
-import Saas from "./pages/Saas";
 import Projects from "./pages/Projects";
 import ProjectDetail from "./pages/ProjectDetail";
 import Industries from "./pages/Industries";
@@ -36,7 +35,6 @@ export default function App() {
           <Route path="about" element={<About />} />
           <Route path="services" element={<Services />} />
           <Route path="services/:slug" element={<ServiceDetail />} />
-          <Route path="saas" element={<Saas />} />
           <Route path="projects" element={<Projects />} />
           <Route path="projects/:slug" element={<ProjectDetail />} />
           <Route path="industries" element={<Industries />} />

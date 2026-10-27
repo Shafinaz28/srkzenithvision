@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { jobs } from "../data/content";
 import Field from "../components/Field";
 import FormSuccess from "../components/FormSuccess";
-import PageHero from "../components/PageHero";
 import Button from "../components/Button";
 import usePageTitle from "../hooks/usePageTitle";
 import { sendByEmail } from "../lib/mail";
@@ -36,35 +35,49 @@ export default function Careers() {
 
   return (
     <div className="careers-page">
-      <PageHero
-        crumb={
+      <header className="careers-intro">
+        <div className="wrap">
           <p className="crumb">
             <Link to="/">Home</Link> / Careers
           </p>
-        }
-        kicker="Join"
-        title="Come build"
-        accent="what comes next."
-      />
+          <div className="careers-intro-copy">
+            <div>
+              <p className="kicker">Join our team</p>
+              <h1>Meet the team behind our success.</h1>
+            </div>
+            <p>
+              Do meaningful work with strategists, creatives, and operators who
+              turn ambitious ideas into measurable growth.
+            </p>
+          </div>
+        </div>
+      </header>
 
       <section className="careers-roles">
-        <div className="wrap careers-list">
-          {jobs.map((job) => (
-            <article className="job" key={job.title}>
-              <div>
-                <h2>{job.title}</h2>
-                <p>{job.summary}</p>
-              </div>
-              <p className="meta">
-                {job.where}
-                <br />
-                {job.type}
-              </p>
-              <Button icon="none" className="btn-small" onClick={() => chooseRole(job.title)}>
-                Apply
-              </Button>
-            </article>
-          ))}
+        <div className="wrap">
+          <div className="careers-roles-heading">
+            <p className="kicker">Find your place</p>
+            <h2>Currently open positions</h2>
+          </div>
+          <div className="careers-list">
+            {jobs.map((job) => (
+              <article className="job" key={job.title}>
+                <div className="job-heading">
+                  <h3>{job.title}</h3>
+                  <Button
+                    icon="none"
+                    className="job-apply"
+                    onClick={() => chooseRole(job.title)}
+                  >
+                    Apply
+                  </Button>
+                </div>
+                <p className="job-type">{job.type}</p>
+                <p className="job-summary">{job.summary}</p>
+                <p className="job-location">{job.where}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
