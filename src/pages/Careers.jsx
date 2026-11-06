@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { jobs } from "../data/content";
 import Field from "../components/Field";
+import { UserIcon, MailIcon, BriefcaseIcon, LinkIcon, MessageIcon } from "../components/Icons";
 import FormSuccess from "../components/FormSuccess";
 import Button from "../components/Button";
 import usePageTitle from "../hooks/usePageTitle";
@@ -96,23 +97,23 @@ export default function Careers() {
             />
           ) : (
             <form className="form-grid" onSubmit={onSubmit}>
-              <Field label="Name">
+              <Field label="Name" icon={UserIcon}>
                 <input name="name" value={form.name} onChange={update} autoComplete="name" required />
               </Field>
-              <Field label="Email">
+              <Field label="Email" icon={MailIcon}>
                 <input name="email" type="email" value={form.email} onChange={update} autoComplete="email" required />
               </Field>
-              <Field label="Role" full>
+              <Field label="Role" icon={BriefcaseIcon} full>
                 <select name="role" value={form.role} onChange={update}>
                   {jobs.map((job) => (
                     <option key={job.title}>{job.title}</option>
                   ))}
                 </select>
               </Field>
-              <Field label="A link to your work" full>
-                <input name="link" value={form.link} onChange={update} placeholder="Site, deck, or writing" required />
+              <Field label="A link to your work" icon={LinkIcon} full>
+                <input name="link" value={form.link} onChange={update} placeholder="Portfolio or work sample" required />
               </Field>
-              <Field label="Why this seat" full>
+              <Field label="Why this seat" icon={MessageIcon} full>
                 <textarea name="note" value={form.note} onChange={update} required />
               </Field>
               <div className="field-full">

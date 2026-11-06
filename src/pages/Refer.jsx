@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { referSteps } from "../data/content";
 import Button from "../components/Button";
 import Field from "../components/Field";
+import { UserIcon, MailIcon, BuildingIcon, MessageIcon } from "../components/Icons";
 import FormSuccess from "../components/FormSuccess";
 import PageHero from "../components/PageHero";
 import usePageTitle from "../hooks/usePageTitle";
@@ -70,19 +71,19 @@ export default function Refer() {
             />
           ) : (
             <form className="form-grid" onSubmit={onSubmit}>
-              <Field label="Your name">
+              <Field label="Your name" icon={UserIcon}>
                 <input name="name" value={form.name} onChange={update} autoComplete="name" required />
               </Field>
-              <Field label="Your email">
+              <Field label="Your email" icon={MailIcon}>
                 <input name="email" type="email" value={form.email} onChange={update} autoComplete="email" required />
               </Field>
-              <Field label="Who should we meet">
+              <Field label="Who should we meet" icon={UserIcon}>
                 <input name="friendName" value={form.friendName} onChange={update} required />
               </Field>
-              <Field label="Their company">
+              <Field label="Their company" icon={BuildingIcon}>
                 <input name="friendCompany" value={form.friendCompany} onChange={update} required />
               </Field>
-              <Field label="Why this conversation" full>
+              <Field label="Why this conversation" icon={MessageIcon} full>
                 <textarea name="note" value={form.note} onChange={update} required />
               </Field>
               <div className="field-full">

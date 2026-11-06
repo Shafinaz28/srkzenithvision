@@ -21,7 +21,7 @@ import NotFound from "./pages/NotFound";
  *   src/data/content.js    words, lists, and page copy
  *   src/components/        header, footer, buttons, shared blocks
  *   src/pages/             one file per page
- *   src/styles/global.css  colors and layout
+ *   src/styles/tailwind.css  Tailwind theme and global styles
  *
  * To add a page: create it in src/pages, import it here, and add a Route.
  * Run the site with: npm install, then npm run dev.

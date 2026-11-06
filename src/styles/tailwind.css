@@ -1,0 +1,58 @@
+@import "tailwindcss";
+@import "./global.css" layer(components);
+@import "./company.css" layer(components);
+
+@theme {
+  --color-background: oklch(0.148 0.012 260);
+  --color-foreground: oklch(0.963 0.018 88);
+  --color-primary: oklch(0.766 0.139 91);
+  --color-primary-foreground: oklch(0.148 0.012 260);
+  --color-secondary: oklch(0.322 0.056 215);
+  --color-tertiary: oklch(0.887 0.112 91);
+  --color-card: oklch(0.182 0.015 235);
+  --color-border: oklch(0.963 0.018 88 / 0.11);
+  --color-muted: oklch(0.676 0.012 95);
+  --color-blue: oklch(0.93 0.06 91);
+  --font-sans: "Sora", "Segoe UI", sans-serif;
+}
+
+@layer base {
+  html {
+    min-height: 100%;
+    scroll-behavior: smooth;
+    color-scheme: dark;
+    background: #080b10;
+  }
+
+  body {
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: clip;
+    background: var(--color-background);
+    background-attachment: fixed;
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+
+  #content {
+    background: transparent;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 3px;
+  }
+}

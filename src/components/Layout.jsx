@@ -30,6 +30,7 @@ export default function Layout() {
       <main
         id="content"
         className={[
+          "min-h-screen w-full font-sans text-foreground",
           pathname === "/" && "is-home",
           pathname === "/services" && "is-services",
           pathname === "/about" && "is-about",

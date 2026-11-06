@@ -17,7 +17,9 @@
     "three": "^0.143.0"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.1.13",
     "@vitejs/plugin-react": "^4.5.2",
+    "tailwindcss": "^4.1.13",
     "vite": "^6.3.5"
   }
 }

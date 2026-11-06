@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { brand, contactOptions } from "../data/content";
 import Button from "../components/Button";
 import Field from "../components/Field";
+import { UserIcon, MailIcon, BuildingIcon, BriefcaseIcon, MessageIcon } from "../components/Icons";
 import FormSuccess from "../components/FormSuccess";
 import PageHero from "../components/PageHero";
 import usePageTitle from "../hooks/usePageTitle";
@@ -100,23 +101,23 @@ export default function Contact() {
               />
             ) : (
               <form className="form-grid enquiry-form" onSubmit={onSubmit}>
-                <Field label="Your name">
+                <Field label="Your name" icon={UserIcon}>
                   <input name="name" value={form.name} onChange={update} autoComplete="name" required />
                 </Field>
-                <Field label="Work email">
+                <Field label="Work email" icon={MailIcon}>
                   <input name="email" type="email" value={form.email} onChange={update} autoComplete="email" required />
                 </Field>
-                <Field label="Company">
+                <Field label="Company" icon={BuildingIcon}>
                   <input name="company" value={form.company} onChange={update} autoComplete="organization" />
                 </Field>
-                <Field label="What do you need?">
+                <Field label="What do you need?" icon={BriefcaseIcon}>
                   <select name="service" value={form.service} onChange={update}>
                     {contactOptions.map((option) => (
                       <option key={option}>{option}</option>
                     ))}
                   </select>
                 </Field>
-                <Field label="Tell us about your goals" full>
+                <Field label="Tell us about your goals" icon={MessageIcon} full>
                   <textarea
                     name="message"
                     value={form.message}
