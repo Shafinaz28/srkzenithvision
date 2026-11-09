@@ -16,7 +16,6 @@ export default function Header() {
   const [solid, setSolid] = useState(false);
   const { pathname, hash } = useLocation();
   const navRef = useRef(null);
-  const panelRef = useRef(null);
   const lastY = useRef(0);
   const onHome = pathname === "/";
   const onServices = pathname === "/services";
@@ -60,6 +59,14 @@ export default function Header() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  useEffect(() => {
+    function onResize() {
+      if (window.innerWidth > 1180) setOpen(false);
+    }
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
   useLayoutEffect(() => {
     if (prefersReducedMotion()) return undefined;
     const ctx = gsap.context(() => {
@@ -73,20 +80,6 @@ export default function Header() {
     }, navRef);
     return () => ctx.revert();
   }, []);
-
-  useLayoutEffect(() => {
-    if (!open || prefersReducedMotion()) return undefined;
-    const ctx = gsap.context(() => {
-      gsap.from(".nav-link", {
-        y: -28,
-        opacity: 0,
-        duration: 0.45,
-        stagger: 0.06,
-        ease: "power3.out",
-      });
-    }, panelRef);
-    return () => ctx.revert();
-  }, [open]);
 
   const links = nav.filter((item) => !item.cta);
   const cta = nav.find((item) => item.cta);
@@ -135,6 +128,7 @@ export default function Header() {
               className="menu-btn"
               aria-expanded={open}
               aria-controls="site-menu"
+              aria-label={open ? "Close menu" : "Open menu"}
               onClick={() => setOpen((value) => !value)}
             >
               <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
@@ -144,7 +138,7 @@ export default function Header() {
         </div>
       </header>
 
-      <div id="site-menu" className={open ? "nav-panel open" : "nav-panel"} aria-hidden={!open} ref={panelRef}>
+      <div id="site-menu" className={open ? "nav-panel open" : "nav-panel"} aria-hidden={!open}>
         {links.map((item) => (
           <NavLink key={item.label} to={linkTo(item)} end={item.to === "/"} className={linkClass(item)} onClick={() => setOpen(false)}>
             {item.label}

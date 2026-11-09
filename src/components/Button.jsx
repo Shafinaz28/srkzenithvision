@@ -14,6 +14,7 @@ export default function Button({
   variant = "gold",
   type = "button",
   onClick,
+  disabled = false,
   icon = "arrow",
   className = "",
 }) {
@@ -34,7 +35,7 @@ export default function Button({
   }
 
   return (
-    <button type={type} className={cls} onClick={onClick}>
+    <button type={type} className={cls} onClick={onClick} disabled={disabled}>
       {inner}
     </button>
   );

@@ -7,7 +7,7 @@ import { UserIcon, MailIcon, BuildingIcon, BriefcaseIcon, MessageIcon } from "..
 import FormSuccess from "../components/FormSuccess";
 import PageHero from "../components/PageHero";
 import usePageTitle from "../hooks/usePageTitle";
-import { sendByEmail } from "../lib/mail";
+import { submitContactToSheet } from "../lib/contactSheet";
 
 const empty = {
   name: "",
@@ -22,6 +22,8 @@ export default function Contact() {
   const [params] = useSearchParams();
   const [form, setForm] = useState(empty);
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   useEffect(() => {
     const service = params.get("service");
@@ -38,13 +40,24 @@ export default function Contact() {
     setForm((current) => ({ ...current, [name]: value }));
   }
 
-  function onSubmit(event) {
+  async function onSubmit(event) {
     event.preventDefault();
-    sendByEmail({
-      subject: `Enquiry from ${form.name} — ${form.service}`,
-      body: `Name: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company || "—"}\nInterest: ${form.service}\n\n${form.message}`,
-    });
-    setSent(true);
+    setSubmitError("");
+    setSubmitting(true);
+    try {
+      await submitContactToSheet({
+        name: form.name.trim(),
+        email: form.email.trim(),
+        company: form.company.trim(),
+        service: form.service,
+        message: form.message.trim(),
+      });
+      setSent(true);
+    } catch {
+      setSubmitError("We could not save your enquiry. Email us directly or try again in a moment.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -92,8 +105,8 @@ export default function Contact() {
 
             {sent ? (
               <FormSuccess
-                title="Your email app should be open."
-                text="The note is addressed and ready to send. If nothing opened, use the email address beside this box."
+                title="We received your enquiry."
+                text="Our team will follow up, usually within one business day. For anything urgent, use the email or WhatsApp beside this form."
                 onReset={() => {
                   setSent(false);
                   setForm(empty);
@@ -127,8 +140,11 @@ export default function Contact() {
                   />
                 </Field>
                 <div className="field-full">
-                  <Button type="submit" icon="none">Send my enquiry</Button>
-                  <p className="enquiry-note">Sending opens your email app with this message ready to send to our team.</p>
+                  <Button type="submit" icon="none" disabled={submitting}>
+                    {submitting ? "Sending…" : "Send my enquiry"}
+                  </Button>
+                  {submitError ? <p className="enquiry-note enquiry-note-error">{submitError}</p> : null}
+                  <p className="enquiry-note">Your details are sent securely to our team inbox.</p>
                 </div>
               </form>
             )}

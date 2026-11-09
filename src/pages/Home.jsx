@@ -296,11 +296,11 @@ export default function Home() {
           <div className="section-heading mb-7 flex flex-col items-center gap-4 text-center">
             <div>
               <p className="eyebrow mx-0 mb-4 flex w-fit items-center gap-2.5 rounded-full border border-primary/45 bg-white/[0.04] px-3.5 py-2 text-[11px] uppercase tracking-[0.1em] text-primary">Predictable excellence</p>
-              <h2 className="text-[clamp(2rem,4vw,2.75rem)] font-medium leading-tight">The 6-step <span className="gradient-text">ascent methodology.</span></h2>
+              <h2 className="text-[clamp(2rem,4vw,2.75rem)] font-medium leading-tight">The 6-step <span className="gradient-text">methodology.</span></h2>
             </div>
             <p className="section-intro max-w-[420px] text-xs leading-[1.9] text-muted">A disciplined roadmap from the first conversation to global scale.</p>
           </div>
-          <div className="method-flow relative mt-12 grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:grid-cols-6">
+          <div className="method-flow relative mt-12 grid grid-cols-2 items-start gap-x-4 gap-y-8 sm:gap-x-6 lg:grid-cols-6">
             <svg className="method-wave pointer-events-none absolute left-0 top-0 hidden h-[170px] w-full lg:block" viewBox="0 0 1200 170" preserveAspectRatio="none" aria-hidden="true">
               <path d="M100 46 C200 46 200 124 300 124 C400 124 400 46 500 46 C600 46 600 124 700 124 C800 124 800 46 900 46 C1000 46 1000 124 1100 124" />
             </svg>
@@ -381,7 +381,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section testimonials overflow-hidden bg-[#141419] px-0 py-14 md:py-20" id="trust">
+      <section className="section testimonials overflow-hidden bg-background px-0 py-14 md:py-20" id="trust">
         <div className="mx-auto w-[calc(100%-2rem)] max-w-[1040px] sm:w-[calc(100%-3.5rem)]">
           <div className="mb-7 flex items-center justify-between">
             <p className="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.14em] text-white/80">
@@ -406,7 +406,7 @@ export default function Home() {
           <div className="quote-slider mt-0 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" ref={testimonialSlider}>
             <div className="quote-track flex w-max animate-none gap-4">
               {testimonialItems.map((item) => (
-                <article className="testimonial flex w-[min(380px,85vw)] shrink-0 flex-col rounded-xl border border-white/[0.06] bg-[#09090d] p-5 transition-colors hover:border-primary/30" key={item.key}>
+                <article className="testimonial flex w-[min(380px,85vw)] shrink-0 flex-col rounded-xl border border-white/[0.06] p-5 transition-colors hover:border-primary/30" key={item.key}>
                   <div className="mb-4 flex items-center justify-between">
                     <span className="text-lg font-bold leading-none text-primary" aria-hidden="true">❞</span>
                     <span className="text-xs tracking-[0.16em] text-primary" aria-label="5 out of 5 stars">★★★★★</span>

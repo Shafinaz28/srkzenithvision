@@ -21,6 +21,9 @@ function SocialIcon({ name }) {
   if (name === "LinkedIn") {
     return <path d="M7 10v7M7 7.1h.01M11 17v-4a2 2 0 114 0v4M11 10v7" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />;
   }
+  if (name === "Pinterest") {
+    return <path fill="currentColor" d="M12 3a9 9 0 0 0-3.27 17.39c-.03-.72 0-1.58.18-2.37l1.22-5.17s-.3-.6-.3-1.48c0-1.39.81-2.43 1.82-2.43.86 0 1.27.65 1.27 1.43 0 .87-.55 2.17-.83 3.37-.24 1 .5 1.82 1.48 1.82 1.77 0 3.13-1.87 3.13-4.57 0-2.39-1.72-4.05-4.18-4.05-2.85 0-4.52 2.14-4.52 4.35 0 .86.33 1.79.75 2.29.08.1.1.19.07.29l-.28 1.13c-.05.18-.15.22-.34.13-1.24-.58-2.01-2.4-2.01-3.87 0-3.15 2.29-6.04 6.61-6.04 3.47 0 6.17 2.47 6.17 5.77 0 3.44-2.17 6.21-5.18 6.21-1.01 0-1.96-.53-2.29-1.16l-.62 2.37c-.22.82-.82 1.85-1.22 2.48A9 9 0 1 0 12 3Z" />;
+  }
   return (
     <>
       <rect x="4" y="7" width="16" height="11" rx="2.5" fill="none" stroke="currentColor" strokeWidth="1.6" />
@@ -29,7 +32,13 @@ function SocialIcon({ name }) {
   );
 }
 
-const socials = ["Facebook", "X", "Instagram", "LinkedIn", "YouTube"];
+const socials = [
+  { name: "Instagram", url: "https://www.instagram.com/srk.zenithvision/" },
+  { name: "Facebook", url: "https://www.facebook.com/people/SRK-ZenithVision/61567062951870/" },
+  { name: "X", url: "https://x.com/SrkZenithvision" },
+  { name: "Pinterest", url: "https://in.pinterest.com/srkzenithvision/" },
+  { name: "LinkedIn", url: "https://www.linkedin.com/in/srk-zenithvision-329139330/" },
+];
 
 export default function Footer() {
   return (
@@ -43,12 +52,12 @@ export default function Footer() {
             Architecting sovereign prestige, next-generation enterprise technology, and bespoke intelligence solutions across global ecosystems.
           </p>
           <div className="socials" aria-label="Social">
-            {socials.map((name) => (
-              <span key={name} aria-label={name} role="img">
+            {socials.map(({ name, url }) => (
+              <a key={name} href={url} aria-label={`SRK Zenithvision on ${name}`} target="_blank" rel="noreferrer">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <SocialIcon name={name} />
                 </svg>
-              </span>
+              </a>
             ))}
           </div>
         </div>

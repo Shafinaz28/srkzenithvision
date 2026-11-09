@@ -1,9 +1,27 @@
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { aboutDossier, aboutFaqs, aboutPillars, brand, founderTraits, team } from "../data/content";
+import { aboutDossier, aboutFaqs, brand, team } from "../data/content";
 import Button from "../components/Button";
 import usePageTitle from "../hooks/usePageTitle";
 import useCardHover from "../hooks/useCardHover";
+
+const aboutValues = [
+  {
+    title: "Radical Transparency",
+    text: "You see what we see — live dashboards, honest numbers, and straight answers when something isn't working.",
+    icon: "eye",
+  },
+  {
+    title: "Outcomes Over Activity",
+    text: "Busy isn't a metric. We measure ourselves on the revenue, pipeline and growth we create — nothing else.",
+    icon: "target",
+  },
+  {
+    title: "Partners, Not Vendors",
+    text: "We embed with your team, share your targets, and win or lose by the same scoreboard you do.",
+    icon: "partners",
+  },
+];
 
 function ImpactIcon({ index }) {
   const paths = [
@@ -24,23 +42,26 @@ export default function About() {
   usePageTitle("About | SRK Zenithvision");
   useCardHover(
     pageRef,
-    ".mission-card, .team-card, .pillar-duo article, .trait-grid article"
+    ".mission-card, .team-card, .about-value-card"
   );
 
   return (
     <div className="about-page" ref={pageRef}>
       <section className="about-hero">
         <div className="wrap">
+          <p className="crumb about-hero-crumb">
+            <Link to="/">Home</Link>
+            <span aria-hidden="true">›</span>
+            About us
+          </p>
           <h1 className="display about-title">
             <span className="about-line">
-              <span>The architects of</span>
+              <span>The architects behind</span>
             </span>
-            <span className="about-line">
-              <span className="gradient-text">digital sovereignty</span>
-            </span>
+            
           </h1>
           <p className="about-deck about-piece">
-            Founded in 2023 on the unshakeable conviction that generational visions demand uncompromising engineering. We synthesize surgical enterprise architecture, sovereign cloud protocols, and hyper-aesthetic intelligence engines to propel category leaders to boundless market dominance.
+            Founded in 2023, we build sovereign digital systems that help ambitious businesses move faster, own their technology, and grow with confidence.
           </p>
         </div>
       </section>
@@ -68,62 +89,49 @@ export default function About() {
         </div>
       </section>
 
-      <section className="home-block home-block-tight band-light">
-  <div className="wrap founder-grid">
-    <figure className="founder-photo">
-      <img src="/suhas-rk.png" alt="Suhas RK" />
-    </figure>
-    <div>
-      <p className="dot-kicker">Foundational directive</p>
-      <blockquote className="founder-quote">
-        “We engineer sovereign technological architecture that grants enterprises decisive velocity and market dominance.”
-      </blockquote>
-      <p className="quote-by">— Suhas RK · Founder & CEO</p>
-      <p className="prose-lead">
-        Suhas RK founded SRK ZenithVision in 2023 as an elite sovereign skunkworks—uniting mathematical rigor with sculptural digital luxury to liberate enterprises from legacy constraints.
-      </p>
-      <div className="trait-grid">
-        {founderTraits.map((item) => (
-          <article key={item.title}>
-            <h3>{item.title}</h3>
-            <p>{item.text}</p>
-          </article>
-        ))}
-      </div>
-      <div className="protocol-row">
-        <Link to="/the-zenith">Explore protocol →</Link>
-        <span>SHA-256: 4CBE…89A1</span>
-      </div>
-    </div>
-  </div>
-</section>
+      <section className="home-block home-block-tight band-light founder-section">
+        <div className="wrap founder-grid">
+          <figure className="founder-photo">
+            <img src="/suhas-rk.png" alt="Suhas RK" />
+          </figure>
+          <div className="founder-copy">
+            <div className="founder-story">
+              <p className="dot-kicker">Foundational directive</p>
+              <blockquote className="founder-quote">
+                “We engineer sovereign technological architecture that grants enterprises decisive velocity and market dominance.”
+              </blockquote>
+              <p className="quote-by">— Suhas RK · Founder & CEO</p>
+              <p className="prose-lead">
+                Suhas RK founded SRK ZenithVision in 2023 as an elite sovereign skunkworks—uniting mathematical rigor with sculptural digital luxury to liberate enterprises from legacy constraints.
+              </p>
+              <p className="founder-detail">
+                That founding belief shapes how we work: begin with the outcome, bring strategy, design, and engineering together, and build technology clients can understand, own, and continue to evolve. The goal is not simply to deliver software, but to give every business a stronger foundation for what comes next.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       
       <section className="home-block home-block-tight mission-vision-section">
         <div className="wrap mission-vision-wrap">
           <div className="mission-intro">
-            <p className="dot-kicker">Mission & vision</p>
-            <h2 className="display">The original story of our mission and vision.</h2>
-            <p>
-              SRK ZenithVision began with one conviction: ambitious enterprises should never have to trade speed for sovereignty. We exist to build elegant systems that convert strategic intent into operational advantage.
-            </p>
-            <p>
-              Our mission is to give leaders the architecture, creative clarity, and executional depth required to move decisively in complex markets. Our vision is to become the trusted sovereign growth partner for brands, institutions, and technology leaders building what comes next.
-            </p>
-            <div className="story-badges">
-              <span>Mission</span>
-              <span>Vision</span>
-              <span>Sovereign by design</span>
+            <div className="mission-intro-copy">
+              <p className="dot-kicker">Mission & vision</p>
+              <h2 className="display">Built for growth. <span>Guided by conviction.</span></h2>
+              <p>
+                We believe ambitious enterprises should never have to trade speed for sovereignty. We build elegant systems that turn strategic intent into lasting operational advantage.
+              </p>
             </div>
           </div>
           <div className="mission-cards">
             <article className="mission-card">
-              <span>01 / Our mission</span>
+              <span><i>01</i> Our mission</span>
               <h3>Make growth a system, not a gamble.</h3>
               <p>Unite strategic thinking, engineering discipline, and creative execution so growth becomes a system instead of a gamble.</p>
             </article>
             <article className="mission-card">
-              <span>02 / Our vision</span>
+              <span><i>02</i> Our vision</span>
               <h3>Build what comes next.</h3>
               <p>Build the next generation of category-defining institutions through disciplined innovation and uncompromising craft.</p>
             </article>
@@ -134,12 +142,12 @@ export default function About() {
       <section className="home-block home-block-tight band-light">
         <div className="wrap leadership-wrap">
           <div className="leadership-heading">
+            <p className="dot-kicker">Leadership, built to deliver</p>
             <h2 className="display">The team & leadership</h2>
             <p>A compact leadership group that combines strategic clarity, craft, and operating discipline.</p>
           </div>
           <div className="leadership-layout">
             <div className="leadership-intro">
-              <p className="dot-kicker">Leadership, built to deliver</p>
               <h3>One team.<br />Four disciplines.</h3>
               <p className="leadership-description">
                 Senior owners bring commercial clarity, creative conviction, and measurement together at every stage of the work.
@@ -162,54 +170,52 @@ export default function About() {
         </div>
       </section>
 
-      <section className="home-block home-block-tight">
+      <section className="about-values-section">
         <div className="wrap">
-          <div className="center-head">
-            <h2 className="display">The four architectural pillars</h2>
-            <p>Our structural doctrines define every system specification, deployment blueprint, and client covenant.</p>
+          <div className="about-values-heading">
+            <p className="about-values-kicker"><span aria-hidden="true" />Our values</p>
+            <h2>What we <span>stand for</span></h2>
           </div>
-          <div className="pillar-duo">
-            {aboutPillars.map((item) => (
-              <article key={item.n}>
-                <span>{item.n}</span>
+          <div className="about-values-grid">
+            {aboutValues.map((item) => (
+              <article className="about-value-card" key={item.title}>
+                <span className="about-value-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    {item.icon === "eye" && (
+                      <>
+                        <path d="M2.5 12s3.3-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.3 6.5-9.5 6.5S2.5 12 2.5 12Z" />
+                        <circle cx="12" cy="12" r="3" />
+                      </>
+                    )}
+                    {item.icon === "target" && (
+                      <>
+                        <circle cx="11" cy="13" r="7.5" />
+                        <circle cx="11" cy="13" r="3.5" />
+                        <path d="m9.5 13.5 2 2L21 6" />
+                        <path d="M17 6h4v4" />
+                      </>
+                    )}
+                    {item.icon === "partners" && (
+                      <>
+                        <circle cx="9" cy="8" r="3" />
+                        <path d="M3.5 19c.5-3 2.4-4.5 5.5-4.5s5 1.5 5.5 4.5M16 5.5a3 3 0 0 1 0 5.8M16.5 14.5c2.4.4 3.8 1.8 4 4.5" />
+                      </>
+                    )}
+                  </svg>
+                </span>
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
-                <strong>{item.note}</strong>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="home-block home-block-tight about-faq">
+      <section className="close-band band-light about-close-cta">
         <div className="wrap">
-          
-          <h2>Frequently Asked Questions</h2>
-          <p className="faq-lead">Answers to the questions clients ask before we start.</p>
-          <div className="inquiry-list">
-            {aboutFaqs.map((item, index) => (
-              <details key={item.q} open={index === 0}>
-                <summary>
-                  <span>{item.q}</span>
-                  <span className="faq-icon" aria-hidden="true" />
-                </summary>
-                <p>{item.a}</p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="close-band band-light">
-        <div className="wrap">
-          
+          <p className="about-cta-kicker"><span aria-hidden="true" />Ready to build?</p>
           <h2 className="display">
-            <span className="slide-line">
-              <span>Ready to architect</span>
-            </span>
-            <span className="slide-line">
-              <span className="accent">what comes next?</span>
-            </span>
+            <span>Ready to architect{" "}<span className="about-cta-accent">what comes next?</span></span>
           </h2>
           <p className="close-piece">Directly engage SRK and the senior engineering vanguard. Elevate your infrastructure from tactical burden to unassailable sovereign advantage.</p>
           <div className="close-actions close-piece">
